@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 16:06:39 by hmorisak          #+#    #+#             */
-/*   Updated: 2022/11/16 17:49:49 by hmorisak         ###   ########.fr       */
+/*   Updated: 2022/11/19 15:19:39 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	const unsigned char	*tmp1;
 	const unsigned char	*tmp2;
 
-	tmp1 = s1;
-	tmp2 = s2;
+	tmp1 = (const unsigned char *)s1;
+	tmp2 = (const unsigned char *)s2;
 	while (n--)
 	{
 		if (*tmp1 != *tmp2)
