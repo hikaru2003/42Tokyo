@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 19:22:03 by hmorisak          #+#    #+#             */
-/*   Updated: 2022/11/16 15:52:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2022/11/19 13:48:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	t_list	*tmp;
 
-	if (lst && del)
+	if (lst)
 	{
 		while (*lst)
 		{

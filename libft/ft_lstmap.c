@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:53:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2022/11/17 15:33:41 by marvin           ###   ########.fr       */
+/*   Updated: 2022/11/19 13:49:08 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*head;
 
 	head = NULL;
-	if (lst && f && del)
+	if (lst && f)
 	{
 		while (lst)
 		{
