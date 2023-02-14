@@ -1,0 +1,4 @@
+cd ~/Library/Cashes
+	rm -rf *
+cd ~/Library/Application\ Support/Code/User/workspaceStorage
+	rm -rf *
