@@ -28,13 +28,15 @@ char	*check_path(char *argv, char **path)
 {
 	char	*path_slash;
 	char	*filepath;
+	char	**only_cmd;
 	int		i;
 
 	i = 0;
+	only_cmd = ft_split(argv, ' ');
 	while (path[i])
 	{
 		path_slash = ft_strjoin(path[i], "/");
-		filepath = ft_strjoin(path_slash, argv);
+		filepath = ft_strjoin(path_slash, only_cmd[0]);
 		ft_free(&path_slash);
 		if (access(filepath, X_OK) == 0)
 			return (filepath);
@@ -43,10 +45,49 @@ char	*check_path(char *argv, char **path)
 	return (NULL);
 }
 
+void	pipex(int i, char *argv[])
+{
+	pid_t	pid;
+	int		pipe_fd[2];
+
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid < 0)
+	{
+		perror("fork");
+		exit(-1);
+	}
+	if (pid == 0)
+	{
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], 1);
+		close(pipe_fd[1]);
+		pipex(i + 1, argv);
+	}
+	else
+	{
+		close(pipe_fd[1]);
+		dup2(pipe_fd[0], 0);
+		close(pipe_fd[0]);
+
+	}
+}
+
+// int	count_cmd(char *argv[])  bonus_part
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (argv[i])
+// 		i++;
+// 	return (i);
+// }
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char	**path;
 	char	*cmd;
+	// int		cmd_num;  bonus
 
 	path = get_path(envp);
 	// while (*path)
@@ -54,27 +95,31 @@ int	main(int argc, char *argv[], char *envp[])
 	// 	printf("%s\n", *path);
 	// 	path++;
 	// }
-	if ((cmd = check_path(argv[1], path)) == NULL)
+	if ((cmd = check_path(argv[2], path)) == NULL)
 		return (-1);
 	// printf("%s\n", cmd);
 
-	int	fd;
-	extern char	**environ;
+	// cmd_num = count_cmd(&argv[1]);  bonus
+	pipex(0, &argv[1]);
 
-	if ((fd = open("test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
-	{
-		perror("open");
-		return (-1);
-	}
-	if (dup2(fd, 1) < 0)
-	{
-		perror("dup2");
-		close(fd);
-		return (-1);
-	}
-	close(fd);
+	// int	fd;
+	// extern char	**environ;
 
-	execve(cmd, &argv[1], environ);
+	// if ((fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0)
+	// {
+	// 	perror("open");
+	// 	return (-1);
+	// }
+	// if (dup2(fd, 0) < 0)
+	// {
+	// 	perror("dup2");
+	// 	close(fd);
+	// 	return (-1);
+	// }
+	// close(fd);
+
+	pipex(0, argv);
+	execve(cmd, &argv[2], environ);
 
 	perror("execve");
 

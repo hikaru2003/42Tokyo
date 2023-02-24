@@ -13,8 +13,14 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <libc.h>
-
+// # include <libc.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h> //pid_t wait(int *status_ptr);, pid_t waitpid(pid_t pid, int *status_ptr, int options);
+#include <sys/types.h> //pid_t fork(void);
+#include <fcntl.h>
 char	**get_path(char **envp);
 
 char	**ft_split(char const *s, char c);
