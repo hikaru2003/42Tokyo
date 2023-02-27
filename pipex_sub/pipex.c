@@ -6,11 +6,31 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/23 21:06:39 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/02/27 20:28:16 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+int	get_file(char *file, int status)
+{
+	int	fd;
+
+	if (status == STDIN)
+	{
+		if (access(file, F_OK))
+		{
+			ft_printf("zsh: no such file or directory: %s\n", file);
+			return (STDIN);
+		}
+		fd = open(file, O_RDONLY);
+		if (fd == -1)
+			return (STDIN);
+	}
+	if (status == STDOUT)
+		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
+	return (fd);
+}
 
 char	**get_path(char **envp)
 {
@@ -89,20 +109,23 @@ void	pipex(char *argv, char **envp)
 
 int	main(int argc, char *argv[], char **envp)
 {
+	int	infile;
+	int	outfile;
 	int	i;
 
-	i = 1;
-	char	**cmd;
-	char	**path;
-	char	*filepath;
-
-	while (i < argc - 1)
+	infile = get_file(argv[1], STDIN);
+	outfile = get_file(argv[argc - 1], STDOUT);
+	dup2(infile, STDIN);
+	dup2(outfile, STDOUT);
+	// close(infile); 必要か？
+	// close(outfile);
+	i = 2;
+	while (i < argc - 2)
 	{
 		pipex(argv[i], envp);
 		i++;
 	}
 	exec(argv[i], envp);
 	perror("execve");
-
 	return (0);
 }
