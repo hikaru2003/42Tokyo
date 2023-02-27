@@ -1,4 +1,4 @@
-cd ~/Library/Cashes
+cd ~/Library/Caches
 	rm -rf *
 cd ~/Library/Application\ Support/Code/User/workspaceStorage
 	rm -rf *

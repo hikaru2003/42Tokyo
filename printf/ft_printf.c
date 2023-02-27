@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/13 15:37:44 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:01:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-int	main(void)
-{
-	char	c;
+// int	main(void)
+// {
+// 	char	c;
 
-	// printf("num=%d\n", ft_printf("%u\n", -11));
-	// printf("num=%d\n", printf("%u\n", -11));
-	ft_printf("%5%");
-	// printf("%5%");
-	// printf("num=%d\n", ft_printf("%X\n", LONG_MAX));
-	// printf("num=%d\n", printf("%lX\n", LONG_MAX));
-	// printf("num=%d\n", ft_printf("%p\n", &c));
-	// printf("num=%d\n", printf("%p\n", &c));
-	// printf("num=%d\n", ft_printf("%s\n", NULL));
-	// printf("num=%d\n", printf("%s\n", NULL));
-	return (0);
-}
+// 	// printf("num=%d\n", ft_printf("%u\n", -11));
+// 	// printf("num=%d\n", printf("%u\n", -11));
+// 	ft_printf("%5%");
+// 	// printf("%5%");
+// 	// printf("num=%d\n", ft_printf("%X\n", LONG_MAX));
+// 	// printf("num=%d\n", printf("%lX\n", LONG_MAX));
+// 	// printf("num=%d\n", ft_printf("%p\n", &c));
+// 	// printf("num=%d\n", printf("%p\n", &c));
+// 	// printf("num=%d\n", ft_printf("%s\n", NULL));
+// 	// printf("num=%d\n", printf("%s\n", NULL));
+// 	return (0);
+// }
 

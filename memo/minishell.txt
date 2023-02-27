@@ -1,0 +1,5 @@
+env -i ./minishell
+export できるの？
+
+cat | ls | cat 
+cat < test.txt < makefile
