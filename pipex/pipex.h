@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/23 20:54:42 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/02/26 21:17:38 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 # define PIPEX_H
 
 // # include <libc.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h> //pid_t wait(int *status_ptr);, pid_t waitpid(pid_t pid, int *status_ptr, int options);
-#include <sys/types.h> //pid_t fork(void);
-#include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <sys/wait.h> //pid_t wait(int *status_ptr);, pid_t waitpid(pid_t pid, int *status_ptr, int options);
+# include <sys/types.h> //pid_t fork(void);
+# include <fcntl.h>
+
+extern char	**environ;
+
 char	**get_path(char **envp);
+char	*check_path(char **cmd, char **path);
+void	exec(char *argv, char **path);
 
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
