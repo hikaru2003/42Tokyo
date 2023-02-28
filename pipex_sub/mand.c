@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/28 19:17:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:35:47 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void	exec(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
-	printf("filepath = %s\n", filepath);
+	// printf("filepath = %s\n", filepath);
 	execve(filepath, cmd, envp);
 }
 
-void	pipex(char *argv, char **envp, int *pipefd, int pid)
+void	pipex(char *argv, char **envp, int *pipefd, pid_t pid)
 {
 	if (pid == 0)
 	{
@@ -99,45 +99,65 @@ void	pipex(char *argv, char **envp, int *pipefd, int pid)
 	}
 }
 
+void	last_pipex(char *argv, char **envp, int *pipefd, pid_t pid)
+{
+	if (pid == 0)
+	{
+		// printf("argv = %s\n", argv);
+		close(pipefd[0]);
+		close(pipefd[1]);
+		exec(argv, envp);
+	}
+	else
+	{
+		close(pipefd[1]);
+		dup2(pipefd[0], 0);
+		close(pipefd[0]);
+	}
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int	i;
 	int	pipefd[2];
-	int	*pid;
+	pid_t	*pid;
 	int	tmp;
 
-	pid = (int *)malloc(sizeof(int) * (argc - 2));
+	pid = (pid_t *)malloc(sizeof(pid_t) * (argc - 1));
 	if (!pid)
 		return (1);
-	i = 0;
 	pipe(pipefd);
-	while (i < argc - 2)
+	pid[0] = fork();
+	i = 1;
+	while (i < argc - 1)
 	{
-		pid[i] = fork();
+		if (pid[i - 1] != 0)
+			pid[i] = fork();
 		if (pid[i] < 0)
 		{
 			perror("main");
 			exit(1);
 		}
+		// printf("%d, %d\n", i, pid[i]);
 		i++;
 	}
 	i = 1;
 	while (i < argc - 1)
 	{
-		printf("pid[%d] == %d, cmd == %s\n", i - 1, pid[i - 1], argv[i]);
+		// printf("pid[%d] == %d, cmd == %s\n", i - 1, pid[i - 1], argv[i]);
 		pipex(argv[i], envp, pipefd, pid[i - 1]);
-		printf("\n\n\npipex is returned\n\n\n");
+		// printf("\n\n\npipex is returned\n\n\n");
 		i++;
 	}
-	exec(argv[i], envp);
-	printf("\n\n\nhere\n\n\n");
+	last_pipex(argv[i], envp, pipefd, pid[i - 1]);
+	// exec(argv[i], envp);
+	// printf("\n\n\nfinish\n\n\n");
 	i = 0;
-	while (i < argc - 2)
+	while (i < argc - 1)
 	{
 		tmp = waitpid(pid[i], NULL, 0);
-		printf("tmp === %d\n", tmp);
+		// printf("tmp === %d\n", tmp);
 		i++;
 	}
-	perror("execve");
 	return (0);
 }

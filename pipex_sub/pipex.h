@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/28 19:03:54 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/02/28 22:34:03 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 char	**get_path(char **envp);
 char	*check_path(char **cmd, char **path);
 void	exec(char *argv, char **envp);
-void	pipex(char *argv, char **envp, int *pipefd, int pid);
+void	pipex(char *argv, char **envp, int *pipefd, pid_t pid);
+void	last_pipex(char *argv, char **envp, int *pipefd, pid_t pid);
 
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
