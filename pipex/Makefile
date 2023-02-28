@@ -1,8 +1,13 @@
-NAME = pipex
-SRCS =  ./pipex.c	\
-		./ft_split.c\
-		./tool_1.c	\
-		./tool_2.c	\
+NAME = libftprintf.a
+SRCS	=	./ft_printf.c		\
+			./ft_print_conv.c	\
+			./ft_put.c			\
+			./ft_strlen.c		\
+			./to_hexa.c			\
+			./ft_split.c		\
+			./pipex.c			\
+			./tool_1.c			\
+			./tool_2.c			\
 
 OBJS = $(SRCS:%.c=%.o)
 CC = cc
