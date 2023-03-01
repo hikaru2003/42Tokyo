@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/27 18:06:54 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:29:32 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,17 @@
 # include <sys/wait.h> 
 //pid_t waitpid(pid_t pid, int *status_ptr, int options);
 
-// extern char	**environ;
-
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
 
+int		get_file(char *file, int status);
+void	pipex(int i, int argc, char *argv, char **envp);
 char	**get_path(char **envp);
 char	*check_path(char **cmd, char **path);
 void	exec(char *argv, char **envp);
-void	pipex(char *argv, char **envp);
+void	last_chile(char *argv, int *pipefd, char **envp);
+void	do_child(char *argv, int *pipefd, char **envp);
 
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

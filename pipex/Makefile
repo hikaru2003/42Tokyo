@@ -1,11 +1,12 @@
-NAME = libftprintf.a
-SRCS	=	./ft_printf.c		\
-			./ft_print_conv.c	\
+NAME = pipex
+
+SRCS	=	./ft_print_conv.c	\
+			./ft_printf.c		\
 			./ft_put.c			\
-			./ft_strlen.c		\
-			./to_hexa.c			\
 			./ft_split.c		\
+			./pipe_tool.c		\
 			./pipex.c			\
+			./to_hexa.c			\
 			./tool_1.c			\
 			./tool_2.c			\
 
@@ -16,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

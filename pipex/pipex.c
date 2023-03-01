@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/28 16:43:30 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:53:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,54 +32,7 @@ int	get_file(char *file, int status)
 	return (fd);
 }
 
-char	**get_path(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	if (!envp[i])
-	{
-		perror("no path");
-		exit(1);
-	}
-	return (ft_split(envp[i] + 5, ':'));
-}
-
-char	*check_path(char **cmd, char **path)
-{
-	char	*path_slash;
-	char	*filepath;
-	int		i;
-
-	i = 0;
-	while (path[i])
-	{
-		path_slash = ft_strjoin(path[i], "/");
-		filepath = ft_strjoin(path_slash, cmd[0]);
-		ft_free(&path_slash);
-		if (access(filepath, X_OK) == 0)
-			return (filepath);
-		i++;
-	}
-	perror("bad path");
-	exit(1);
-}
-
-void	exec(char *argv, char **envp)
-{
-	char	**cmd;
-	char	**path;
-	char	*filepath;
-
-	cmd = ft_split(argv, ' ');
-	path = get_path(envp);
-	filepath = check_path(cmd, path);
-	execve(filepath, cmd, envp);
-}
-
-void	pipex(char *argv, char **envp)
+void	pipex(int i, int argc, char *argv, char **envp)
 {
 	pid_t	pid;
 	int		pipefd[2];
@@ -93,17 +46,16 @@ void	pipex(char *argv, char **envp)
 	}
 	if (pid == 0)
 	{
-		close(pipefd[0]);
-		dup2(pipefd[1], 1);
-		close(pipefd[1]);
-		exec(argv, envp);
+		if (i == argc - 2)
+			last_chile(argv, pipefd, envp);
+		else
+			do_child(argv, pipefd, envp);
 	}
 	else
 	{
 		close(pipefd[1]);
 		dup2(pipefd[0], 0);
 		close(pipefd[0]);
-		waitpid(pid, NULL, 0);
 	}
 }
 
@@ -111,21 +63,19 @@ int	main(int argc, char *argv[], char **envp)
 {
 	int	infile;
 	int	outfile;
-	int	i;
 
-	infile = get_file(argv[1], STDIN);
-	outfile = get_file(argv[argc - 1], STDOUT);
-	dup2(infile, STDIN);
-	dup2(outfile, STDOUT);
-	// close(infile); 必要か？
-	// close(outfile);
-	i = 2;
-	while (i < argc - 2)
+	if (argc == 5)
 	{
-		pipex(argv[i], envp);
-		i++;
+		infile = get_file(argv[1], STDIN);
+		outfile = get_file(argv[argc - 1], STDOUT);
+		dup2(infile, STDIN);
+		dup2(outfile, STDOUT);
+		pipex(2, argc, argv[2], envp);
+		pipex(3, argc, argv[3], envp);
+		wait(NULL);
+		wait(NULL);
 	}
-	exec(argv[i], envp);
-	perror("execve");
-	return (0);
+	else
+		ft_printf("Invalid number of argments.\n");
+	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 18:53:37 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:00:54 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	pipex(int i, int argc, char *argv, char **envp)
 	}
 	if (pid == 0)
 	{
-		if (i == argc - 2)
+		if (i == argc - 1)
 			last_chile(argv, pipefd, envp);
 		else
 			do_child(argv, pipefd, envp);
@@ -63,17 +63,26 @@ int	main(int argc, char *argv[], char **envp)
 {
 	int	infile;
 	int	outfile;
+	int	i;
 
-	if (argc == 5)
+	if (argc >= 5) //cmdが一個のみの場合は存在するのか？
 	{
 		infile = get_file(argv[1], STDIN);
 		outfile = get_file(argv[argc - 1], STDOUT);
 		dup2(infile, STDIN);
 		dup2(outfile, STDOUT);
-		pipex(2, argc, argv[2], envp);
-		pipex(3, argc, argv[3], envp);
-		wait(NULL);
-		wait(NULL);
+		i = 2;
+		while (i < argc - 1)
+		{
+			pipex(i, argc, argv[i], envp);
+			i++;
+		}
+		i = 0;
+		while (i < argc - 3)
+		{
+			wait(NULL);
+			i++;
+		}
 	}
 	else
 		ft_printf("Invalid number of argments.\n");
