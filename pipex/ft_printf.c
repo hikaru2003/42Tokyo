@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 12:00:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/27 18:04:04 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/01 18:25:40 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int	ft_printf(const char *format, ...)
 // 	// printf("num=%d\n", printf("%s\n", NULL));
 // 	return (0);
 // }
-

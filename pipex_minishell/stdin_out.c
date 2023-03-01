@@ -1,12 +1,12 @@
 // /* ************************************************************************** */
 // /*                                                                            */
 // /*                                                        :::      ::::::::   */
-// /*   pipex.c                                            :+:      :+:    :+:   */
+// /*   stdin_out.c                                        :+:      :+:    :+:   */
 // /*                                                    +:+ +:+         +:+     */
 // /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-// /*   Updated: 2023/03/01 18:53:37 by hmorisak         ###   ########.fr       */
+// /*   Updated: 2023/03/01 18:03:18 by hmorisak         ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
@@ -32,6 +32,53 @@
 // 	return (fd);
 // }
 
+// char	**get_path(char **envp)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
+// 		i++;
+// 	if (!envp[i])
+// 	{
+// 		perror("no path");
+// 		exit(1);
+// 	}
+// 	return (ft_split(envp[i] + 5, ':'));
+// }
+
+// char	*check_path(char **cmd, char **path)
+// {
+// 	char	*path_slash;
+// 	char	*filepath;
+// 	int		i;
+
+// 	i = 0;
+// 	while (path[i])
+// 	{
+// 		path_slash = ft_strjoin(path[i], "/");
+// 		filepath = ft_strjoin(path_slash, cmd[0]);
+// 		ft_free(&path_slash);
+// 		if (access(filepath, X_OK) == 0)
+// 			return (filepath);
+// 		i++;
+// 	}
+// 	perror("bad path");
+// 	exit(1);
+// }
+
+// void	exec(char *argv, char **envp)
+// {
+// 	char	**cmd;
+// 	char	**path;
+// 	char	*filepath;
+
+// 	cmd = ft_split(argv, ' ');
+// 	path = get_path(envp);
+// 	filepath = check_path(cmd, path);
+// 	execve(filepath, cmd, envp);
+// }
+
 // void	pipex(int i, int argc, char *argv, char **envp)
 // {
 // 	pid_t	pid;
@@ -46,10 +93,19 @@
 // 	}
 // 	if (pid == 0)
 // 	{
-// 		if (i == argc - 2)
-// 			last_chile(argv, pipefd, envp);
+// 		if (i == argc - 1)
+// 		{
+// 			close(pipefd[0]);
+// 			close(pipefd[1]);
+// 			exec(argv, envp);
+// 		}
 // 		else
-// 			do_child(argv, pipefd, envp);
+// 		{
+// 			close(pipefd[0]);
+// 			dup2(pipefd[1], 1);
+// 			close(pipefd[1]);
+// 			exec(argv, envp);
+// 		}
 // 	}
 // 	else
 // 	{
@@ -63,19 +119,25 @@
 // {
 // 	int	infile;
 // 	int	outfile;
+// 	int	i;
 
-// 	if (argc == 5)
+// 	// infile = get_file(argv[1], STDIN);
+// 	// outfile = get_file(argv[argc - 1], STDOUT);
+// 	// dup2(infile, STDIN);
+// 	// dup2(outfile, STDOUT);
+// 	// close(infile); 必要か？
+// 	// close(outfile);
+// 	i = 1;
+// 	while (i < argc)
 // 	{
-// 		infile = get_file(argv[1], STDIN);
-// 		outfile = get_file(argv[argc - 1], STDOUT);
-// 		dup2(infile, STDIN);
-// 		dup2(outfile, STDOUT);
-// 		pipex(2, argc, argv[2], envp);
-// 		pipex(3, argc, argv[3], envp);
-// 		wait(NULL);
-// 		wait(NULL);
+// 		pipex(i, argc, argv[i], envp);
+// 		i++;
 // 	}
-// 	else
-// 		ft_printf("Invalid number of argments.\n");
-// 	return (1);
+// 	i = 0;
+// 	while(i < argc - 1)
+// 	{
+// 		wait(NULL);
+// 		i++;
+// 	}
+// 	return (0);
 // }
