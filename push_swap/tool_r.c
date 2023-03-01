@@ -16,3 +16,22 @@ void	rotate(t_stack *head)
 	}
 	tmp->num = top_num;
 }
+
+void	ra(t_stack *a_head)
+{
+	rotate(a_head);
+	printf("ra\n");
+}
+
+void	rb(t_stack *b_head)
+{
+	rotate(b_head);
+	printf("rb\n");
+}
+
+void	rr(t_stack *a_head, t_stack *b_head)
+{
+	ra(a_head);
+	rb(b_head);
+	printf("rr\n");
+}
