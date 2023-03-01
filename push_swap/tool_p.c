@@ -23,7 +23,7 @@ void	p_to(t_stack *to, t_stack *from)
 		return ;
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
-		return (NULL); //free(all)するのか？
+		return ; //free(all)するのか？
 	new->num = from->num;
 	insert(to, new);
 	pop(from);
