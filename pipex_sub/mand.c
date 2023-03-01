@@ -145,11 +145,11 @@ int	main(int argc, char *argv[], char **envp)
 	while (i < argc - 1)
 	{
 		// printf("pid[%d] == %d, cmd == %s\n", i - 1, pid[i - 1], argv[i]);
-		pipex(argv[i], envp, pipefd, pid[i - 1]);
+		pipex(argv[i], envp, pipefd, pid[argc - 1]);
 		// printf("\n\n\npipex is returned\n\n\n");
 		i++;
 	}
-	last_pipex(argv[i], envp, pipefd, pid[i - 1]);
+	last_pipex(argv[i], envp, pipefd, pid[argc - 1]);
 	// exec(argv[i], envp);
 	// printf("\n\n\nfinish\n\n\n");
 	i = 0;

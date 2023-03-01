@@ -13,11 +13,12 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <libc.h>
+// # include <libc.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdarg.h>
 # include <sys/types.h> //pid_t fork(void);
 # include <sys/stat.h>
 # include <fcntl.h>
