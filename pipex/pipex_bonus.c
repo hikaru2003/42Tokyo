@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 19:00:54 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:11:22 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	pipex(int i, int argc, char *argv, char **envp)
 	}
 	if (pid == 0)
 	{
-		if (i == argc - 1)
+		if (i == argc - 2)
 			last_chile(argv, pipefd, envp);
 		else
 			do_child(argv, pipefd, envp);

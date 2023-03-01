@@ -1,4 +1,6 @@
 Makefile
+a.out
+cpy.c
 ft_print_conv.c
 ft_print_conv.o
 ft_printf.c
@@ -15,6 +17,7 @@ pipex
 pipex.c
 pipex.h
 pipex.o
+pipex_bonus.c
 to_hexa.c
 to_hexa.o
 tool_1.c
