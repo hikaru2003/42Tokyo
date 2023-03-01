@@ -17,7 +17,6 @@ int	main(void)
 	t_stack	*a;
 	t_stack	*b;
 	
-
 	a->num = 1;
 	printf("%d\n", a->num);
 	return (0);
