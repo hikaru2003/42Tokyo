@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 19:16:45 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:38:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,37 @@ int	get_file(char *file, int status)
 		if (access(file, F_OK))
 		{
 			ft_printf("zsh: no such file or directory: %s\n", file);
-			return (STDIN);
+			return (-1);
 		}
 		fd = open(file, O_RDONLY);
 		if (fd == -1)
-			return (STDIN);
+		{
+			ft_printf("zsh: %s: %s\n", strerror(errno), file);
+			return (-1);
+		}
 	}
 	if (status == STDOUT)
 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
 	return (fd);
+}
+
+int	is_cmd(char *argv, char **envp)
+{
+	char	**cmd;
+	char	**path;
+	char	*filepath;
+
+	cmd = ft_split(argv, ' ');
+	path = get_path(envp);
+	filepath = check_path(cmd, path);
+	if (filepath == NULL)
+	{
+		write(STDERR, "zsh: command not found: ", 24);
+		write(STDERR, cmd[0], ft_strlen(cmd[0]));
+		write(STDERR, "\n", 1);
+		return (-1);
+	}
+	return (0);
 }
 
 void	pipex(int i, int argc, char *argv, char **envp)
@@ -37,6 +59,8 @@ void	pipex(int i, int argc, char *argv, char **envp)
 	pid_t	pid;
 	int		pipefd[2];
 
+	if (is_cmd(argv, envp) == -1)
+		return ;
 	pipe(pipefd);
 	pid = fork();
 	if (pid < 0)
@@ -44,13 +68,10 @@ void	pipex(int i, int argc, char *argv, char **envp)
 		perror("main");
 		exit(1);
 	}
-	if (pid == 0)
-	{
-		if (i == argc - 2)
-			last_chile(argv, pipefd, envp);
-		else
-			do_child(argv, pipefd, envp);
-	}
+	if (pid == 0 && i == argc - 2)
+		last_chile(argv, pipefd, envp);
+	else if (pid == 0)
+		do_child(argv, pipefd, envp);
 	else
 	{
 		close(pipefd[1]);
@@ -70,7 +91,8 @@ int	main(int argc, char *argv[], char **envp)
 		outfile = get_file(argv[argc - 1], STDOUT);
 		dup2(infile, STDIN);
 		dup2(outfile, STDOUT);
-		pipex(2, argc, argv[2], envp);
+		if (infile != -1)
+			pipex(2, argc, argv[2], envp);
 		pipex(3, argc, argv[3], envp);
 		wait(NULL);
 		wait(NULL);

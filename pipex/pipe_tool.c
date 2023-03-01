@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 18:29:25 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/02 18:55:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ char	*check_path(char **cmd, char **path)
 			return (filepath);
 		i++;
 	}
-	perror("bad path");
-	exit(1);
+	return (NULL);
 }
 
 void	exec(char *argv, char **envp)
