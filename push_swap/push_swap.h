@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/28 19:43:27 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:54:52 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,23 @@ typedef struct s_stack
 }	t_stack;
 
 static int	check_flow(long sum, char c, int flag);
-int	ft_atoi(const char *str);
-void	insert(t_stack *stack, t_stack *new);
-void	pop(t_stack *stack);
-void	p_to(t_stack *to, t_stack *from);
-void	pa(t_stack *a, t_stack *b);
-void	pb(t_stack *a, t_stack *b);
-void	rotate(t_stack *head);
-void	ra(t_stack *a_head);
-void	rb(t_stack *b_head);
-void	rr(t_stack *a_head, t_stack *b_head);
-void	reverse_rotate(t_stack *head);
-void	rra(t_stack *a_head);
-void	rrb(t_stack *b_head);
-void	rrr(t_stack *a_head, t_stack *b_head);
-void	swap(t_stack *stack);
-void	sa(t_stack *a);
-void	sb(t_stack *b);
-void	ss(t_stack *a, t_stack *b);
+int			ft_atoi(const char *str);
+void		insert(t_stack *stack, t_stack *new);
+void		pop(t_stack *stack);
+void		p_to(t_stack *to, t_stack *from);
+void		pa(t_stack *a, t_stack *b);
+void		pb(t_stack *a, t_stack *b);
+void		rotate(t_stack *head);
+void		ra(t_stack *a_head);
+void		rb(t_stack *b_head);
+void		rr(t_stack *a_head, t_stack *b_head);
+void		reverse_rotate(t_stack *head);
+void		rra(t_stack *a_head);
+void		rrb(t_stack *b_head);
+void		rrr(t_stack *a_head, t_stack *b_head);
+void		swap(t_stack *stack);
+void		sa(t_stack *a);
+void		sb(t_stack *b);
+void		ss(t_stack *a, t_stack *b);
 
 #endif
