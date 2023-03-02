@@ -6,13 +6,14 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 18:29:32 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:33:34 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
+# include <errno.h>
 # include <libc.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -28,7 +29,10 @@
 # define STDOUT 1
 # define STDERR 2
 
+int		errno;
+
 int		get_file(char *file, int status);
+int		is_cmd(char *argv, char **envp);
 void	pipex(int i, int argc, char *argv, char **envp);
 char	**get_path(char **envp);
 char	*check_path(char **cmd, char **path);
