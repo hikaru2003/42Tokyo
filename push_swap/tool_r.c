@@ -5,7 +5,7 @@ void	rotate(t_stack *head)
 	t_stack	*tmp;
 	int		top_num;
 
-	if (head == NULL)
+	if (head->next == head)
 		return ;
 	tmp = head->next;
 	top_num = tmp->num;
@@ -35,3 +35,42 @@ void	rr(t_stack *a_head, t_stack *b_head)
 	rb(b_head);
 	printf("rr\n");
 }
+
+// int	main(int argc, char ** argv)
+// {
+// 	t_stack	*a;
+// 	t_stack	a_head;
+// 	int	i;
+// 	t_array	*array;
+	
+// 	i = 1;
+// 	a_head.next = &a_head;
+// 	a_head.prev = &a_head;
+// 	a_head.num = INT_MIN;
+
+// 	array = pre_sort(argc - 1, argv);
+// 	i = 0;
+// 	while (i < argc - 1)
+// 	{
+// 		a = (t_stack *)malloc(sizeof(t_stack));
+// 		a->num = array[i].num;
+// 		insert(&a_head, a);
+// 		i++;
+// 	}
+// 	a = a_head.next;
+// 	while (a != &a_head)
+// 	{
+// 		printf("%d\n", a->num);
+// 		a = a->next;
+// 	}
+// 	ra(&a_head);
+// 	printf("a_head=%d\n", a_head.num);
+// 	printf("a_head_prev=%d\n", a_head.prev->num);
+// 	a = a_head.next;
+// 	while (a != &a_head)
+// 	{
+// 		printf("%d\n", a->num);
+// 		a = a->next;
+// 	}
+// 	return (0);
+// }
