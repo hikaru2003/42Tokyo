@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tool_s.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 20:55:19 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/02 20:55:27 by hmorisak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(t_stack *stack)
@@ -14,7 +26,7 @@ void	swap(t_stack *stack)
 void	sa(t_stack *a)
 {
 	swap(a);
-	printf("sa\n");	
+	printf("sa\n");
 }
 
 void	sb(t_stack *b)
