@@ -19,34 +19,21 @@ void	only_three_elements(t_stack *a_head)
 	int	min;
 
 	min = find_min(a_head, 3);
-	// printf("min = %d\n", min);
-	if (a_head->next->num == min)
+	if (a_head->next->num == min && a_head->next->next->num == min + 2)
 	{
-		if (a_head->next->next->num == min + 1)
-			return ;
-		else
-		{
-			ra(a_head);
-			sa(a_head);
-			rra(a_head);
-		}
+		rra(a_head);
+		sa(a_head);
 	}
+	else if (a_head->next->num == min + 1 && a_head->next->next->num == min)
+		sa(a_head);
 	else if (a_head->next->num == min + 1)
+		rra(a_head);
+	else if (a_head->next->num == min + 2 && a_head->next->next->num == min)
+		ra(a_head);
+	else if (a_head->next->num == min + 2)
 	{
-		if (a_head->next->next->num == min)
-			sa(a_head);
-		else
-			rra(a_head);
-	}
-	else
-	{
-		if (a_head->next->next->num == min)
-			ra(a_head);
-		else
-		{
-			sa(a_head);
-			rra(a_head);
-		}
+		sa(a_head);
+		rra(a_head);
 	}
 }
 

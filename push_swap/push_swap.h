@@ -34,10 +34,11 @@ typedef struct s_array
 	int	flag;
 } t_array;
 
+//ft_atoi.c
 static int	check_flow(long sum, char c, int flag);
 int			ft_atoi(const char *str);
-void		insert(t_stack *stack, t_stack *new);
-void		pop(t_stack *stack);
+
+//tool_.c
 void		insert(t_stack *stack, t_stack *new);
 void		pop(t_stack *stack);
 void		push_to(t_stack *to, t_stack *from);
@@ -56,13 +57,22 @@ void		sa(t_stack *a_head);
 void		sb(t_stack *b_head);
 void		ss(t_stack *a_head, t_stack *b_head);
 
+//push_swap.c
 t_array		*pre_sort(int element_num, char **argv);
-void		push_swap(t_stack *a_head, int element_num);
+int			split_half(t_stack *a_head, t_stack *b_head, int element_num);
 int			find_min(t_stack *head, int count);
+void		rtn_b2a_bottom(t_stack *a_head, t_stack *b_head);
+void		sort_three_elements(t_stack *a_head, t_stack *b_head);
+void		push_swap(t_stack *a_head, int element_num);
+
+//sort.c
 int			is_sorted(t_stack *a_head);
 void		only_three_elements(t_stack *a_head);
 void		only_six_elements(t_stack *a_head, int element_num);
-void		sort_three_elements(t_stack *a_head, t_stack *b_head);
 
+//main.c
+void		print_stack(t_stack *head);
+int			ft_free(t_stack *head);
+int			creat_stack(t_stack *stack_head, t_stack *stack, int element_num, t_array *array);
 
 #endif

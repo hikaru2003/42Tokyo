@@ -1,57 +1,75 @@
 #include "push_swap.h"
 
+void	print_stack(t_stack *head)
+{
+	t_stack	*tmp;
+
+	tmp = head->next;
+	while (tmp != head)
+	{
+		printf("%d ", tmp->num);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
+
+int	ft_free(t_stack *head)
+{
+	t_stack *tmp;
+
+	tmp = head;
+	head = head->next;
+	while (head != tmp)
+	{
+		free(head);
+		head = head->next;
+	}
+	return (1);
+}
+
+int	creat_stack(t_stack *stack_head, t_stack *stack, int element_num, t_array *array)
+{
+	int	i;
+
+	i = 0;
+	while (i < element_num)
+	{
+		stack = (t_stack *)malloc(sizeof(t_stack));
+		if (!stack)
+			return (ft_free(stack_head));
+		stack->num = array[i].num;
+		insert(stack_head, stack);
+		i++;
+	}
+	return (0);
+}
+
 int	main(int argc, char ** argv)
 {
 	t_stack	a_head;
 	t_stack	*a;
-	int	i;
 	t_array	*array;
-	
-	i = 1;
+
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
-
 	//input compact num(start from 0) -> stack a
 	array = pre_sort(argc - 1, argv);
-	i = 0;
-	while (i < argc - 1)
-	{
-		a = (t_stack *)malloc(sizeof(t_stack));
-		a->num = array[i].num;
-		insert(&a_head, a);
-		i++;
-	}
-	//print stack a
-	a = a_head.next;
-	while (a != &a_head)
-	{
-		printf("%d\n", a->num);
-		a = a->next;
-	}
-
-	//check if stack a is alreadly sorted
+	if (creat_stack(&a_head, a, argc - 1, array) != 0)
+		return (1);
+	printf("stack a -> ");
+	print_stack(&a_head);
 	if (is_sorted(&a_head) == 0)
 	{
 		printf("stack a is alreadly sorted\n");
 		return (0);
 	}
-	//element num <= 3
 	if (argc <= 4)
 		only_three_elements(&a_head);
-	//element num <= 6
 	else if (argc <= 7)
 		only_six_elements(&a_head, argc - 1);
 	else
-	{
 		push_swap(&a_head, argc - 1);
-		printf("push swap\n");
-	}
-	printf("stack a\n");
-	a = a_head.next;
-	while (a != &a_head)
-	{
-		printf("%d\n", a->num);
-		a = a->next;
-	}
+	printf("stack a -> ");
+	print_stack(&a_head);
 	return (0);
 }
