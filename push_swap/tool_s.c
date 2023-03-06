@@ -12,32 +12,34 @@
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack)
+void	swap(t_stack *head)
 {
+	t_stack	*head_next;
 	int	tmp;
 
-	if (stack == NULL || stack->next == NULL)
+	head_next = head->next;
+	if (head_next == head || head_next->next == head)
 		return ;
-	tmp = stack->num;
-	stack->num = stack->next->num;
-	stack->next->num = tmp;
+	tmp = head_next->num;
+	head_next->num = head_next->next->num;
+	head_next->next->num = tmp;
 }
 
-void	sa(t_stack *a)
+void	sa(t_stack *a_head)
 {
-	swap(a);
+	swap(a_head);
 	printf("sa\n");
 }
 
-void	sb(t_stack *b)
+void	sb(t_stack *b_head)
 {
-	swap(b);
+	swap(b_head);
 	printf("sb\n");
 }
 
-void	ss(t_stack *a, t_stack *b)
+void	ss(t_stack *a_head, t_stack *b_head)
 {
-	swap(a);
-	swap(b);
+	swap(a_head);
+	swap(b_head);
 	printf("ss\n");
 }

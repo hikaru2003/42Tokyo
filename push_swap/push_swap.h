@@ -51,12 +51,18 @@ void		reverse_rotate(t_stack *head);
 void		rra(t_stack *a_head);
 void		rrb(t_stack *b_head);
 void		rrr(t_stack *a_head, t_stack *b_head);
-void		swap(t_stack *stack);
-void		sa(t_stack *a);
-void		sb(t_stack *b);
-void		ss(t_stack *a, t_stack *b);
+void		swap(t_stack *head);
+void		sa(t_stack *a_head);
+void		sb(t_stack *b_head);
+void		ss(t_stack *a_head, t_stack *b_head);
 
 t_array		*pre_sort(int element_num, char **argv);
 void		push_swap(t_stack *a_head, int element_num);
+int			find_min(t_stack *head, int count);
+int			is_sorted(t_stack *a_head);
+void		only_three_elements(t_stack *a_head);
+void		only_six_elements(t_stack *a_head, int element_num);
+void		sort_three_elements(t_stack *a_head, t_stack *b_head);
+
 
 #endif

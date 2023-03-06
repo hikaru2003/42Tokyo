@@ -29,8 +29,23 @@ int	main(int argc, char ** argv)
 		a = a->next;
 	}
 
-	push_swap(&a_head, argc - 1);
-	printf("push swap\n");
+	//check if stack a is alreadly sorted
+	if (is_sorted(&a_head) == 0)
+	{
+		printf("stack a is alreadly sorted\n");
+		return (0);
+	}
+	//element num <= 3
+	if (argc <= 4)
+		only_three_elements(&a_head);
+	//element num <= 6
+	else if (argc <= 7)
+		only_six_elements(&a_head, argc - 1);
+	else
+	{
+		push_swap(&a_head, argc - 1);
+		printf("push swap\n");
+	}
 	printf("stack a\n");
 	a = a_head.next;
 	while (a != &a_head)

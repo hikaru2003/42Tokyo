@@ -66,10 +66,16 @@ int	split_half(t_stack *a_head, t_stack *b_head, int element_num)
 	pivot = (pivot + element_num) / 2;
 	rotate_count = 0;
 	tmp = a_head->next;
+	// printf("pivot=%d\n", pivot);
 	while (count < element_num)
 	{
+		// if (tmp->num > tmp->next->num)
+		// 	sa(a_head);
 		if (tmp->num < pivot)
+		{
 			push_to_b(a_head, b_head);
+			// printf("after_push_to_b %d\n", tmp->num);
+		}
 		else
 		{
 			ra(a_head);
@@ -86,19 +92,22 @@ int	split_half(t_stack *a_head, t_stack *b_head, int element_num)
 	return (pivot);
 }
 
-int	find_min(t_stack *head)
+int	find_min(t_stack *head, int count)
 {
 	t_stack	*tmp;
 	int		min;
+	int		i;
 
 	// if (head->next == head)  //return値整数を返すとエラーかどうか判定できない
+	i = 0;
 	tmp = head->next;
 	min = INT_MAX;
-	while (tmp != head)
+	while (tmp != head && i < count)
 	{
 		if (tmp->num < min)
 			min = tmp->num;
 		tmp = tmp->next;
+		i++;
 	}
 	return (min);
 }
@@ -111,7 +120,7 @@ void	rtn_b2a_bottom(t_stack *a_head, t_stack *b_head)
 
 	save_b_head = b_head;
 	tmp = b_head->next;
-	min = find_min(b_head);
+	min = find_min(b_head, INT_MAX);
 	while (b_head->next != save_b_head)
 	{
 		if (tmp->num == min)
@@ -126,6 +135,69 @@ void	rtn_b2a_bottom(t_stack *a_head, t_stack *b_head)
 	}
 }
 
+void	sort_three_elements(t_stack *a_head, t_stack *b_head)
+{
+	int	min;
+
+	min = find_min(a_head, 3);
+	// printf("min = %d\n", min);
+	if (a_head->next->num == min)
+	{
+		ra(a_head);
+		if (a_head->next->num == min + 1)
+		{
+			ra(a_head);
+			ra(a_head);
+		}
+		else
+		{
+			sa(a_head);
+			ra(a_head);
+			ra(a_head);
+		}
+	}
+	else if (a_head->next->num == min + 1)
+	{
+		if (a_head->next->next->num == min)
+		{
+			sa(a_head);
+			ra(a_head);
+			ra(a_head);
+			ra(a_head);
+		}
+		else
+		{
+			push_to_b(a_head, b_head);
+			push_to_b(a_head, b_head);
+			ra(a_head);
+			push_to_a(a_head, b_head);
+			push_to_a(a_head, b_head);
+			ra(a_head);
+			ra(a_head);
+		}
+	}
+	else
+	{
+		if (a_head->next->next->num == min)
+		{
+			push_to_b(a_head, b_head);
+			ra(a_head);
+			ra(a_head);
+			push_to_a(a_head, b_head);
+			ra(a_head);
+		}
+		else
+		{
+			push_to_b(a_head, b_head);
+			sa(a_head);
+			ra(a_head);
+			ra(a_head);
+			push_to_a(a_head, b_head);
+			ra(a_head);
+		}
+	}
+}
+
 void	push_swap(t_stack *a_head, int element_num)
 {
 	t_stack	b_head;
@@ -135,7 +207,7 @@ void	push_swap(t_stack *a_head, int element_num)
 	b_head.next = &b_head;
 	b_head.prev = &b_head;
 	pivot = 0;
-	while (pivot != element_num - 1)
+	while (element_num - pivot > 3)
 	{
 		pivot = split_half(a_head, &b_head, element_num);
 		// printf("stack b\n");
@@ -147,5 +219,15 @@ void	push_swap(t_stack *a_head, int element_num)
 		// }
 		rtn_b2a_bottom(a_head, &b_head);
 	}
-	ra(a_head);
+
+	//print stack a
+	t_stack	*a;
+	a = a_head->next;
+	// printf("stack a\n");
+	// while (a != a_head)
+	// {
+	// 	printf("%d\n", a->num);
+	// 	a = a->next;
+	// }
+	sort_three_elements(a_head, &b_head);
 }
