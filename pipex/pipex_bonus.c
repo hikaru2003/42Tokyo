@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/01 19:11:22 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:35:03 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,25 @@ int	get_file(char *file, int status)
 	if (status == STDOUT)
 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
 	return (fd);
+}
+
+int	is_cmd(char *argv, char **envp)
+{
+	char	**cmd;
+	char	**path;
+	char	*filepath;
+
+	cmd = ft_split(argv, ' ');
+	path = get_path(envp);
+	filepath = check_path(cmd, path);
+	if (filepath == NULL)
+	{
+		write(STDERR, "zsh: command not found: ", 24);
+		write(STDERR, cmd[0], ft_strlen(cmd[0]));
+		write(STDERR, "\n", 1);
+		return (-1);
+	}
+	return (0);
 }
 
 void	pipex(int i, int argc, char *argv, char **envp)
@@ -59,6 +78,28 @@ void	pipex(int i, int argc, char *argv, char **envp)
 	}
 }
 
+void	here_doc(char *limiter, int lmtlen)
+{
+	int		fd;
+	int		line_len;
+	char	*buf;
+	char	*line;
+
+	if (!line)
+		return ;
+	fd = open(".tmp.txt", (O_CREAT | O_WRONLY | O_TRUNC | O_APPEND), 0644);
+	line = (char *)malloc(1);
+	while (1)
+	{
+		buf = get_next_line(STDIN);
+		line_len = ft_strlen(buf);
+		if ((lmtlen == line_len - 1) && !ft_strncmp(buf, limiter, lmtlen))
+			break ;
+		line = gnl_strjoin(line, buf);
+	}
+	write(fd, line, ft_strlen(line));
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int	infile;
@@ -67,11 +108,17 @@ int	main(int argc, char *argv[], char **envp)
 
 	if (argc >= 5) //cmdが一個のみの場合は存在するのか？
 	{
+		i = 2;
+		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		{
+			here_doc(argv[2], ft_strlen(argv[2]));
+			argv[1] = ".tmp.txt";
+			i = 3;
+		}
 		infile = get_file(argv[1], STDIN);
 		outfile = get_file(argv[argc - 1], STDOUT);
 		dup2(infile, STDIN);
 		dup2(outfile, STDOUT);
-		i = 2;
 		while (i < argc - 1)
 		{
 			pipex(i, argc, argv[i], envp);

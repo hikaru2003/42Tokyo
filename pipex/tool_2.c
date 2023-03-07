@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:44:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/23 20:54:37 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:58:51 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	*tmp = '\0';
 	return (rtn);
-}
-
-char	*ft_free(char **str)
-{
-	if (*str)
-		free(*str);
-	*str = NULL;
-	return (NULL);
 }

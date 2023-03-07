@@ -1,103 +1,103 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 19:38:37 by hmorisak         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+// /* ************************************************************************** */
+// /*                                                                            */
+// /*                                                        :::      ::::::::   */
+// /*   pipex.c                                            :+:      :+:    :+:   */
+// /*                                                    +:+ +:+         +:+     */
+// /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+// /*                                                +#+#+#+#+#+   +#+           */
+// /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
+// /*   Updated: 2023/03/07 12:14:39 by hmorisak         ###   ########.fr       */
+// /*                                                                            */
+// /* ************************************************************************** */
 
-#include "pipex.h"
+// #include "pipex.h"
 
-int	get_file(char *file, int status)
-{
-	int	fd;
+// int	get_file(char *file, int status)
+// {
+// 	int	fd;
 
-	if (status == STDIN)
-	{
-		if (access(file, F_OK))
-		{
-			ft_printf("zsh: no such file or directory: %s\n", file);
-			return (-1);
-		}
-		fd = open(file, O_RDONLY);
-		if (fd == -1)
-		{
-			ft_printf("zsh: %s: %s\n", strerror(errno), file);
-			return (-1);
-		}
-	}
-	if (status == STDOUT)
-		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
-	return (fd);
-}
+// 	if (status == STDIN)
+// 	{
+// 		if (access(file, F_OK))
+// 		{
+// 			ft_printf("zsh: no such file or directory: %s\n", file);
+// 			return (-1);
+// 		}
+// 		fd = open(file, O_RDONLY);
+// 		if (fd == -1)
+// 		{
+// 			ft_printf("zsh: %s: %s\n", strerror(errno), file);
+// 			return (-1);
+// 		}
+// 	}
+// 	if (status == STDOUT)
+// 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
+// 	return (fd);
+// }
 
-int	is_cmd(char *argv, char **envp)
-{
-	char	**cmd;
-	char	**path;
-	char	*filepath;
+// int	is_cmd(char *argv, char **envp)
+// {
+// 	char	**cmd;
+// 	char	**path;
+// 	char	*filepath;
 
-	cmd = ft_split(argv, ' ');
-	path = get_path(envp);
-	filepath = check_path(cmd, path);
-	if (filepath == NULL)
-	{
-		write(STDERR, "zsh: command not found: ", 24);
-		write(STDERR, cmd[0], ft_strlen(cmd[0]));
-		write(STDERR, "\n", 1);
-		return (-1);
-	}
-	return (0);
-}
+// 	cmd = ft_split(argv, ' ');
+// 	path = get_path(envp);
+// 	filepath = check_path(cmd, path);
+// 	if (filepath == NULL)
+// 	{
+// 		write(STDERR, "zsh: command not found: ", 24);
+// 		write(STDERR, cmd[0], ft_strlen(cmd[0]));
+// 		write(STDERR, "\n", 1);
+// 		return (-1);
+// 	}
+// 	return (0);
+// }
 
-void	pipex(int i, int argc, char *argv, char **envp)
-{
-	pid_t	pid;
-	int		pipefd[2];
+// void	pipex(int i, int argc, char *argv, char **envp)
+// {
+// 	pid_t	pid;
+// 	int		pipefd[2];
 
-	if (is_cmd(argv, envp) == -1)
-		return ;
-	pipe(pipefd);
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("main");
-		exit(1);
-	}
-	if (pid == 0 && i == argc - 2)
-		last_chile(argv, pipefd, envp);
-	else if (pid == 0)
-		do_child(argv, pipefd, envp);
-	else
-	{
-		close(pipefd[1]);
-		dup2(pipefd[0], 0);
-		close(pipefd[0]);
-	}
-}
+// 	if (is_cmd(argv, envp) == -1)
+// 		return ;
+// 	pipe(pipefd);
+// 	pid = fork();
+// 	if (pid < 0)
+// 	{
+// 		perror("main");
+// 		exit(1);
+// 	}
+// 	if (pid == 0 && i == argc - 2)
+// 		last_chile(argv, pipefd, envp);
+// 	else if (pid == 0)
+// 		do_child(argv, pipefd, envp);
+// 	else
+// 	{
+// 		close(pipefd[1]);
+// 		dup2(pipefd[0], 0);
+// 		close(pipefd[0]);
+// 	}
+// }
 
-int	main(int argc, char *argv[], char **envp)
-{
-	int	infile;
-	int	outfile;
+// int	main(int argc, char *argv[], char **envp)
+// {
+// 	int	infile;
+// 	int	outfile;
 
-	if (argc == 5)
-	{
-		infile = get_file(argv[1], STDIN);
-		outfile = get_file(argv[argc - 1], STDOUT);
-		dup2(infile, STDIN);
-		dup2(outfile, STDOUT);
-		if (infile != -1)
-			pipex(2, argc, argv[2], envp);
-		pipex(3, argc, argv[3], envp);
-		wait(NULL);
-		wait(NULL);
-	}
-	else
-		ft_printf("Invalid number of argments.\n");
-	return (1);
-}
+// 	if (argc == 5)
+// 	{
+// 		infile = get_file(argv[1], STDIN);
+// 		outfile = get_file(argv[argc - 1], STDOUT);
+// 		dup2(infile, STDIN);
+// 		dup2(outfile, STDOUT);
+// 		if (infile != -1)
+// 			pipex(2, argc, argv[2], envp);
+// 		pipex(3, argc, argv[3], envp);
+// 		wait(NULL);
+// 		wait(NULL);
+// 	}
+// 	else
+// 		ft_printf("Invalid number of argments.\n");
+// 	return (1);
+// }

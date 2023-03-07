@@ -6,12 +6,16 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 19:33:34 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:00:35 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <errno.h>
 # include <libc.h>
@@ -56,5 +60,10 @@ void	ft_putnbr(int n, int *len);
 void	to_hexa(unsigned long long num, char *str, int *len);
 void	print_conv(const char *format, va_list *args, int *len);
 void	ft_putnbr_u(unsigned int n, int *len);
+
+char	*get_next_line(int fd);
+char	*gnl_strjoin(char *line, char *buf);
+char	*ft_strchr(const char *s, int c);
+char	*ft_free(char **str);
 
 #endif
