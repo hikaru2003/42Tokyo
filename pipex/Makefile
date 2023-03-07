@@ -12,10 +12,10 @@ SRCS	=	./ft_print_conv.c		\
 			./tool_1.c				\
 			./tool_2.c				\
 
-B_SRCS	=	./pipex_bonus.c
+B_SRCS	=	./pipex_bonus.c			\
 
 OBJS = $(SRCS:%.c=%.o)
-B_OBJS = $(SRCS:%.c=%.o)
+B_OBJS = $(B_SRCS:%.c=%.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/07 21:25:58 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/07 21:39:06 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h> 
+# include <limits.h>
 //pid_t waitpid(pid_t pid, int *status_ptr, int options);
 
 # define STDIN 0
