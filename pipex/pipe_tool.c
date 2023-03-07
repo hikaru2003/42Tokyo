@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 18:55:30 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/07 21:26:07 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ char	**get_path(char **envp)
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (!envp[i])
-	{
-		perror("no path");
-		exit(1);
-	}
+		return (envp);
 	return (ft_split(envp[i] + 5, ':'));
 }
 
@@ -33,6 +30,8 @@ char	*check_path(char **cmd, char **path)
 	char	*filepath;
 	int		i;
 
+	if (access(cmd[0], X_OK) == 0)
+		return (cmd[0]);
 	i = 0;
 	while (path[i])
 	{

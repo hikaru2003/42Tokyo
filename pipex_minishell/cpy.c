@@ -1,12 +1,12 @@
 // /* ************************************************************************** */
 // /*                                                                            */
 // /*                                                        :::      ::::::::   */
-// /*   pipex_bonus.c                                      :+:      :+:    :+:   */
+// /*   pipex.c                                            :+:      :+:    :+:   */
 // /*                                                    +:+ +:+         +:+     */
 // /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
 // /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-// /*   Updated: 2023/03/07 19:34:48 by hmorisak         ###   ########.fr       */
+// /*   Updated: 2023/03/01 18:53:37 by hmorisak         ###   ########.fr       */
 // /*                                                                            */
 // /* ************************************************************************** */
 
@@ -30,25 +30,6 @@
 // 	if (status == STDOUT)
 // 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
 // 	return (fd);
-// }
-
-// int	is_cmd(char *argv, char **envp)
-// {
-// 	char	**cmd;
-// 	char	**path;
-// 	char	*filepath;
-
-// 	cmd = ft_split(argv, ' ');
-// 	path = get_path(envp);
-// 	filepath = check_path(cmd, path);
-// 	if (filepath == NULL)
-// 	{
-// 		write(STDERR, "zsh: command not found: ", 24);
-// 		write(STDERR, cmd[0], ft_strlen(cmd[0]));
-// 		write(STDERR, "\n", 1);
-// 		return (-1);
-// 	}
-// 	return (0);
 // }
 
 // void	pipex(int i, int argc, char *argv, char **envp)
@@ -78,58 +59,21 @@
 // 	}
 // }
 
-// int	here_doc(char **argv, char *limiter, int lmtlen)
-// {
-// 	int		fd;
-// 	int		line_len;
-// 	char	*buf;
-// 	char	*line;
-
-// 	line = (char *)malloc(sizeof(char));
-// 	if (!line)
-// 		return ;
-// 	fd = open(".tmp.txt", (O_CREAT | O_WRONLY | O_TRUNC), 0644);
-// 	line = (char *)malloc(1);
-// 	while (1)
-// 	{
-// 		ft_printf("pipe heredoc> ");
-// 		buf = get_next_line(STDIN);
-// 		line_len = ft_strlen(buf);
-// 		if ((lmtlen == line_len - 1) && !ft_strncmp(buf, limiter, lmtlen))
-// 			break ;
-// 		line = gnl_strjoin(line, buf);
-// 	}
-// 	write(fd, line, ft_strlen(line));
-// 	argv[0] = ".tmp.txt";
-// 	return (3);
-// }
-
 // int	main(int argc, char *argv[], char **envp)
 // {
 // 	int	infile;
 // 	int	outfile;
-// 	int	i;
 
-// 	if (argc >= 5)
+// 	if (argc == 5)
 // 	{
-// 		i = 2;
-// 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
-// 			i = here_doc(argv, argv[2], ft_strlen(argv[2]));
 // 		infile = get_file(argv[1], STDIN);
 // 		outfile = get_file(argv[argc - 1], STDOUT);
 // 		dup2(infile, STDIN);
 // 		dup2(outfile, STDOUT);
-// 		while (i < argc - 1)
-// 		{
-// 			pipex(i, argc, argv[i], envp);
-// 			i++;
-// 		}
-// 		i = 0;
-// 		while (i < argc - 3)
-// 		{
-// 			wait(NULL);
-// 			i++;
-// 		}
+// 		pipex(2, argc, argv[2], envp);
+// 		pipex(3, argc, argv[3], envp);
+// 		wait(NULL);
+// 		wait(NULL);
 // 	}
 // 	else
 // 		ft_printf("Invalid number of argments.\n");
