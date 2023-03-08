@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/08 10:13:35 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/08 18:15:18 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ int	get_file(char *file, int status)
 		if (fd == -1)
 			return (STDIN);
 	}
-	if (status == STDOUT)
+	if (status == 2)
 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
+	if (status == 3)
+		fd = open(file, (O_CREAT | O_WRONLY | O_APPEND), 0644);
 	return (fd);
 }
 
@@ -92,8 +94,10 @@ int	here_doc(char **argv, char *limiter, int lmtlen)
 	line = (char *)malloc(1);
 	while (1)
 	{
-		ft_printf("pipe heredoc> ");
+		ft_printf("> ");
 		buf = get_next_line(STDIN);
+		if (!buf)
+			break ;
 		line_len = ft_strlen(buf);
 		if ((lmtlen == line_len - 1) && !ft_strncmp(buf, limiter, lmtlen))
 			break ;
@@ -111,10 +115,10 @@ int	main(int argc, char *argv[], char **envp)
 	if (argc >= 5)
 	{
 		i = 2;
-		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+		if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 			i = here_doc(argv, argv[2], ft_strlen(argv[2]));
 		dup2(get_file(argv[1], STDIN), STDIN);
-		dup2(get_file(argv[argc - 1], STDOUT), STDOUT);
+		dup2(get_file(argv[argc - 1], i), STDOUT);
 		while (i < argc - 1)
 		{
 			pipex(i, argc, argv[i], envp);
