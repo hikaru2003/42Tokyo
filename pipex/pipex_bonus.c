@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/08 18:15:18 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/08 20:15:54 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@ int	get_file(char *file, int status)
 
 	if (status == STDIN)
 	{
-		if (access(file, F_OK))
-		{
-			ft_printf("zsh: no such file or directory: %s\n", file);
-			return (STDIN);
-		}
 		fd = open(file, O_RDONLY);
 		if (fd == -1)
-			return (STDIN);
+		{
+			ft_printf("zsh: %s: %s\n", strerror(errno), file);
+			return (-1);
+		}
+	}
+	if (status >= 2 && access(file, W_OK) == -1)
+	{
+		ft_printf("zsh: %s: %s\n", strerror(errno), file);
+		exit (1);
 	}
 	if (status == 2)
 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
@@ -62,7 +65,7 @@ void	pipex(int i, int argc, char *argv, char **envp)
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("main");
+		perror("zsh: fork failed");
 		exit(1);
 	}
 	if (pid == 0)
@@ -117,7 +120,10 @@ int	main(int argc, char *argv[], char **envp)
 		i = 2;
 		if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 			i = here_doc(argv, argv[2], ft_strlen(argv[2]));
-		dup2(get_file(argv[1], STDIN), STDIN);
+		if (get_file(argv[1], STDIN) == -1)
+			i = 3;
+		else
+			dup2(get_file(argv[1], STDIN), STDIN);
 		dup2(get_file(argv[argc - 1], i), STDOUT);
 		while (i < argc - 1)
 		{
