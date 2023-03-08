@@ -6,6 +6,8 @@ SRCS	=	./ft_print_conv.c		\
 			./ft_split.c			\
 			./get_next_line_utils.c	\
 			./get_next_line.c		\
+			./here_doc.c			\
+			./path.c				\
 			./pipe_tool.c			\
 			./pipex.c				\
 			./to_hexa.c				\

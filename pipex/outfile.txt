@@ -12,8 +12,12 @@ get_next_line.c
 get_next_line.o
 get_next_line_utils.c
 get_next_line_utils.o
+here_doc.c
+here_doc.o
 infile.txt
 outfile.txt
+path.c
+path.o
 pipe_tool.c
 pipe_tool.o
 pipex

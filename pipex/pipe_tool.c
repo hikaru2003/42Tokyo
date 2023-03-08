@@ -5,44 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/07 21:26:07 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/08 22:07:43 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**get_path(char **envp)
+void	pipex(int i, int argc, char *argv, char **envp)
 {
-	int	i;
+	pid_t	pid;
+	int		pipefd[2];
 
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	if (!envp[i])
-		return (envp);
-	return (ft_split(envp[i] + 5, ':'));
-}
-
-char	*check_path(char **cmd, char **path)
-{
-	char	*path_slash;
-	char	*filepath;
-	int		i;
-
-	if (access(cmd[0], X_OK) == 0)
-		return (cmd[0]);
-	i = 0;
-	while (path[i])
+	if (is_cmd(argv, envp) == -1)
+		return ;
+	pipe(pipefd);
+	pid = fork();
+	if (pid < 0)
 	{
-		path_slash = ft_strjoin(path[i], "/");
-		filepath = ft_strjoin(path_slash, cmd[0]);
-		ft_free(&path_slash);
-		if (access(filepath, X_OK) == 0)
-			return (filepath);
-		i++;
+		perror("zsh: fork failed");
+		exit(1);
 	}
-	return (NULL);
+	if (pid == 0 && i == argc - 2)
+		last_chile(argv, pipefd, envp);
+	else if (pid == 0)
+		do_child(argv, pipefd, envp);
+	else
+	{
+		close(pipefd[1]);
+		dup2(pipefd[0], 0);
+		close(pipefd[0]);
+	}
 }
 
 void	exec(char *argv, char **envp)

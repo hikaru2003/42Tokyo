@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/07 21:39:06 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/08 23:04:06 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@
 
 int		errno;
 
-int		get_file(char *file, int status);
+void	write_get_file_error(char *err_msg, char *file);
+int		get_file(char *file, int status, int flag);
 int		is_cmd(char *argv, char **envp);
 void	pipex(int i, int argc, char *argv, char **envp);
-// char	**get_path(char *cmd, char **envp);
 char	**get_path(char **envp);
 char	*check_path(char **cmd, char **path);
 void	exec(char *argv, char **envp);
 void	last_chile(char *argv, int *pipefd, char **envp);
 void	do_child(char *argv, int *pipefd, char **envp);
+void	do_wait(int argc);
+int		here_doc(char **argv, char *limiter, int lmtlen);
 
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -60,7 +62,6 @@ void	to_hexa(unsigned long long num, char *str, int *len);
 void	ft_putchar(char c, int *len);
 void	ft_putstr(char *s, int *len);
 void	ft_putnbr(int n, int *len);
-int		here_doc(char **argv, char *limiter, int lmtlen);
 void	print_conv(const char *format, va_list *args, int *len);
 void	ft_putnbr_u(unsigned int n, int *len);
 
