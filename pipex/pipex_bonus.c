@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/07 21:47:36 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:13:35 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ int	here_doc(char **argv, char *limiter, int lmtlen)
 
 int	main(int argc, char *argv[], char **envp)
 {
-	int	infile;
-	int	outfile;
 	int	i;
 
 	if (argc >= 5)
@@ -115,10 +113,8 @@ int	main(int argc, char *argv[], char **envp)
 		i = 2;
 		if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 			i = here_doc(argv, argv[2], ft_strlen(argv[2]));
-		infile = get_file(argv[1], STDIN);
-		outfile = get_file(argv[argc - 1], STDOUT);
-		dup2(infile, STDIN);
-		dup2(outfile, STDOUT);
+		dup2(get_file(argv[1], STDIN), STDIN);
+		dup2(get_file(argv[argc - 1], STDOUT), STDOUT);
 		while (i < argc - 1)
 		{
 			pipex(i, argc, argv[i], envp);

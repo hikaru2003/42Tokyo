@@ -29,7 +29,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(B_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
