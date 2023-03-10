@@ -53,26 +53,6 @@ t_array	*pre_sort(int element_num, char **argv)
 	return (array);
 }
 
-int	find_min(t_stack *head, int count)
-{
-	t_stack	*tmp;
-	int		min;
-	int		i;
-
-	// if (head->next == head)  //return値整数を返すとエラーかどうか判定できない
-	i = 0;
-	tmp = head->next;
-	min = INT_MAX;
-	while (tmp != head && i < count)
-	{
-		if (tmp->num < min)
-			min = tmp->num;
-		tmp = tmp->next;
-		i++;
-	}
-	return (min);
-}
-
 int	grouping(t_stack *a_head, t_stack *b_head, int prev_pivot, int element_num)
 {
 	static int	i;
