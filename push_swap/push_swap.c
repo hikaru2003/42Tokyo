@@ -19,11 +19,9 @@ t_array	*pre_sort(int element_num, char **argv)
 	int	count;
 	int	min;
 	int	min_index;
-	int	compact_num;
 
 	i = 0;
 	count = 0;
-	compact_num = 0;
 	min = INT_MAX;
 	min_index = 0;
 	array = (t_array *)malloc(sizeof(t_array) * element_num);
@@ -198,36 +196,93 @@ void	sort_three_elements(t_stack *a_head, t_stack *b_head)
 	}
 }
 
+// void	push_swap(t_stack *a_head, int element_num)
+// {
+// 	t_stack	b_head;
+// 	int		pivot;
+
+// 	b_head.next = &b_head;
+// 	b_head.prev = &b_head;
+// 	pivot = 0;
+// 	while (element_num - pivot > 3)
+// 	{
+// 		pivot = split_half(a_head, &b_head, element_num);
+// 		// t_stack	*b;
+// 		// printf("stack b\n");
+// 		// b = b_head.next;
+// 		// while (b != &b_head)
+// 		// {
+// 		// 	printf("%d\n", b->num);
+// 		// 	b = b->next;
+// 		// }
+// 		rtn_b2a_bottom(a_head, &b_head);
+// 	}
+
+// 	//print stack a
+// 	// t_stack	*a;
+// 	// a = a_head->next;
+// 	// printf("stack a\n");
+// 	// while (a != a_head)
+// 	// {
+// 	// 	printf("%d\n", a->num);
+// 	// 	a = a->next;
+// 	// }
+// 	sort_three_elements(a_head, &b_head);
+// }
+
+int	grouping(t_stack *a_head, t_stack *b_head, int prev_pivot, int element_num)
+{
+	static int	i;
+	int			devide_num;
+	int			pivot;
+	int			last_num;
+
+	if (i == 0)
+		i = 1;
+	devide_num = 3 + element_num / 100;
+	last_num = a_head->prev->num;
+	pivot = element_num * i / devide_num;
+	if (i == devide_num + 1)
+		return (0);
+	while (a_head->next->num != last_num)
+	{
+		if (a_head->next->num == element_num - 1 ||a_head->next->num == element_num - 2 || a_head->next->num == element_num - 3)
+			ra(a_head);
+		else if (a_head->next->num < pivot)
+		{
+			push_to_b(a_head, b_head);
+			if ((b_head->next->num < (prev_pivot + pivot) / 2) && a_head->next->num >= pivot)
+				rr(a_head, b_head);
+			else if (b_head->next->num < (prev_pivot + pivot) / 2)
+				rb(b_head);
+		}
+		else
+			ra(a_head);
+	}
+	if (a_head->next->num == element_num - 1 ||a_head->next->num == element_num - 2 || a_head->next->num == element_num - 3)
+			ra(a_head);
+	else if (a_head->next->num < pivot)
+	{
+		push_to_b(a_head, b_head);
+		if (b_head->next->num < (prev_pivot + pivot) / 2)
+			rb(b_head);
+	}
+	i++;
+	return (pivot);
+}
+
 void	push_swap(t_stack *a_head, int element_num)
 {
 	t_stack	b_head;
-	t_stack	*b;
-	int		pivot;
+	int		prev_pivot;
 
 	b_head.next = &b_head;
 	b_head.prev = &b_head;
-	pivot = 0;
-	while (element_num - pivot > 3)
+	prev_pivot = grouping(a_head, &b_head, 0, element_num);
+	while (prev_pivot != 0)
 	{
-		pivot = split_half(a_head, &b_head, element_num);
-		// printf("stack b\n");
-		// b = b_head.next;
-		// while (b != &b_head)
-		// {
-		// 	printf("%d\n", b->num);
-		// 	b = b->next;
-		// }
-		rtn_b2a_bottom(a_head, &b_head);
+		prev_pivot = grouping(a_head, &b_head, prev_pivot, element_num);
 	}
-
-	//print stack a
-	t_stack	*a;
-	a = a_head->next;
-	// printf("stack a\n");
-	// while (a != a_head)
-	// {
-	// 	printf("%d\n", a->num);
-	// 	a = a->next;
-	// }
-	sort_three_elements(a_head, &b_head);
+	only_three_elements(a_head);
+	sort(a_head, &b_head, element_num);
 }

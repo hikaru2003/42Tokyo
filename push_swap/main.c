@@ -27,9 +27,10 @@ int	ft_free(t_stack *head)
 	return (1);
 }
 
-int	creat_stack(t_stack *stack_head, t_stack *stack, int element_num, t_array *array)
+int	creat_stack(t_stack *stack_head, int element_num, t_array *array)
 {
-	int	i;
+	int		i;
+	t_stack	*stack;
 
 	i = 0;
 	while (i < element_num)
@@ -47,14 +48,14 @@ int	creat_stack(t_stack *stack_head, t_stack *stack, int element_num, t_array *a
 int	main(int argc, char ** argv)
 {
 	t_stack	a_head;
-	t_stack	*a;
+	// t_stack	*a;
 	t_array	*array;
 
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
 	//input compact num(start from 0) -> stack a
 	array = pre_sort(argc - 1, argv);
-	if (creat_stack(&a_head, a, argc - 1, array) != 0)
+	if (creat_stack(&a_head, argc - 1, array) != 0)
 		return (1);
 	printf("stack a -> ");
 	print_stack(&a_head);
@@ -71,5 +72,10 @@ int	main(int argc, char ** argv)
 		push_swap(&a_head, argc - 1);
 	printf("stack a -> ");
 	print_stack(&a_head);
+	if (is_sorted(&a_head) == 0)
+	{
+		printf("stack a is sorted\n");
+		return (0);
+	}
 	return (0);
 }

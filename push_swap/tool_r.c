@@ -43,8 +43,8 @@ void	rb(t_stack *b_head)
 
 void	rr(t_stack *a_head, t_stack *b_head)
 {
-	ra(a_head);
-	rb(b_head);
+	rotate(a_head);
+	rotate(b_head);
 	printf("rr\n");
 }
 

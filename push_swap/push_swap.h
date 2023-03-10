@@ -21,6 +21,9 @@
 # include <limits.h>
 # include <unistd.h>
 
+# define TOP 0
+# define BOTTOM 1
+
 typedef struct s_stack
 {
 	int				num;
@@ -35,7 +38,6 @@ typedef struct s_array
 } t_array;
 
 //ft_atoi.c
-static int	check_flow(long sum, char c, int flag);
 int			ft_atoi(const char *str);
 
 //tool_.c
@@ -63,16 +65,20 @@ int			split_half(t_stack *a_head, t_stack *b_head, int element_num);
 int			find_min(t_stack *head, int count);
 void		rtn_b2a_bottom(t_stack *a_head, t_stack *b_head);
 void		sort_three_elements(t_stack *a_head, t_stack *b_head);
+int			grouping(t_stack *a_head, t_stack *b_head, int prev_pivot, int element_num);
 void		push_swap(t_stack *a_head, int element_num);
 
 //sort.c
 int			is_sorted(t_stack *a_head);
 void		only_three_elements(t_stack *a_head);
 void		only_six_elements(t_stack *a_head, int element_num);
+int			find_max_pos(t_stack *b_head, int max, int element_num);
+void		max_to_a(t_stack *a_head, t_stack *b_head, int max, int pos);
+void		sort(t_stack *a_head, t_stack *b_head, int element_num);
 
 //main.c
 void		print_stack(t_stack *head);
 int			ft_free(t_stack *head);
-int			creat_stack(t_stack *stack_head, t_stack *stack, int element_num, t_array *array);
+int			creat_stack(t_stack *stack_head, int element_num, t_array *array);
 
 #endif
