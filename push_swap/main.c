@@ -53,15 +53,17 @@ int	main(int argc, char ** argv)
 
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
+	if (argc <= 2)
+		return (0);
 	//input compact num(start from 0) -> stack a
 	array = pre_sort(argc - 1, argv);
 	if (creat_stack(&a_head, argc - 1, array) != 0)
 		return (1);
-	printf("stack a -> ");
-	print_stack(&a_head);
+	// printf("stack a -> ");
+	// print_stack(&a_head);
 	if (is_sorted(&a_head) == 0)
 	{
-		printf("stack a is alreadly sorted\n");
+		// printf("stack a is alreadly sorted\n");
 		return (0);
 	}
 	if (argc <= 4)
@@ -70,12 +72,13 @@ int	main(int argc, char ** argv)
 		only_six_elements(&a_head, argc - 1);
 	else
 		push_swap(&a_head, argc - 1);
-	printf("stack a -> ");
-	print_stack(&a_head);
-	if (is_sorted(&a_head) == 0)
-	{
-		printf("stack a is sorted\n");
-		return (0);
-	}
+	// printf("stack a -> ");
+	// print_stack(&a_head);
+	// if (is_sorted(&a_head) == 0)
+	// {
+	// 	printf("stack a is sorted\n");
+	// 	return (0);
+	// }
+	// system("leaks push_swap");
 	return (0);
 }

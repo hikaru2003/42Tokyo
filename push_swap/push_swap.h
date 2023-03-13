@@ -60,13 +60,12 @@ void		sb(t_stack *b_head);
 void		ss(t_stack *a_head, t_stack *b_head);
 
 //push_swap.c
+t_array		*scale_down(t_array *array, int min, int min_index, int element_num);
 t_array		*pre_sort(int element_num, char **argv);
-int			grouping(t_stack *a_head, t_stack *b_head, int prev_pivot, int element_num);
+void		push_last_num(t_stack *a_head, t_stack *b_head, int prev_pivot, int pivot, int element_num);
+int			grouping(t_stack *a_head, t_stack *b_head, int last_num, int prev_pivot, int element_num);
 void		push_swap(t_stack *a_head, int element_num);
-// int			split_half(t_stack *a_head, t_stack *b_head, int element_num);
-// int			find_min(t_stack *head, int count);
-// void		rtn_b2a_bottom(t_stack *a_head, t_stack *b_head);
-// void		sort_three_elements(t_stack *a_head, t_stack *b_head);
+int			find_min(t_stack *head, int count);
 
 //sort.c
 int			is_sorted(t_stack *a_head);
