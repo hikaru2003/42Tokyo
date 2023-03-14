@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+void	*print_error()
+{
+	write(2, "Error\n", 6);
+	exit(1);
+	return (NULL);
+}
+
 t_array	*scale_down(t_array *array, int min_index, int element_num)
 {
 	int	count;
@@ -24,6 +31,8 @@ t_array	*scale_down(t_array *array, int min_index, int element_num)
 		min_index = 0;
 		while (i < element_num + 1)
 		{
+			if (array[i].num == array[min_index].num)
+				return ((t_array *)print_error());
 			if (array[i].flag != 1 && array[i].num < array[min_index].num)
 				min_index = i;
 			i++;
@@ -50,6 +59,8 @@ t_array	*pre_sort(int element_num, char **argv)
 	while (i < element_num + 1)
 	{
 		array[i].num = ft_atoi(argv[i]);
+		// if (array[i].num == (int)LONG_MAX || array[i].num == (int)LONG_MIN) //0もはじいてしまうのでft_atoiの中でオーバーフロウなどはprint_errorして、print_errorはNULLをかえしたりするのではなく、exitしてしまう．exitしてもいいのか？？？
+		// 	return ((t_array *)print_error());
 		array[i].flag = 0;
 		i++;
 	}

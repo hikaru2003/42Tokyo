@@ -45,9 +45,11 @@ int	ft_atoi(const char *str)
 		sum = sum * 10 + (*str - '0');
 		str++;
 		if (check_flow(sum, *str, flag) > 0)
-			return ((int)LONG_MAX);
+			print_error();
+			// return ((int)LONG_MAX);
 		if (check_flow(sum, *str, flag) < 0)
-			return ((int)LONG_MIN);
+			print_error();
+			// return ((int)LONG_MIN);
 	}
 	if (flag == 1)
 		sum *= -1;

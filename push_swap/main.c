@@ -95,7 +95,7 @@ int	main(int argc, char ** argv)
 		return (0);
 	array = pre_sort(argc - 1, argv);
 	if (!array)
-		return (1);
+		return (1); //return値はゼロ？正常終了でいいのか？
 	if (creat_stack(&a_head, argc - 1, array) != 0)
 		return (1);
 	if (is_sorted(&a_head) == 0)
