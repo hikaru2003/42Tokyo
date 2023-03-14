@@ -16,13 +16,16 @@ void	print_stack(t_stack *head)
 int	ft_free(t_stack *head)
 {
 	t_stack *tmp;
+	t_stack	*tmp_next;
 
-	tmp = head;
-	head = head->next;
-	while (head != tmp)
+	tmp = head->next;
+	tmp_next = tmp->next;
+	while (tmp != head)
 	{
-		free(head);
-		head = head->next;
+		pop(tmp);
+		free(tmp);
+		tmp = tmp_next;
+		tmp_next = tmp_next->next;
 	}
 	return (1);
 }
@@ -48,22 +51,20 @@ int	creat_stack(t_stack *stack_head, int element_num, t_array *array)
 int	main(int argc, char ** argv)
 {
 	t_stack	a_head;
-	// t_stack	*a;
 	t_array	*array;
 
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
 	if (argc <= 2)
 		return (0);
-	//input compact num(start from 0) -> stack a
 	array = pre_sort(argc - 1, argv);
+	if (!array)
+		return (1);
 	if (creat_stack(&a_head, argc - 1, array) != 0)
 		return (1);
-	// printf("stack a -> ");
-	// print_stack(&a_head);
 	if (is_sorted(&a_head) == 0)
 	{
-		// printf("stack a is alreadly sorted\n");
+		// printf("stack a is alreadly sorted or no input\n");
 		return (0);
 	}
 	if (argc <= 4)
