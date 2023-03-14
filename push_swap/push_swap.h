@@ -60,7 +60,7 @@ void		sb(t_stack *b_head);
 void		ss(t_stack *a_head, t_stack *b_head);
 
 //push_swap.c
-t_array		*scale_down(t_array *array, int min, int min_index, int element_num);
+t_array		*scale_down(t_array *array, int min_index, int element_num);
 t_array		*pre_sort(int element_num, char **argv);
 void		push_last_num(t_stack *a_head, t_stack *b_head, int prev_pivot, int pivot, int element_num);
 int			grouping(t_stack *a_head, t_stack *b_head, int last_num, int prev_pivot, int element_num);

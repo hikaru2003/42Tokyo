@@ -12,24 +12,20 @@
 
 #include "push_swap.h"
 
-t_array	*scale_down(t_array *array, int min, int min_index, int element_num)
+t_array	*scale_down(t_array *array, int min_index, int element_num)
 {
 	int	count;
 	int	i;
 
 	count = 0;
-	i = 0;
 	while (count < element_num)
 	{
-		i = 0;
-		min = INT_MAX;
-		while (i < element_num)
+		i = 1;
+		min_index = 0;
+		while (i < element_num + 1)
 		{
-			if (array[i].flag != 1 && array[i].num < min)
-			{
-				min = array[i].num;
+			if (array[i].flag != 1 && array[i].num < array[min_index].num)
 				min_index = i;
-			}
 			i++;
 		}
 		array[min_index].num = count;
@@ -43,22 +39,21 @@ t_array	*pre_sort(int element_num, char **argv)
 {
 	t_array	*array;
 	int	i;
-	int	min;
 	int	min_index;
 
-	i = 0;
-	min = INT_MAX;
+	i = 1;
 	min_index = 0;
-	array = (t_array *)malloc(sizeof(t_array) * element_num);
+	array = (t_array *)malloc(sizeof(t_array) * (element_num + 1));
 	if (!array)
 		return NULL;
-	while (i < element_num)
+	array[0].num = INT_MAX;
+	while (i < element_num + 1)
 	{
-		array[i].num = ft_atoi(argv[i + 1]);
+		array[i].num = ft_atoi(argv[i]);
 		array[i].flag = 0;
 		i++;
 	}
-	return (scale_down(array, min, min_index, element_num));
+	return (scale_down(array, min_index, element_num));
 }
 
 int	find_min(t_stack *head, int count)
