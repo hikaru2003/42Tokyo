@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:39:58 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:14:51 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:46:39 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int	ft_atoi(const char *str)
 		str++;
 		if (check_flow(sum, *str, flag) > 0)
 			print_error();
-			// return ((int)LONG_MAX);
 		if (check_flow(sum, *str, flag) < 0)
 			print_error();
-			// return ((int)LONG_MIN);
 	}
 	if (flag == 1)
 		sum *= -1;

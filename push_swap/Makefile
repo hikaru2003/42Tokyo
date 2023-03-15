@@ -2,17 +2,16 @@ NAME = push_swap
 
 SRCS	=	./ft_atoi.c		\
 			./main.c		\
+			./max_to_a.c	\
+			./pre_sort.c	\
 			./push_swap.c	\
-			./sort.c		\
+			./sort_cpy.c	\
 			./tool_push.c	\
 			./tool_r.c		\
 			./tool_rrev.c	\
 			./tool_s.c		\
 
-# B_SRCS	=	./
-
 OBJS = $(SRCS:%.c=%.o)
-# B_OBJS = $(B_SRCS:%.c=%.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 

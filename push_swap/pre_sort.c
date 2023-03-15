@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:17 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:26:12 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:47:48 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ t_array	*pre_sort(int element_num, char **argv)
 	while (i < element_num + 1)
 	{
 		array[i].num = ft_atoi(argv[i]);
-		// if (array[i].num == (int)LONG_MAX || array[i].num == (int)LONG_MIN) //0もはじいてしまうのでft_atoiの中でオーバーフロウなどはprint_errorして、print_errorはNULLをかえしたりするのではなく、exitしてしまう．exitしてもいいのか？？？
-		// 	return ((t_array *)print_error());
 		array[i].flag = 0;
 		i++;
 	}

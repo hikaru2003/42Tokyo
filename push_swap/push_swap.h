@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:27:07 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:43:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,16 @@ int			grouping(t_stack *a_head, t_stack *b_head, int last_num, int prev_pivot, i
 void		push_swap(t_stack *a_head, int element_num);
 int			find_min(t_stack *head, int count);
 
+//max_to_a.c
+int			max_on_top(t_stack *a_head, t_stack *b_head, int max);
+int			max_on_bottom(t_stack *a_head, t_stack *b_head, int max);
+int			max_to_a(t_stack *a_head, t_stack *b_head, int max, int pos);
+
 //sort.c
 int			is_sorted(t_stack *a_head);
 void		only_three_elements(t_stack *a_head);
 void		only_six_elements(t_stack *a_head, int element_num);
 int			find_max_pos(t_stack *b_head, int max, int element_num);
-void		max_to_a(t_stack *a_head, t_stack *b_head, int max, int pos);
 void		sort(t_stack *a_head, t_stack *b_head, int element_num);
 
 //main.c

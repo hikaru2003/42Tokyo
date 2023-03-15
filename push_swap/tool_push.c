@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:13:09 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:26:38 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:45:13 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	pop(t_stack *stack)
 {
 	stack->prev->next = stack->next;
 	stack->next->prev = stack->prev;
-	// free(stack); //freeしらたらpush_toのtmpも消えてしまう
 }
 
 void	push_to(t_stack *to_head, t_stack *from_head)

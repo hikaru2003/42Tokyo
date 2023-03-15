@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:12:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:15:01 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:47:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,34 @@ int	creat_stack(t_stack *stack_head, int element_num, t_array *array)
 	return (0);
 }
 
+int	main(int argc, char **argv)
+{
+	t_stack	a_head;
+	t_array	*array;
+
+	a_head.next = &a_head;
+	a_head.prev = &a_head;
+	if (argc <= 2)
+		return (0);
+	array = pre_sort(argc - 1, argv);
+	if (!array)
+		return (1);
+	if (creat_stack(&a_head, argc - 1, array) != 0)
+		return (1);
+	if (is_sorted(&a_head) == 0)
+	{
+		printf("stack a is alreadly sorted or no input\n");
+		return (0);
+	}
+	if (argc <= 4)
+		only_three_elements(&a_head);
+	else if (argc <= 7)
+		only_six_elements(&a_head, argc - 1);
+	else
+		push_swap(&a_head, argc - 1);
+	return (0);
+}
+
 // int	main(int argc, char ** argv)
 // {
 // 	t_stack	a_head;
@@ -71,52 +99,16 @@ int	creat_stack(t_stack *stack_head, int element_num, t_array *array)
 // 		return (0);
 // 	array = pre_sort(argc - 1, argv);
 // 	if (!array)
-// 		return (1);
+// 		return (1); //return値はゼロ？正常終了でいいのか？
 // 	if (creat_stack(&a_head, argc - 1, array) != 0)
 // 		return (1);
 // 	if (is_sorted(&a_head) == 0)
-// 	{
-// 		printf("stack a is alreadly sorted or no input\n");
 // 		return (0);
-// 	}
 // 	if (argc <= 4)
 // 		only_three_elements(&a_head);
 // 	else if (argc <= 7)
 // 		only_six_elements(&a_head, argc - 1);
 // 	else
 // 		push_swap(&a_head, argc - 1);
-// 	printf("stack a -> ");
-// 	print_stack(&a_head);
-// 	if (is_sorted(&a_head) == 0)
-// 	{
-// 		printf("stack a is sorted\n");
-// 		return (0);
-// 	}
-// 	system("leaks push_swap");
 // 	return (0);
 // }
-
-int	main(int argc, char ** argv)
-{
-	t_stack	a_head;
-	t_array	*array;
-
-	a_head.next = &a_head;
-	a_head.prev = &a_head;
-	if (argc <= 2)
-		return (0);
-	array = pre_sort(argc - 1, argv);
-	if (!array)
-		return (1); //return値はゼロ？正常終了でいいのか？
-	if (creat_stack(&a_head, argc - 1, array) != 0)
-		return (1);
-	if (is_sorted(&a_head) == 0)
-		return (0);
-	if (argc <= 4)
-		only_three_elements(&a_head);
-	else if (argc <= 7)
-		only_six_elements(&a_head, argc - 1);
-	else
-		push_swap(&a_head, argc - 1);
-	return (0);
-}
