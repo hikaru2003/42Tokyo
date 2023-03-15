@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:39:58 by hmorisak          #+#    #+#             */
-/*   Updated: 2022/11/18 11:22:29 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:14:51 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,3 @@ int	ft_atoi(const char *str)
 		sum *= -1;
 	return ((int)sum);
 }
-
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// int main(void)
-// {
-// 	const char str[] = "9223372036854775808";
-// 	printf("%d\n", atoi(str));
-// 	printf("%d\n", ft_atoi(str));
-// 	// printf("%lu\n", (int)LONG_MIN);
-
-// 	return (0);
-// }

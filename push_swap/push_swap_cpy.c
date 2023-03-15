@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_cpy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:40:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 20:56:13 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:15:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_array	*pre_sort(int element_num, char **argv)
 {
 	t_array	*array;
-	int	i;
-	int	count;
-	int	min;
-	int	min_index;
+	int		i;
+	int		count;
+	int		min;
+	int		min_index;
 
 	i = 0;
 	count = 0;
@@ -26,7 +26,7 @@ t_array	*pre_sort(int element_num, char **argv)
 	min_index = 0;
 	array = (t_array *)malloc(sizeof(t_array) * element_num);
 	if (!array)
-		return NULL;
+		return (NULL);
 	while (i < element_num)
 	{
 		array[i].num = ft_atoi(argv[i + 1]);

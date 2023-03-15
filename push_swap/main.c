@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 09:12:45 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/15 09:15:01 by hmorisak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	print_stack(t_stack *head)
@@ -15,7 +27,7 @@ void	print_stack(t_stack *head)
 
 int	ft_free(t_stack *head)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 	t_stack	*tmp_next;
 
 	tmp = head->next;

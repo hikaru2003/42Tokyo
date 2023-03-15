@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:55:19 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 20:55:27 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:13:41 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	swap(t_stack *head)
 {
 	t_stack	*head_next;
-	int	tmp;
+	int		tmp;
 
 	head_next = head->next;
 	if (head_next == head || head_next->next == head)

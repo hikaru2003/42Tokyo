@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tool_push.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 09:13:09 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/15 09:26:38 by hmorisak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	insert(t_stack *stack, t_stack *new)
@@ -44,7 +56,7 @@ void	push_to_b(t_stack *a_head, t_stack *b_head)
 // 	t_stack	*a;
 // 	t_stack	*b;
 // 	int	i;
-	
+
 // 	i = 1;
 // 	a_head.next = &a_head;
 // 	a_head.prev = &a_head;

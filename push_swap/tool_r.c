@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:55:09 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 20:55:10 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:13:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	rr(t_stack *a_head, t_stack *b_head)
 // 	t_stack	a_head;
 // 	int	i;
 // 	t_array	*array;
-	
+
 // 	i = 1;
 // 	a_head.next = &a_head;
 // 	a_head.prev = &a_head;

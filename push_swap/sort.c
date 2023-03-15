@@ -1,18 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 09:13:13 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/15 09:25:56 by hmorisak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
-
-int	is_sorted(t_stack *a_head)
-{
-	t_stack	*tmp;
-
-	tmp = a_head->next;
-	while (tmp != a_head && tmp->next != a_head)
-	{
-		if (tmp->num > tmp->next->num)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 void	only_three_elements(t_stack *a_head)
 {
@@ -65,7 +63,7 @@ void	only_six_elements(t_stack *a_head, int element_num)
 int	find_max_pos(t_stack *b_head, int max, int element_num)
 {
 	t_stack	*tmp;
-	int 	count;
+	int		count;
 
 	tmp = b_head->next;
 	count = 0;
@@ -92,7 +90,7 @@ void	max_to_a(t_stack *a_head, t_stack *b_head, int max, int pos)
 	}
 	else
 	{
-		while(b_head->next->num != max)
+		while (b_head->next->num != max)
 		{
 			rrb(b_head);
 		}
@@ -105,7 +103,7 @@ void	sort(t_stack *a_head, t_stack *b_head, int element_num)
 	int	max;
 
 	max = element_num - 4;
-	while(b_head->next != b_head)
+	while (b_head->next != b_head)
 	{
 		max_to_a(a_head, b_head, max, find_max_pos(b_head, max, element_num));
 		max--;

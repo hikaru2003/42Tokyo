@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/02 20:54:52 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 09:27:07 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_array
 {
 	int	num;
 	int	flag;
-} t_array;
+}	t_array;
 
 //ft_atoi.c
 int			ft_atoi(const char *str);
@@ -60,7 +60,7 @@ void		sb(t_stack *b_head);
 void		ss(t_stack *a_head, t_stack *b_head);
 
 //push_swap.c
-void		*print_error();
+void		*print_error(void);
 t_array		*scale_down(t_array *array, int min_index, int element_num);
 t_array		*pre_sort(int element_num, char **argv);
 void		push_last_num(t_stack *a_head, t_stack *b_head, int prev_pivot, int pivot, int element_num);
