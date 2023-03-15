@@ -1,6 +1,7 @@
 NAME = push_swap
 
 SRCS	=	./ft_atoi.c		\
+			./grouping.c	\
 			./main.c		\
 			./max_to_a.c	\
 			./pre_sort.c	\

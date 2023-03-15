@@ -1,18 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   grouping.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/16 16:42:52 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/16 16:55:39 by hmorisak         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "push_swap.h"
 
-void	push_last_num(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
+void	push_last_num(t_stack *a_head, t_stack *b_head,
+	t_pivot pivot, int element_num)
 {
 	if (a_head->next->num == element_num - 1
 		|| a_head->next->num == element_num - 2
@@ -26,7 +15,7 @@ void	push_last_num(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_
 	}
 }
 
-int	max_three_elements(t_stack *a_head, int element_num)
+int	last_three_elements(t_stack *a_head, int element_num)
 {
 	if (a_head->next->num == element_num - 1
 		|| a_head->next->num == element_num - 2
@@ -58,7 +47,7 @@ int	grouping(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
 		return (0);
 	while (a_head->next->num != last_num)
 	{
-		if (max_three_elements(a_head, element_num) == 1)
+		if (last_three_elements(a_head, element_num) == 1)
 			ra(a_head);
 		else if (a_head->next->num < pivot.current)
 			under_pivot(a_head, b_head, pivot);
@@ -67,5 +56,5 @@ int	grouping(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
 	}
 	push_last_num(a_head, b_head, pivot, element_num);
 	i++;
-	return (pivot.prev);
+	return (pivot.current);
 }
