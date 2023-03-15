@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/08 23:06:16 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 19:04:38 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	get_file(char *file, int status, int flag)
 		write_get_file_error(strerror(errno), file);
 		exit (1);
 	}
-	if (flag == 0)
+	if (status == STDOUT && flag == 0)
 		fd = open(file, (O_CREAT | O_WRONLY | O_TRUNC), 0644);
-	if (flag == 1)
+	if (status == STDOUT && flag == 1)
 		fd = open(file, (O_CREAT | O_WRONLY | O_APPEND), 0644);
 	return (fd);
 }
@@ -86,6 +86,7 @@ int	main(int argc, char *argv[], char **envp)
 		else
 			dup2(get_file(argv[1], STDIN, flag), STDIN);
 		dup2(get_file(argv[argc - 1], STDOUT, flag), STDOUT);
+		write(1, "here\n", 5);
 		do_pipex(i, argc, argv, envp);
 		do_wait(argc);
 		unlink(".tmp.txt");

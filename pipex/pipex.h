@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/08 23:04:06 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 19:04:03 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@
 # define STDOUT 1
 # define STDERR 2
 
-int		errno;
-
+int		all_space(char *argv);
 void	write_get_file_error(char *err_msg, char *file);
 int		get_file(char *file, int status, int flag);
 int		is_cmd(char *argv, char **envp);

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/08 22:38:14 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/15 18:26:34 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,29 @@ int	is_cmd(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
-	if (filepath == NULL)
+	if (filepath == NULL || all_space(argv) == 0)
 	{
 		write(STDERR, "zsh: command not found: ", 24);
-		write(STDERR, cmd[0], ft_strlen(cmd[0]));
+		if (all_space(argv) == 0)
+			write(STDERR, argv, ft_strlen(argv));
+		else
+			write(STDERR, cmd[0], ft_strlen(cmd[0]));
 		write(STDERR, "\n", 1);
 		return (-1);
+	}
+	return (0);
+}
+
+int	all_space(char *argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] != ' ')
+			return (1);
+		i++;
 	}
 	return (0);
 }
