@@ -1,47 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   grouping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 19:40:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/16 17:02:40 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/03/16 16:42:52 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/16 16:55:39 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	*print_error(void)
-{
-	write(2, "Error\n", 6);
-	exit(1);
-	return (NULL);
-}
-
-int	find_min(t_stack *head, int count)
-{
-	t_stack	*tmp;
-	int		min;
-	int		i;
-
-	// if (head->next == head) ありえないから書かなくてもいいか？
-	// 	return (-1);
-	i = 0;
-	tmp = head->next;
-	min = INT_MAX;
-	while (tmp != head && i < count)
-	{
-		if (tmp->num < min)
-			min = tmp->num;
-		tmp = tmp->next;
-		i++;
-	}
-	return (min);
-}
-
-void	push_last_num(t_stack *a_head, t_stack *b_head,
-	t_pivot pivot, int element_num)
+void	push_last_num(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
 {
 	if (a_head->next->num == element_num - 1
 		|| a_head->next->num == element_num - 2
@@ -55,7 +26,7 @@ void	push_last_num(t_stack *a_head, t_stack *b_head,
 	}
 }
 
-int	last_three_elements(t_stack *a_head, int element_num)
+int	max_three_elements(t_stack *a_head, int element_num)
 {
 	if (a_head->next->num == element_num - 1
 		|| a_head->next->num == element_num - 2
@@ -87,7 +58,7 @@ int	grouping(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
 		return (0);
 	while (a_head->next->num != last_num)
 	{
-		if (last_three_elements(a_head, element_num) == 1)
+		if (max_three_elements(a_head, element_num) == 1)
 			ra(a_head);
 		else if (a_head->next->num < pivot.current)
 			under_pivot(a_head, b_head, pivot);
@@ -96,22 +67,5 @@ int	grouping(t_stack *a_head, t_stack *b_head, t_pivot pivot, int element_num)
 	}
 	push_last_num(a_head, b_head, pivot, element_num);
 	i++;
-	return (pivot.current);
-}
-
-void	push_swap(t_stack *a_head, int element_num)
-{
-	t_stack	b_head;
-	t_pivot	pivot;
-
-	b_head.next = &b_head;
-	b_head.prev = &b_head;
-	pivot.current = 0;
-	pivot.prev = grouping(a_head, &b_head, pivot, element_num);
-	while (pivot.prev != 0)
-	{
-		pivot.prev = grouping(a_head, &b_head, pivot, element_num);
-	}
-	only_three_elements(a_head);
-	sort(a_head, &b_head, element_num);
+	return (pivot.prev);
 }

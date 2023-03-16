@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 21:43:49 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:03:10 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void		ss(t_stack *a_head, t_stack *b_head);
 void		*print_error(void);
 t_array		*scale_down(t_array *array, int min_index, int element_num);
 t_array		*pre_sort(int element_num, char **argv);
-void		push_last_num(t_stack *a_head, t_stack *b_head, int prev_pivot, int pivot, int element_num);
-int			grouping(t_stack *a_head, t_stack *b_head, int last_num, int prev_pivot, int element_num);
+void		push_last_num(t_stack *a_head, t_stack *b_head,
+				int prev_pivot, int pivot, int element_num);
+int			grouping(t_stack *a_head, t_stack *b_head,
+				int last_num, int prev_pivot, int element_num);
 void		push_swap(t_stack *a_head, int element_num);
 int			find_min(t_stack *head, int count);
 
