@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 21:04:24 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:09:43 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ void	do_child(char *argv, int *pipefd, char **envp)
 
 char	*ft_free(char **str)
 {
-	size_t	i = 0;
+	size_t	i;
 
+	i = 0;
 	while (str[i])
 	{
 		free(str[i]);

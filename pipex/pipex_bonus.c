@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 20:23:45 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:10:02 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ void	do_wait(int argc)
 		wait(NULL);
 		i++;
 	}
-}
-
-__attribute__((destructor))
-static void	destructor(void)
-{
-	system("leaks -q pipex");
 }
 
 int	main(int argc, char *argv[], char **envp)
