@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 18:26:34 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:02:13 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**get_path(char **envp)
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
 	if (!envp[i])
-		return (envp);
+		return (NULL);
 	return (ft_split(envp[i] + 5, ':'));
 }
 
@@ -37,9 +37,10 @@ char	*check_path(char **cmd, char **path)
 	{
 		path_slash = ft_strjoin(path[i], "/");
 		filepath = ft_strjoin(path_slash, cmd[0]);
-		ft_free(&path_slash);
+		gnl_free(&path_slash);
 		if (access(filepath, X_OK) == 0)
 			return (filepath);
+		gnl_free(&filepath);
 		i++;
 	}
 	return (NULL);
@@ -54,8 +55,11 @@ int	is_cmd(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
+	ft_free(cmd);
+	ft_free(path);
 	if (filepath == NULL || all_space(argv) == 0)
 	{
+		gnl_free(&filepath);
 		write(STDERR, "zsh: command not found: ", 24);
 		if (all_space(argv) == 0)
 			write(STDERR, argv, ft_strlen(argv));
@@ -64,6 +68,7 @@ int	is_cmd(char *argv, char **envp)
 		write(STDERR, "\n", 1);
 		return (-1);
 	}
+	gnl_free(&filepath);
 	return (0);
 }
 

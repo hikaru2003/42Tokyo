@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 19:04:38 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 20:23:45 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ void	do_wait(int argc)
 	}
 }
 
+__attribute__((destructor))
+static void	destructor(void)
+{
+	system("leaks -q pipex");
+}
+
 int	main(int argc, char *argv[], char **envp)
 {
 	int	i;
@@ -86,7 +92,6 @@ int	main(int argc, char *argv[], char **envp)
 		else
 			dup2(get_file(argv[1], STDIN, flag), STDIN);
 		dup2(get_file(argv[argc - 1], STDOUT, flag), STDOUT);
-		write(1, "here\n", 5);
 		do_pipex(i, argc, argv, envp);
 		do_wait(argc);
 		unlink(".tmp.txt");

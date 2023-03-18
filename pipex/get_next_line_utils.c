@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 12:36:53 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/07 12:00:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:27:32 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*ft_free(char **str)
+char	*gnl_free(char **str)
 {
 	if (*str)
 		free(*str);
@@ -66,11 +66,11 @@ char	*gnl_strjoin(char *line, char *buf)
 	if (!tmp)
 		return (NULL);
 	ft_strlcat(line, buf, tmp);
-	ft_free(&line);
+	gnl_free(&line);
 	line = (char *)malloc(len + 1);
 	if (!line)
 		return (NULL);
 	ft_strlcat(tmp, "", line);
-	ft_free(&tmp);
+	gnl_free(&tmp);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 19:04:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:02:26 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*ft_strdup(const char *s1);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *c);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_free(char **str);
 
 int		ft_printf(const char *format, ...);
 void	to_hexa(unsigned long long num, char *str, int *len);
@@ -67,6 +66,8 @@ void	ft_putnbr_u(unsigned int n, int *len);
 char	*get_next_line(int fd);
 char	*gnl_strjoin(char *line, char *buf);
 char	*ft_strchr(const char *s, int c);
+char	*gnl_free(char **str);
+
 char	*ft_free(char **str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 17:57:39 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:04:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	exec(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
+	ft_free(path);
 	execve(filepath, cmd, envp);
 }
 
@@ -63,4 +64,17 @@ void	do_child(char *argv, int *pipefd, char **envp)
 	dup2(pipefd[1], 1);
 	close(pipefd[1]);
 	exec(argv, envp);
+}
+
+char	*ft_free(char **str)
+{
+	size_t	i = 0;
+
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
 }

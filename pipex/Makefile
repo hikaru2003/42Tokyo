@@ -9,17 +9,18 @@ SRCS	=	./ft_print_conv.c		\
 			./here_doc.c			\
 			./path.c				\
 			./pipe_tool.c			\
-			./pipex.c				\
 			./to_hexa.c				\
 			./tool_1.c				\
 			./tool_2.c				\
+
+M_SRC	= 	./pipex.c				\
 
 B_SRCS	=	./pipex_bonus.c			\
 
 OBJS = $(SRCS:%.c=%.o)
 B_OBJS = $(B_SRCS:%.c=%.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 ifdef WITH_BONUS
 OBJS += $(B_OBJS)

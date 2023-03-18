@@ -1,3 +1,4 @@
+-s
 Makefile
 ft_print_conv.c
 ft_print_conv.o
@@ -21,9 +22,10 @@ pipe_tool.c
 pipe_tool.o
 pipex
 pipex.c
+pipex.dSYM
 pipex.h
-pipex.o
 pipex_bonus.c
+pipex_bonus.o
 test
 to_hexa.c
 to_hexa.o
@@ -31,3 +33,7 @@ tool_1.c
 tool_1.o
 tool_2.c
 tool_2.o
+leaks Report Version: 4.0
+Process 55581: 162 nodes malloced for 14 KB
+Process 55581: 0 leaks for 0 total leaked bytes.
+
