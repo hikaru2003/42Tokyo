@@ -6,7 +6,7 @@ SRCS	=	./ft_atoi.c		\
 			./max_to_a.c	\
 			./pre_sort.c	\
 			./push_swap.c	\
-			./sort_cpy.c	\
+			./sort.c	\
 			./tool_push.c	\
 			./tool_r.c		\
 			./tool_rrev.c	\

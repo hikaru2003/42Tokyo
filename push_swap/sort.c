@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_cpy.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 09:13:13 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 09:25:56 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/03/15 09:13:00 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/03/15 21:42:50 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,34 +79,25 @@ int	find_max_pos(t_stack *b_head, int max, int element_num)
 	return (-1);
 }
 
-void	max_to_a(t_stack *a_head, t_stack *b_head, int max, int pos)
-{
-	if (pos == TOP)
-	{
-		while (b_head->next->num != max)
-		{
-			rb(b_head);
-		}
-	}
-	else
-	{
-		while (b_head->next->num != max)
-		{
-			rrb(b_head);
-		}
-	}
-	push_to_a(a_head, b_head);
-}
-
 void	sort(t_stack *a_head, t_stack *b_head, int element_num)
 {
 	int	max;
+	int	flag;
 
 	max = element_num - 4;
 	while (b_head->next != b_head)
 	{
-		max_to_a(a_head, b_head, max, find_max_pos(b_head, max, element_num));
-		max--;
-		element_num--;
+		flag = max_to_a(a_head, b_head, max,
+				find_max_pos(b_head, max, element_num));
+		if (flag == 1)
+		{
+			max -= 2;
+			element_num -= 2;
+		}
+		else
+		{
+			max -= 1;
+			element_num -= 1;
+		}
 	}
 }
