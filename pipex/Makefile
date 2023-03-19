@@ -13,31 +13,37 @@ SRCS	=	./ft_print_conv.c		\
 			./tool_1.c				\
 			./tool_2.c				\
 
-M_SRC	= 	./pipex.c				\
+M_SRCS	= 	./pipex.c				\
 
 B_SRCS	=	./pipex_bonus.c			\
 
 OBJS = $(SRCS:%.c=%.o)
+M_OBJS = $(M_SRCS:%.c=%.o)
 B_OBJS = $(B_SRCS:%.c=%.o)
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 
 ifdef WITH_BONUS
 OBJS += $(B_OBJS)
+$(NAME): $(OBJS) $(M_OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 endif
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+ifndef WITH_BONUS
+$(NAME): $(OBJS) $(M_OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(M_OBJS)
+endif
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
+	rm -f $(OBJS) $(M_OBJS) $(B_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
-bonus:	$(OBJS) $(B_OBJS)
+bonus:	clean	$(OBJS) $(B_OBJS)
 	make WITH_BONUS=1
 
 re: fclean all

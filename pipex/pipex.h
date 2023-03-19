@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:30:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 21:02:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:11:28 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	exec(char *argv, char **envp);
 void	last_chile(char *argv, int *pipefd, char **envp);
 void	do_child(char *argv, int *pipefd, char **envp);
 void	do_wait(int argc);
-int		here_doc(char **argv, char *limiter, int lmtlen);
+char	*is_env(char *buf, char *limiter, char **envp);
+int		here_doc(char **argv, char *limiter, int lmtlen, char **envp);
 
 char	**ft_split(char const *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

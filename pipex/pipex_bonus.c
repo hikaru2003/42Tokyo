@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 21:10:02 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/19 20:14:53 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_file(char *file, int status, int flag)
 		if (fd == -1)
 		{
 			write_get_file_error(strerror(errno), file);
-			return (-1);
+			return (STDERR);
 		}
 	}
 	if (status == STDOUT && access(file, F_OK) == 0 && access(file, W_OK) == -1)
@@ -78,11 +78,14 @@ int	main(int argc, char *argv[], char **envp)
 		i = 2;
 		if (ft_strncmp(argv[1], "here_doc", 9) == 0)
 		{
-			flag = here_doc(argv, argv[2], ft_strlen(argv[2]));
+			flag = here_doc(argv, argv[2], ft_strlen(argv[2]), envp);
 			i = 3;
 		}
-		if (get_file(argv[1], STDIN, flag) == -1)
-			i = 3;
+		// if (get_file(argv[1], STDIN, flag) == STDERR)
+		// {
+		// 	dup2(STDERR, STDIN);
+		// 	i = 3;
+		// }
 		else
 			dup2(get_file(argv[1], STDIN, flag), STDIN);
 		dup2(get_file(argv[argc - 1], STDOUT, flag), STDOUT);
