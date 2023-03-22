@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/22 20:10:56 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:44:27 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	do_here_doc(int argc, char **argv, char **envp)
 	int	flag;
 	int	i;
 
-	outfile = get_file(argv[argc - 1], STDOUT, 1);
-	dup2(outfile, STDOUT);
 	flag = 0;
-	i = 3;
 	flag = here_doc(argv, argv[2], ft_strlen(argv[2]), envp);
+	outfile = get_file(argv[argc - 1], STDOUT, flag);
+	dup2(outfile, STDOUT);
+	i = 4;
 	pipex_here_doc(1, argc, argv, envp);
 	while (i < argc - 1)
 	{

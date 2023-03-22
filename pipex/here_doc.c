@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 20:20:16 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/22 19:56:04 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:16:17 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	here_doc(char **argv, char *limiter, int lmtlen, char **envp)
 	line = (char *)malloc(1);
 	if (!line)
 		return (INT_MAX);
-	fd = open(".tmp.txt", (O_CREAT | O_WRONLY | O_TRUNC), 0644);
+	fd = open(".tmp.txt", (O_CREAT | O_RDWR | O_TRUNC), 0644);
 	while (1)
 	{
 		write(0, "> ", 2);

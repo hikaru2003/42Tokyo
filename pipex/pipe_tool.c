@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/22 20:09:33 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:28:29 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	first_child(int i, char **argv, int *pipefd, char **envp)
 		close(pipefd[0]);
 		dup2(infile, STDIN);
 		dup2(pipefd[1], 1);
+		close(infile);
 		close(pipefd[1]);
 	}
 	else
