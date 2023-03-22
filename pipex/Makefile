@@ -1,17 +1,19 @@
 NAME = pipex
 
-SRCS	=	./ft_print_conv.c		\
+SRCS	=	./error.c				\
+			./free.c				\
+			./ft_print_conv.c		\
 			./ft_printf.c			\
 			./ft_put.c				\
 			./ft_split.c			\
+			./ft_strjoin.c			\
 			./get_next_line_utils.c	\
 			./get_next_line.c		\
 			./here_doc.c			\
 			./path.c				\
 			./pipe_tool.c			\
 			./to_hexa.c				\
-			./tool_1.c				\
-			./tool_2.c				\
+			./tool.c				\
 
 M_SRCS	= 	./pipex.c				\
 

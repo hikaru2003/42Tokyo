@@ -6,18 +6,18 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 21:09:43 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 20:09:33 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	pipex(int i, int argc, char *argv, char **envp)
+void	pipex(int i, int argc, char **argv, char **envp)
 {
 	pid_t	pid;
 	int		pipefd[2];
 
-	if (is_cmd(argv, envp) == -1)
+	if (i != 1 && is_cmd(argv[i], envp) == -1)
 		return ;
 	pipe(pipefd);
 	pid = fork();
@@ -26,10 +26,12 @@ void	pipex(int i, int argc, char *argv, char **envp)
 		perror("zsh: fork failed");
 		exit(1);
 	}
-	if (pid == 0 && i == argc - 2)
-		last_chile(argv, pipefd, envp);
-	else if (pid == 0)
-		do_child(argv, pipefd, envp);
+	if (pid == 0 && i == 1)
+		first_child(i, argv, pipefd, envp);
+	else if (pid == 0 && i == argc - 2)
+		last_chile(argv[i], pipefd, envp);
+	else if (pid == 0 && i > 2)
+		middle_child(argv[i], pipefd, envp);
 	else
 	{
 		close(pipefd[1]);
@@ -51,6 +53,27 @@ void	exec(char *argv, char **envp)
 	execve(filepath, cmd, envp);
 }
 
+void	first_child(int i, char **argv, int *pipefd, char **envp)
+{
+	int	infile;
+
+	infile = get_file(argv[1], STDIN, 0);
+	if (infile != -1)
+	{
+		close(pipefd[0]);
+		dup2(infile, STDIN);
+		dup2(pipefd[1], 1);
+		close(pipefd[1]);
+	}
+	else
+	{
+		close(pipefd[0]);
+		close(pipefd[1]);
+		exit(1);
+	}
+	exec(argv[i + 1], envp);
+}
+
 void	last_chile(char *argv, int *pipefd, char **envp)
 {
 	close(pipefd[0]);
@@ -58,24 +81,10 @@ void	last_chile(char *argv, int *pipefd, char **envp)
 	exec(argv, envp);
 }
 
-void	do_child(char *argv, int *pipefd, char **envp)
+void	middle_child(char *argv, int *pipefd, char **envp)
 {
 	close(pipefd[0]);
 	dup2(pipefd[1], 1);
 	close(pipefd[1]);
 	exec(argv, envp);
-}
-
-char	*ft_free(char **str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return (NULL);
 }

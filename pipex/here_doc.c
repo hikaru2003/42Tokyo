@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 20:20:16 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/19 20:11:15 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:56:04 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	here_doc(char **argv, char *limiter, int lmtlen, char **envp)
 	fd = open(".tmp.txt", (O_CREAT | O_WRONLY | O_TRUNC), 0644);
 	while (1)
 	{
-		ft_printf("> ");
+		write(0, "> ", 2);
 		buf = get_next_line(STDIN);
 		if (!buf)
 			break ;
@@ -59,4 +59,32 @@ int	here_doc(char **argv, char *limiter, int lmtlen, char **envp)
 	gnl_free(&line);
 	argv[1] = ".tmp.txt";
 	return (1);
+}
+
+void	pipex_here_doc(int i, int argc, char **argv, char **envp)
+{
+	pid_t	pid;
+	int		pipefd[2];
+
+	if (i != 1 && is_cmd(argv[i], envp) == -1)
+		return ;
+	pipe(pipefd);
+	pid = fork();
+	if (pid < 0)
+	{
+		perror("zsh: fork failed");
+		exit(1);
+	}
+	if (pid == 0 && i == 1)
+		first_child(i + 1, argv, pipefd, envp);
+	else if (pid == 0 && i == argc - 2)
+		last_chile(argv[i], pipefd, envp);
+	else if (pid == 0 && i > 3)
+		middle_child(argv[i], pipefd, envp);
+	else
+	{
+		close(pipefd[1]);
+		dup2(pipefd[0], 0);
+		close(pipefd[0]);
+	}
 }

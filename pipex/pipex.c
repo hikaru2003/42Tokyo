@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:29:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/19 19:11:36 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:48:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	get_file(char *file, int status, int flag)
 		fd = open(file, O_RDONLY);
 		if (fd == -1)
 		{
-			ft_printf("zsh: %s: %s\n", strerror(errno), file);
+			write_get_file_error(strerror(errno), file);
 			return (-1);
 		}
 	}
 	if (status == STDOUT && access(file, F_OK) == 0 && access(file, W_OK) == -1)
 	{
-		ft_printf("zsh: %s: %s\n", strerror(errno), file);
+		write_get_file_error(strerror(errno), file);
 		exit (1);
 	}
 	if (status == STDOUT && flag == 0)
@@ -37,22 +37,18 @@ int	get_file(char *file, int status, int flag)
 
 int	main(int argc, char *argv[], char **envp)
 {
-	int	infile;
 	int	outfile;
 
 	if (argc == 5)
 	{
-		infile = get_file(argv[1], STDIN, 0);
 		outfile = get_file(argv[argc - 1], STDOUT, 0);
-		dup2(infile, STDIN);
 		dup2(outfile, STDOUT);
-		if (infile != -1)
-			pipex(2, argc, argv[2], envp);
-		pipex(3, argc, argv[3], envp);
+		pipex(1, argc, argv, envp);
+		pipex(3, argc, argv, envp);
 		wait(NULL);
 		wait(NULL);
 	}
 	else
 		ft_printf("Invalid number of argments.\n");
-	return (1);
+	return (0);
 }
