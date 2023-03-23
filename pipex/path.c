@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 21:02:13 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:39:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*check_path(char **cmd, char **path)
 	int		i;
 
 	if (access(cmd[0], X_OK) == 0)
-		return (cmd[0]);
+		return (ft_strjoin(cmd[0], ""));
 	i = 0;
 	while (path[i])
 	{
