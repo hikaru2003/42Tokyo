@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/22 20:28:29 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:16:23 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	pipex(int i, int argc, char **argv, char **envp)
 		first_child(i, argv, pipefd, envp);
 	else if (pid == 0 && i == argc - 2)
 		last_chile(argv[i], pipefd, envp);
-	else if (pid == 0 && i > 2)
+	else if (pid == 0)
 		middle_child(argv[i], pipefd, envp);
 	else
 	{
@@ -68,7 +68,9 @@ void	first_child(int i, char **argv, int *pipefd, char **envp)
 	}
 	else
 	{
+		close(infile);
 		close(pipefd[0]);
+		dup2(pipefd[1], 1);
 		close(pipefd[1]);
 		exit(1);
 	}
