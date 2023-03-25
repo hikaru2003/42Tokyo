@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 14:15:52 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/13 10:20:08 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:40:51 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,17 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+// __attribute__((destructor))
+// static void	destructor(void){
+// 	system("leaks -q a.out");
+// }
+
 // int	main(void)
 // {
 // 	int		fd;
 // 	char	*buf;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	close(fd);
-// 	// printf("%d\n", fd);
+// 	fd = open("get_next_line.c", O_RDONLY);
 // 	while (1)
 // 	{
 // 		buf = get_next_line(fd);
@@ -81,6 +84,6 @@ char	*get_next_line(int fd)
 // 		if (!buf)
 // 			break ;
 // 	}
-// 	// system("leaks a.out");
+// 	close(fd);
 // 	return (0);
 // }
