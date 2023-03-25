@@ -1,0 +1,4 @@
+__attribute__((destructor))
+static void	destructor(void){
+	system("leaks -q a.out");
+}
