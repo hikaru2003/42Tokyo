@@ -16,10 +16,6 @@ OBJS = $(SRCS:%.c=%.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-ifdef WITH_BONUS
-OBJS += $(B_OBJS)
-endif
-
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -30,8 +26,5 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-
-bonus:	$(OBJS) $(B_OBJS)
-	make WITH_BONUS=1
 
 re: fclean all
