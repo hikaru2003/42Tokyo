@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:12:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/22 16:34:50 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:00:54 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	main(int argc, char **argv)
 
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
+	array = pre_sort(argc - 1, argv);
 	if (argc <= 2)
 		return (0);
-	array = pre_sort(argc - 1, argv);
 	if (!array)
 		return (1);
 	if (creat_stack(&a_head, argc - 1, array) != 0)
