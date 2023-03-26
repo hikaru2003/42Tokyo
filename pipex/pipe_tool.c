@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/23 17:16:23 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:42:53 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ void	exec(char *argv, char **envp)
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
 	ft_free(path);
-	execve(filepath, cmd, envp);
+	if (execve(filepath, cmd, envp) == -1)
+	{
+		perror("execve error");
+		exit(127);
+	}
 }
 
 void	first_child(int i, char **argv, int *pipefd, char **envp)
