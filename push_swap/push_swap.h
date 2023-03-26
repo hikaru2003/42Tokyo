@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 21:43:49 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:11:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_stack
 
 typedef struct s_array
 {
-	int	num;
-	int	flag;
+	long	num;
+	int		flag;
 }	t_array;
 
 typedef struct s_pivot

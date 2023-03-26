@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:17 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/15 21:47:48 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:11:59 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_array	*pre_sort(int element_num, char **argv)
 	array = (t_array *)malloc(sizeof(t_array) * (element_num + 1));
 	if (!array)
 		return (NULL);
-	array[0].num = INT_MAX;
+	array[0].num = LONG_MAX;
 	while (i < element_num + 1)
 	{
 		array[i].num = ft_atoi(argv[i]);

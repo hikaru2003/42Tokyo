@@ -6,29 +6,29 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:39:58 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/18 16:31:05 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/26 20:13:56 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_flow(long sum, char c, int flag)
+static int	check_flow(int sum, char c, int flag)
 {
-	if (LONG_MAX / 10 < sum && c && flag == 0)
+	if (INT_MAX / 10 < sum && c && flag == 0)
 		return (1);
-	if (sum == LONG_MAX / 10 && LONG_MAX % 10 < c - '0' && flag == 0)
+	if (sum == INT_MAX / 10 && INT_MAX % 10 < c - '0' && flag == 0)
 		return (1);
-	if (LONG_MIN / 10 > -sum && c && flag == 1)
+	if (INT_MIN / 10 > -sum && c && flag == 1)
 		return (-1);
-	if (LONG_MIN / 10 == -sum && LONG_MIN % 10 > -(c - '0') && flag == 1)
+	if (INT_MIN / 10 == -sum && INT_MIN % 10 > -(c - '0') && flag == 1)
 		return (-1);
 	return (0);
 }
 
 int	ft_atoi(const char *str)
 {
-	int		flag;
-	long	sum;
+	int	flag;
+	int	sum;
 
 	flag = 0;
 	sum = 0;
@@ -44,7 +44,7 @@ int	ft_atoi(const char *str)
 	{
 		sum = sum * 10 + (*str - '0');
 		str++;
-		if (check_flow(sum, *str, flag) < 0 || check_flow(sum, *str, flag) > 0)
+		if (check_flow(sum, *str, flag) != 0)
 			print_error();
 	}
 	if (*str != '\0')
