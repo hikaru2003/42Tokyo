@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:20:17 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/26 20:11:59 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:02:09 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_array	*pre_sort(int element_num, char **argv)
 
 	i = 1;
 	min_index = 0;
-	array = (t_array *)malloc(sizeof(t_array) * (element_num + 1));
+	array = (t_array *)malloc(sizeof(t_array) * (element_num + 2));
 	if (!array)
 		return (NULL);
 	array[0].num = LONG_MAX;
@@ -69,5 +69,6 @@ t_array	*pre_sort(int element_num, char **argv)
 		array[i].flag = 0;
 		i++;
 	}
+	array[i].flag = 2;
 	return (scale_down(array, min_index, element_num));
 }

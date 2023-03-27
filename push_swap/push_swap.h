@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:34:24 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/26 20:11:49 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:21:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ typedef struct s_pivot
 	int	current;
 }	t_pivot;
 
+//free.c
+int			ft_free(t_stack *head);
+int			array_free(t_array *array);
+
 //ft_atoi.c
 int			ft_atoi(const char *str);
 
@@ -56,7 +60,6 @@ int			grouping(t_stack *a_head, t_stack *b_head,
 
 //main.c
 void		print_stack(t_stack *head);
-int			ft_free(t_stack *head);
 int			creat_stack(t_stack *stack_head, int element_num, t_array *array);
 
 //max_to_a.c

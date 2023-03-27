@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:12:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/26 18:00:54 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/03/27 20:22:05 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ void	print_stack(t_stack *head)
 		tmp = tmp->next;
 	}
 	printf("\n");
-}
-
-int	ft_free(t_stack *head)
-{
-	t_stack	*tmp;
-	t_stack	*tmp_next;
-
-	tmp = head->next;
-	tmp_next = tmp->next;
-	while (tmp != head)
-	{
-		pop(tmp);
-		free(tmp);
-		tmp = tmp_next;
-		tmp_next = tmp_next->next;
-	}
-	return (1);
 }
 
 int	creat_stack(t_stack *stack_head, int element_num, t_array *array)
@@ -68,19 +51,20 @@ int	main(int argc, char **argv)
 	a_head.next = &a_head;
 	a_head.prev = &a_head;
 	array = pre_sort(argc - 1, argv);
-	if (argc <= 2)
-		return (0);
 	if (!array)
 		return (1);
+	if (argc <= 2)
+		return (array_free(array));
 	if (creat_stack(&a_head, argc - 1, array) != 0)
-		return (1);
+		return (array_free(array));
+	array_free(array);
 	if (is_sorted(&a_head) == 0)
-		return (0);
+		return (ft_free(&a_head));
 	if (argc <= 4)
 		only_three_elements(&a_head);
 	else if (argc <= 7)
 		only_six_elements(&a_head, argc - 1);
 	else
 		push_swap(&a_head, argc - 1);
-	return (0);
+	return (ft_free(&a_head));
 }
