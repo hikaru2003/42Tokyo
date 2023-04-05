@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/29 21:48:55 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/05 18:12:10 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+}	t_vars;
+
 //check_file.c
 int	check_file(char *file);
 
@@ -78,5 +84,9 @@ char	*ft_free(char **str);
 
 //init.c
 void	data_init(t_data *data);
+
+//close.c
+int		ft_close(int keycode, t_vars *vars);
+int		ft_destroy(t_vars *vars);
 
 #endif

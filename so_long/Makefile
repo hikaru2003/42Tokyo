@@ -9,6 +9,7 @@ SRCS	=	srcs/main.c					\
 			srcs/init.c					\
 			srcs/ft_strchr.c			\
 			srcs/ft_strlen.c			\
+			srcs/close.c				\
 
 
 OBJS = $(SRCS:%.c=%.o)
