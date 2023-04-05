@@ -10,7 +10,8 @@ SRCS	=	srcs/main.c					\
 			srcs/ft_strchr.c			\
 			srcs/ft_strlen.c			\
 			srcs/close.c				\
-
+			srcs/draw.c					\
+			srcs/next_frame.c			\
 
 OBJS = $(SRCS:%.c=%.o)
 

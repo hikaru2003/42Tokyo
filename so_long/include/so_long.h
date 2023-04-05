@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/05 18:12:10 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/05 19:09:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_file(char *file);
 //check_map.c
 void	insert(t_map *head, t_map *new);
 t_map	creat_map(int fd, t_data *data);
-int	check_map(int fd, t_data *data);
+int		check_map(int fd, t_data *data);
 
 //error.c
 void	write_get_file_error(char *err_msg, char *file);
@@ -89,4 +89,9 @@ void	data_init(t_data *data);
 int		ft_close(int keycode, t_vars *vars);
 int		ft_destroy(t_vars *vars);
 
+//draw.c
+int		draw_map(t_vars *vars, t_data *data, t_map *map);
+
+//next_frame.c
+int		next_frame(int keycode, t_data *data);
 #endif
