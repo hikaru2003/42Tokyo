@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 22:07:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/26 20:42:53 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:41:36 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	first_child(int i, char **argv, int *pipefd, char **envp)
 {
 	int	infile;
 
+	if (get_file(argv[1], STDIN, 0) == -1 || is_cmd(argv[i + 1], envp) == -1)
+		exit(1);
 	infile = get_file(argv[1], STDIN, 0);
 	if (infile != -1)
 	{

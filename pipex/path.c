@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 18:24:18 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/23 19:39:30 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:28:11 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	is_cmd(char *argv, char **envp)
 	cmd = ft_split(argv, ' ');
 	path = get_path(envp);
 	filepath = check_path(cmd, path);
-	ft_free(cmd);
 	ft_free(path);
 	if (filepath == NULL || all_space(argv) == 0)
 	{
@@ -66,8 +65,10 @@ int	is_cmd(char *argv, char **envp)
 		else
 			write(STDERR, cmd[0], ft_strlen(cmd[0]));
 		write(STDERR, "\n", 1);
+		ft_free(cmd);
 		return (-1);
 	}
+	ft_free(cmd);
 	gnl_free(&filepath);
 	return (0);
 }

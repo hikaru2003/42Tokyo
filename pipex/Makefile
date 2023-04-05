@@ -46,6 +46,6 @@ fclean: clean
 	rm -f $(NAME)
 
 bonus:	$(OBJS) $(B_OBJS)
-	make WITH_BONUS=1
+	@make WITH_BONUS=1
 
 re: fclean all
