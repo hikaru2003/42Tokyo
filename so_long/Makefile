@@ -12,6 +12,7 @@ SRCS	=	srcs/main.c					\
 			srcs/close.c				\
 			srcs/draw.c					\
 			srcs/next_frame.c			\
+			srcs/loop.c					\
 
 OBJS = $(SRCS:%.c=%.o)
 

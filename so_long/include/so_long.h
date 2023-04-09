@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 15:10:04 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 15:52:11 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_data
 	void	*img;
 	int		width;
 	int		height;
+	t_map	head;
 	t_map	*map;
 	void	*mlx;
 	void	*win;
@@ -93,5 +94,8 @@ void	do_up(t_data *data);
 void	do_down(t_data *data);
 void	do_left(t_data *data);
 void	do_right(t_data *data);
+
+//loop.c
+int		ft_loop(t_data *data);
 
 #endif

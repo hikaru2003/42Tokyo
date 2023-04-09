@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:33:39 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 14:53:19 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:04:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-	t_map	head;
 
 	if (argc != 2)
 		print_error();
@@ -34,15 +33,15 @@ int	main(int argc, char **argv)
 	data_init(data);
 	if (check_map(check_file(argv[1]), data) != 0)
 		exit(1);
-	head = creat_map(check_file(argv[1]), data);
-	data->map = head.next;
+	data->head = creat_map(check_file(argv[1]), data);
+	data->map = data->head.next;
 	data->width = ft_strlen(data->map->row) - 1;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->width * 32, data->height * 32, "so_long");
 	draw_map(data);
 	// mlx_key_hook(data->win, next_frame, &data);
-	mlx_hook(data->win, 2, 1, next_frame, &data);
-	mlx_hook(data->win, 17, 1, ft_destroy, &data);
-	mlx_loop_hook(data->mlx, draw_map, &data);
+	mlx_hook(data->win, 2, 1, next_frame, data);
+	mlx_hook(data->win, 17, 1, ft_destroy, data);
+	mlx_loop_hook(data->mlx, ft_loop, data);
 	mlx_loop(data->mlx);
 }

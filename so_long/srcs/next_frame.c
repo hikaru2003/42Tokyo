@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:41:42 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 14:45:40 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:04:47 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	next_frame(int keycode, t_data *data)
 		do_left(data);
 	if (keycode == 68 || keycode == 39)
 		do_right(data);
-	draw_map(data);
+	// draw_map(data);
 	return (0);
 }
 

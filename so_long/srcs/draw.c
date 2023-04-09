@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:53:22 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 14:37:23 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:02:25 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	draw_map(t_data *data)
 
 	i = 0;
 	y = 0;
+	data->map = data->head.next;
 	while (i < data->height)
 	{
 		j = 0;
