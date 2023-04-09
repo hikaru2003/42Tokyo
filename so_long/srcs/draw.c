@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:53:22 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 16:02:25 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:59:06 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	draw_map(t_data *data)
 	int	j;
 	int	x;
 	int	y;
-	int height;
-	int width;
 
 	i = 0;
 	y = 0;
@@ -32,39 +30,33 @@ int	draw_map(t_data *data)
 		{
 			if (data->map->row[j] == '1')
 			{
-				data->img = mlx_xpm_file_to_image(data->mlx, "image/voldemort.xpm", &width, &height);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
-				x += width;
+				mlx_put_image_to_window(data->mlx, data->win, data->wall_img, x, y);
+				x += data->xpm_width;
 			}
 			else if (data->map->row[j] == '0')
 			{
-				data->img = mlx_new_image(data->mlx, width, height);
-				// img.img = mlx_xpm_file_to_image(mlx, "image/tile.xpm", &width, &height);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
-				x += width;
+				mlx_put_image_to_window(data->mlx, data->win, data->space_img, x, y);
+				x += data->xpm_width;
 			}
 			else if (data->map->row[j] == 'C')
 			{
-				data->img = mlx_xpm_file_to_image(data->mlx, "image/dobby.xpm", &width, &height);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
-				x += width;
+				mlx_put_image_to_window(data->mlx, data->win, data->collect_img, x, y);
+				x += data->xpm_width;
 			}
 			else if (data->map->row[j] == 'E')
 			{
-				data->img = mlx_xpm_file_to_image(data->mlx, "image/dumbledore.xpm", &width, &height);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
-				x += width;
+				mlx_put_image_to_window(data->mlx, data->win, data->exit_img, x, y);
+				x += data->xpm_width;
 			}
 			else if (data->map->row[j] == 'P')
 			{
-				data->img = mlx_xpm_file_to_image(data->mlx, "image/sirius.xpm", &width, &height);
-				mlx_put_image_to_window(data->mlx, data->win, data->img, x, y);
-				x += width;
+				mlx_put_image_to_window(data->mlx, data->win, data->player_img, x, y);
+				x += data->xpm_width;
 			}
 			j++;
 		}
 		i++;
-		y += height;
+		y += data->xpm_height;
 		data->map = data->map->next;
 	}
 	return (0);

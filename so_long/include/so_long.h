@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 15:52:11 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 20:27:50 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,24 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	void	*img;
+	int		xpm_height;
+	int		xpm_width;
+	void	*space_img;
+	void	*wall_img;
+	void	*collect_img;
+	void	*exit_img;
+	void	*player_img;
 	int		width;
 	int		height;
 	t_map	head;
 	t_map	*map;
 	void	*mlx;
 	void	*win;
+	int		player_x;
+	int		player_y;
+	int		c_num;
+	int		collected;
+	int		exit_flag;
 }	t_data;
 
 //check_file.c
@@ -61,7 +72,7 @@ int		check_file(char *file);
 //check_map.c
 void	insert(t_map *head, t_map *new);
 t_map	creat_map(int fd, t_data *data);
-int		check_map(int fd, t_data *data);
+int		check_map(t_data *data);
 
 //error.c
 void	write_get_file_error(char *err_msg, char *file);

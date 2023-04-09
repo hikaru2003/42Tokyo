@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/29 21:59:12 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 20:59:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	insert(t_map *head, t_map *new)
 t_map	creat_map(int fd, t_data *data)
 {
 	char	*line;
-	t_map	head;
+	// t_map	head;
 	t_map	*map;
 
 	data->height = 0;
-	head.next = &head;
-	head.prev = &head;
+	// head.next = &head;
+	// head.prev = &head;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -36,55 +36,64 @@ t_map	creat_map(int fd, t_data *data)
 			break ;
 		map = (t_map *)malloc(sizeof(t_map));
 		if (!map)
-			return (head);
+			return (data->head);
 		map->row = line;
-		insert(&head, map);
+		insert(&data->head, map);
 		data->height++;
 	}
-	return (head);
+	// data->width = ft_strlen(data->head.next->row) - 1;
+	return (data->head);
 }
 
-int	check_map(int fd, t_data *data)
+int	check_map(t_data *data)
 {
-	t_map	head;
-	t_map	*map;
-	int		i;
-	int		index;
+	int	x;
+	int	y;
 
-	i = 0;
-	head = creat_map(fd, data);
-	map = head.next;
-	while (i < data->height)
+	x = 0;
+	y = 0;
+	data->map = data->head.next;
+	data->width = ft_strlen(data->map->row) - 1;
+	while (y < data->height)
 	{
-		index = 0;
-		if (i == 0 || i == data->height - 1)
+		x = 0;
+		if (y == 0 || y == data->height - 1)
 		{
-			while (index < data->width)
+			while (x < data->width)
 			{
-				if (map->row[index] != '1')
+				if (data->map->row[x] != '1')
 					print_error();
-				index++;
+				x++;
 			}
 		}
 		else
 		{
-			while (index < data->width)
+			while (x < data->width)
 			{
-				if (index == 0 || index == data->width - 1)
+				if (x == 0 || x == data->width - 1)
 				{
-					if (map->row[index] != '1')
+					if (data->map->row[x] != '1')
 						print_error();
 				}
 				else
 				{
-					if (!ft_strchr("0CEP", map->row[index]))
+					if (data->map->row[x] == 'P')
+					{
+						data->player_x = x;
+						data->player_y = y;
+					}
+					if (data->map->row[x] == 'C')
+					{
+						data->c_num++;
+					}
+					if (!ft_strchr("01CEP", data->map->row[x]))
 						print_error();
 				}
-				index++;
-			}	
+				x++;
+			}
 		}
-		i++;
-		map = map->next;
+		y++;
+		data->map = data->map->next;
 	}
 	return (0);
 }
