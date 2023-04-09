@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:33:39 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/05 19:14:09 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 14:53:19 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	t_map	head;
-	t_map	*map;
-	t_vars	*vars;
-	int		width;
-	int		height;
 
 	if (argc != 2)
 		print_error();
@@ -39,15 +35,14 @@ int	main(int argc, char **argv)
 	if (check_map(check_file(argv[1]), data) != 0)
 		exit(1);
 	head = creat_map(check_file(argv[1]), data);
-	map = head.next;
-	data->width = ft_strlen(map->row) - 1;
-	vars = (t_vars *)malloc(sizeof(t_vars));
-	vars->mlx = mlx_init();
-	vars->win = mlx_new_window(vars->mlx, data->width * 32, data->height * 32, "so_long");
-	data->img = mlx_xpm_file_to_image(vars->mlx, "image/dobby.xpm", &width, &height);
-	draw_map(vars, data, map);
-	mlx_hook(vars->win, 2, 1, ft_close, vars);
-	mlx_hook(vars->win, 17, 1, ft_destroy, vars);
-	// mlx_loop_hook(vars->mlx, next_step, &data);
-	mlx_loop(vars->mlx);
+	data->map = head.next;
+	data->width = ft_strlen(data->map->row) - 1;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, data->width * 32, data->height * 32, "so_long");
+	draw_map(data);
+	// mlx_key_hook(data->win, next_frame, &data);
+	mlx_hook(data->win, 2, 1, next_frame, &data);
+	mlx_hook(data->win, 17, 1, ft_destroy, &data);
+	mlx_loop_hook(data->mlx, draw_map, &data);
+	mlx_loop(data->mlx);
 }

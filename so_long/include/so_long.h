@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/05 19:09:24 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/09 15:10:04 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,15 @@ typedef struct s_map
 typedef struct s_data
 {
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
 	int		width;
 	int		height;
-	int		endian;
-}	t_data;
-
-typedef struct s_vars
-{
+	t_map	*map;
 	void	*mlx;
 	void	*win;
-}	t_vars;
+}	t_data;
 
 //check_file.c
-int	check_file(char *file);
+int		check_file(char *file);
 
 //check_map.c
 void	insert(t_map *head, t_map *new);
@@ -86,12 +80,18 @@ char	*ft_free(char **str);
 void	data_init(t_data *data);
 
 //close.c
-int		ft_close(int keycode, t_vars *vars);
-int		ft_destroy(t_vars *vars);
+int		ft_close(int keycode, t_data *data);
+int		ft_destroy(t_data *data);
 
 //draw.c
-int		draw_map(t_vars *vars, t_data *data, t_map *map);
+int		draw_map(t_data *data);
 
 //next_frame.c
 int		next_frame(int keycode, t_data *data);
+int		next_step(t_data *data);
+void	do_up(t_data *data);
+void	do_down(t_data *data);
+void	do_left(t_data *data);
+void	do_right(t_data *data);
+
 #endif
