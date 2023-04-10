@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:24:48 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 15:08:24 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:12:42 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,16 @@ void	write_get_file_error(char *err_msg, char *file)
 	exit(1);
 }
 
-void	print_error(void)
+void	file_error(void)
 {
 	write(2, "error\n", 6);
+	exit(1);
+}
+
+void	print_error(t_data *data)
+{
+	write(2, "error\n", 6);
+	map_free(data);
+	data_free(data);
 	exit(1);
 }

@@ -5,66 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 18:53:22 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 14:52:57 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/10 19:34:23 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/10 19:34:40 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	draw_player(t_data *data, t_map_index *index)
+{
+	if (data->player_direction == FRONT)
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->player_front_img, index->x, index->y);
+	if (data->player_direction == BACK)
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->player_back_img, index->x, index->y);
+	if (data->player_direction == RIGHT)
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->player_right_img, index->x, index->y);
+	if (data->player_direction == LEFT)
+		mlx_put_image_to_window(data->mlx, data->win,
+			data->player_left_img, index->x, index->y);
+}
+
+void	draw_one_image(t_data *data, t_map_index *index)
+{
+	if (data->map->row[index->width] == '1')
+		mlx_put_image_to_window(data->mlx, data->win, data->wall_img,
+			index->x, index->y);
+	else if (data->map->row[index->width] == '0')
+		mlx_put_image_to_window(data->mlx, data->win, data->space_img,
+			index->x, index->y);
+	else if (data->map->row[index->width] == 'C')
+		mlx_put_image_to_window(data->mlx, data->win, data->collect_img,
+			index->x, index->y);
+	else if (data->map->row[index->width] == 'E')
+		mlx_put_image_to_window(data->mlx, data->win, data->exit_img,
+			index->x, index->y);
+	else if (data->map->row[index->width] == 'P')
+		draw_player(data, index);
+}
+
 int	draw_map(t_data *data)
 {
-	int	i;
-	int	j;
-	int	x;
-	int	y;
+	t_map_index	*index;
 
-	i = 0;
-	y = 0;
+	index = (t_map_index *)malloc(sizeof(t_map_index));
+	if (!index)
+		print_error(data);
+	index_init(index);
 	data->map = data->head.next;
-	while (i < data->height)
+	while (index->height < data->height)
 	{
-		j = 0;
-		x = 0;
-		while (j < data->width)
+		index->width = 0;
+		index->x = 0;
+		while (index->width < data->width)
 		{
-			if (data->map->row[j] == '1')
-			{
-				mlx_put_image_to_window(data->mlx, data->win, data->wall_img, x, y);
-				x += data->xpm_width;
-			}
-			else if (data->map->row[j] == '0')
-			{
-				mlx_put_image_to_window(data->mlx, data->win, data->space_img, x, y);
-				x += data->xpm_width;
-			}
-			else if (data->map->row[j] == 'C')
-			{
-				mlx_put_image_to_window(data->mlx, data->win, data->collect_img, x, y);
-				x += data->xpm_width;
-			}
-			else if (data->map->row[j] == 'E')
-			{
-				mlx_put_image_to_window(data->mlx, data->win, data->exit_img, x, y);
-				x += data->xpm_width;
-			}
-			else if (data->map->row[j] == 'P')
-			{
-				if (data->player_direction == FRONT)
-					mlx_put_image_to_window(data->mlx, data->win, data->player_front_img, x, y);
-				if (data->player_direction == BACK)
-					mlx_put_image_to_window(data->mlx, data->win, data->player_back_img, x, y);
-				if (data->player_direction == RIGHT)
-					mlx_put_image_to_window(data->mlx, data->win, data->player_right_img, x, y);
-				if (data->player_direction == LEFT)
-					mlx_put_image_to_window(data->mlx, data->win, data->player_left_img, x, y);
-				x += data->xpm_width;
-			}
-			j++;
+			draw_one_image(data, index);
+			index->x += data->xpm_width;
+			index->width++;
 		}
-		i++;
-		y += data->xpm_height;
+		index->height++;
+		index->y += data->xpm_height;
 		data->map = data->map->next;
 	}
+	free(index);
 	return (0);
 }

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/09 15:49:23 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 20:14:03 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/05 14:28:15 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/10 18:49:29 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_loop(t_data *data)
+int	ft_destroy(t_data *data)
 {
-	draw_map(data);
-	return (0);
+	mlx_destroy_window(data->mlx, data->win);
+	map_free(data);
+	data_free(data);
+	exit(0);
 }

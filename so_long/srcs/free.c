@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 14:28:15 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 14:35:06 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/10 17:23:23 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/10 18:07:27 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_close(int keycode, t_data *data)
+int	map_free(t_data *data)
 {
-	if (keycode == 53)
+	t_map	*tmp;
+
+	tmp = data->head.next;
+	data->map = data->head.next;
+	while (tmp != &data->head)
 	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit(0);
-		return (0);
+		tmp = data->map->next;
+		free(data->map->row);
+		free(data->map);
+		data->map = tmp;
 	}
 	return (0);
 }
 
-int	ft_destroy(t_data *data)
+int	data_free(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
+	if (!data)
+		free(data);
 	return (0);
 }
