@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 14:50:19 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:23:12 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# include <libc.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -74,6 +75,7 @@ typedef struct s_data
 	int		c_num;
 	int		collected;
 	int		exit_flag;
+	int		step;
 }	t_data;
 
 //check_file.c
@@ -91,6 +93,17 @@ void	print_error(void);
 //libft
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *c);
+int		ft_strcmp(const char *s1, const char *s2);
+
+//printf
+size_t	ft_strlen(const char *c);
+int		ft_printf(const char *format, ...);
+void	ft_putchar(char c, int *len);
+void	ft_putstr(char *s, int *len);
+void	ft_putnbr(int n, int *len);
+void	to_hexa(unsigned long long num, char *str, int *len);
+void	print_conv(const char *format, va_list *args, int *len);
+void	ft_putnbr_u(unsigned int n, int *len);
 
 //gnl
 char	*get_next_line(int fd);

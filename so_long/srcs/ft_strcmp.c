@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:24:48 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 15:08:24 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/10 15:10:15 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/10 15:11:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	write_get_file_error(char *err_msg, char *file)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	write(STDERR, "zsh: ", 5);
-	write(STDERR, err_msg, ft_strlen(err_msg));
-	write(STDERR, ": ", 2);
-	write(STDERR, file, ft_strlen(file));
-	write(STDERR, "\n", 1);
-	exit(1);
-}
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-void	print_error(void)
-{
-	write(2, "error\n", 6);
-	exit(1);
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (*c1 != '\0' || *c2 != '\0')
+	{
+		if (*c1 != *c2)
+			return (*c1 - *c2);
+		c1++;
+		c2++;
+	}
+	return (0);
 }

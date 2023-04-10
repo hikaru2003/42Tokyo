@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:24:56 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/29 21:13:48 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:12:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int	check_file(char *file)
 {
-	int	fd;
+	int		fd;
+	char	*dot;
 
+	dot = ft_strchr(file, '.');
+	if (!dot)
+		print_error();
+	if (ft_strcmp(dot, ".ber") != 0)
+		print_error();
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
 		write_get_file_error(strerror(errno), file);
-		exit(1);
-	}
 	return (fd);
 }

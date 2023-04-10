@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:33:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 14:50:29 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:17:23 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	data_init(t_data *data)
 	data->c_num = 0;
 	data->collected = 0;
 	data->exit_flag = 0;
+	data->step = 0;
 }

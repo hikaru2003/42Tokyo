@@ -13,6 +13,11 @@ SRCS	=	srcs/main.c					\
 			srcs/draw.c					\
 			srcs/next_frame.c			\
 			srcs/loop.c					\
+			srcs/ft_strcmp.c			\
+			srcs/ft_print_conv.c		\
+			srcs/ft_printf.c			\
+			srcs/ft_put.c				\
+			srcs/to_hexa.c				\
 
 OBJS = $(SRCS:%.c=%.o)
 

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   to_hexa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:24:48 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 15:08:24 by hmorisak         ###   ########.fr       */
+/*   Created: 2022/12/27 15:25:59 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/10 15:21:10 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	write_get_file_error(char *err_msg, char *file)
+void	to_hexa(unsigned long long num, char *str, int *len)
 {
-	write(STDERR, "zsh: ", 5);
-	write(STDERR, err_msg, ft_strlen(err_msg));
-	write(STDERR, ": ", 2);
-	write(STDERR, file, ft_strlen(file));
-	write(STDERR, "\n", 1);
-	exit(1);
-}
+	unsigned long long	div;
+	unsigned long long	mod;
 
-void	print_error(void)
-{
-	write(2, "error\n", 6);
-	exit(1);
+	div = num / 16;
+	mod = num % 16;
+	if (div > 0)
+		to_hexa(div, str, len);
+	write(1, &str[mod], 1);
+	(*len)++;
 }
