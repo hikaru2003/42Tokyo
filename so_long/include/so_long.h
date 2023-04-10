@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 20:27:50 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:50:19 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@
 # define STDOUT			1
 # define STDERR			2
 
+# define FRONT			0
+# define BACK			1
+# define RIGHT			2
+# define LEFT			3
+
+
 typedef struct s_map
 {
 	char			*row;
@@ -52,7 +58,11 @@ typedef struct s_data
 	void	*wall_img;
 	void	*collect_img;
 	void	*exit_img;
-	void	*player_img;
+	void	*player_front_img;
+	void	*player_back_img;
+	void	*player_right_img;
+	void	*player_left_img;
+	int		player_direction;
 	int		width;
 	int		height;
 	t_map	head;

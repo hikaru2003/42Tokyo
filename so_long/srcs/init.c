@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:33:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 13:56:24 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:50:29 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	data_init(t_data *data)
 	data->wall_img = mlx_xpm_file_to_image(data->mlx, "image/stone.xpm", &(data->xpm_width), &(data->xpm_height));
 	data->collect_img = mlx_xpm_file_to_image(data->mlx, "image/pikatyu.xpm", &(data->xpm_width), &(data->xpm_height));
 	data->exit_img = mlx_xpm_file_to_image(data->mlx, "image/myuu2.xpm", &(data->xpm_width), &(data->xpm_height));
-	data->player_img = mlx_xpm_file_to_image(data->mlx, "image/satoshi.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_front_img = mlx_xpm_file_to_image(data->mlx, "image/player_front.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_back_img = mlx_xpm_file_to_image(data->mlx, "image/player_back.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_right_img = mlx_xpm_file_to_image(data->mlx, "image/player_right.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_left_img = mlx_xpm_file_to_image(data->mlx, "image/player_left.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_direction = FRONT;
 	data->width = 0;
 	data->height = 0;
 	data->head.next = &data->head;

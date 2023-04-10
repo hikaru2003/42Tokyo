@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:41:42 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 20:29:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:53:22 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	do_up(t_data *data)
 		}
 		data->player_y -= 1;
 	}
+	data->player_direction = FRONT;
 }
 
 void	do_down(t_data *data)
@@ -140,6 +141,7 @@ void	do_down(t_data *data)
 		}
 		data->player_y += 1;
 	}
+	data->player_direction = BACK;
 }
 
 void	do_left(t_data *data)
@@ -180,6 +182,7 @@ void	do_left(t_data *data)
 		}
 		data->player_x -= 1;
 	}
+	data->player_direction = LEFT;
 }
 
 void	do_right(t_data *data)
@@ -220,4 +223,5 @@ void	do_right(t_data *data)
 		}
 		data->player_x += 1;
 	}
+	data->player_direction = RIGHT;
 }

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:53:22 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 19:59:06 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 14:52:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,14 @@ int	draw_map(t_data *data)
 			}
 			else if (data->map->row[j] == 'P')
 			{
-				mlx_put_image_to_window(data->mlx, data->win, data->player_img, x, y);
+				if (data->player_direction == FRONT)
+					mlx_put_image_to_window(data->mlx, data->win, data->player_front_img, x, y);
+				if (data->player_direction == BACK)
+					mlx_put_image_to_window(data->mlx, data->win, data->player_back_img, x, y);
+				if (data->player_direction == RIGHT)
+					mlx_put_image_to_window(data->mlx, data->win, data->player_right_img, x, y);
+				if (data->player_direction == LEFT)
+					mlx_put_image_to_window(data->mlx, data->win, data->player_left_img, x, y);
 				x += data->xpm_width;
 			}
 			j++;
