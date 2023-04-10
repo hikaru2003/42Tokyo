@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:50:44 by hmorisak          #+#    #+#             */
-/*   Updated: 2022/11/16 17:51:58 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:11:12 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strtrim(char const *s1, char const *set);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
