@@ -6,19 +6,11 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 14:33:39 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 21:17:17 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:53:43 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x *(data->bits_per_pixel / 8));
-// 	*(unsigned int *)dst = color;
-// }
 
 int	main(int argc, char **argv)
 {
@@ -42,6 +34,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win, 17, 1, ft_destroy, data);
 	mlx_loop_hook(data->mlx, ft_loop, data);
 	mlx_loop(data->mlx);
+	return (0);
 }
 
 __attribute__((destructor))

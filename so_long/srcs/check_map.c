@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 20:59:14 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:57:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ void	insert(t_map *head, t_map *new)
 t_map	creat_map(int fd, t_data *data)
 {
 	char	*line;
-	// t_map	head;
 	t_map	*map;
 
 	data->height = 0;
-	// head.next = &head;
-	// head.prev = &head;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -83,9 +80,7 @@ int	check_map(t_data *data)
 						data->player_y = y;
 					}
 					if (data->map->row[x] == 'C')
-					{
 						data->c_num++;
-					}
 					if (!ft_strchr("01CEP", data->map->row[x]))
 						print_error();
 				}

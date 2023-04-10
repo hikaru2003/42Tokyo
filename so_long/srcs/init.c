@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:33:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/09 20:28:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/10 13:56:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	data_init(t_data *data)
 {
-	data->space_img = mlx_xpm_file_to_image(data->mlx, "image/tile.xpm", &(data->xpm_width), &(data->xpm_height));
-	data->wall_img = mlx_xpm_file_to_image(data->mlx, "image/voldemort.xpm", &(data->xpm_width), &(data->xpm_height));
-	data->collect_img = mlx_xpm_file_to_image(data->mlx, "image/dobby.xpm", &(data->xpm_width), &(data->xpm_height));
-	data->exit_img = mlx_xpm_file_to_image(data->mlx, "image/dumbledore.xpm", &(data->xpm_width), &(data->xpm_height));
-	data->player_img = mlx_xpm_file_to_image(data->mlx, "image/sirius.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->space_img = mlx_xpm_file_to_image(data->mlx, "image/field.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->wall_img = mlx_xpm_file_to_image(data->mlx, "image/stone.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->collect_img = mlx_xpm_file_to_image(data->mlx, "image/pikatyu.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->exit_img = mlx_xpm_file_to_image(data->mlx, "image/myuu2.xpm", &(data->xpm_width), &(data->xpm_height));
+	data->player_img = mlx_xpm_file_to_image(data->mlx, "image/satoshi.xpm", &(data->xpm_width), &(data->xpm_height));
 	data->width = 0;
 	data->height = 0;
 	data->head.next = &data->head;
