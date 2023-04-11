@@ -60,6 +60,14 @@ typedef struct s_map_index
 	int	width;
 }	t_map_index;
 
+typedef struct s_map_direct
+{
+	int	up;
+	int	down;
+	int	right;
+	int	left;
+}	t_map_direct;
+
 typedef struct s_data
 {
 	int		xpm_height;
@@ -90,15 +98,37 @@ typedef struct s_data
 //check_file.c
 int		check_file(char *file);
 
+//check_goal.c
+int		all_searched(t_map_direct **index, t_data *data);
+int		serch_goal(t_data *data, t_map_direct **index);
+int		check_goal(t_data *;data)
+
 //check_map.c
+t_map	creat_map(int fd, t_data *data);
+void	top_bottom_check(t_data *data);
+void	middle_check(t_data *data, int y);
+int		check_map(t_data *data);
+
+//creat_map.c
 void	insert(t_map *head, t_map *new);
 t_map	creat_map(int fd, t_data *data);
-int		check_map(t_data *data);
+
+//destroy.c
+int		ft_destroy(t_data *data);
+
+//draw.c
+void	draw_player(t_data *data, t_map_index *index);
+void	draw_one_image(t_data *data, t_map_index *index);
+int		draw_map(t_data *data);
 
 //error.c
 void	write_get_file_error(char *err_msg, char *file);
 void	file_error(void);
 void	print_error(t_data *data);
+
+//free.c
+int		map_free(t_data *data);
+int		data_free(t_data *data);
 
 //libft
 char	*ft_strchr(const char *s, int c);
@@ -121,25 +151,16 @@ char	*ft_strjoin(char *line, char *buf);
 char	*ft_strchr(const char *s, int c);
 char	*ft_free(char **str);
 
+//go_direct.c
+int		go_up(t_data *data, t_map_direct **index)
+int		go_down(t_data *data, t_map_direct **index)
+int		go_right(t_data *data, t_map_direct **index)
+int		go_left(t_data *data, t_map_direct **index)
+
 //init.c
 void	index_init(t_map_index *index);
 void	data_init(t_data *data);
 void	img_init(t_data *data);
-
-//destroy.c
-int		ft_destroy(t_data *data);
-
-//draw.c
-void	draw_player(t_data *data, t_map_index *index);
-void	draw_one_image(t_data *data, t_map_index *index);
-int		draw_map(t_data *data);
-
-//next_frame.c
-int		next_frame(int keycode, t_data *data);
-void	do_up(t_data *data);
-void	do_down(t_data *data);
-void	do_left(t_data *data);
-void	do_right(t_data *data);
 
 //next_frame_tool.c
 void	serch_all(t_data *data);
@@ -147,8 +168,11 @@ void	move_to_player_y(t_data *data);
 void	current_pos_img(t_data *data);
 void	check_game_complete(t_data *data, int status);
 
-//free.c
-int		map_free(t_data *data);
-int		data_free(t_data *data);
+//next_frame.c
+int		next_frame(int keycode, t_data *data);
+void	do_up(t_data *data);
+void	do_down(t_data *data);
+void	do_left(t_data *data);
+void	do_right(t_data *data);
 
 #endif

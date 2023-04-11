@@ -12,14 +12,6 @@
 
 #include "so_long.h"
 
-void	insert(t_map *head, t_map *new)
-{
-	new->prev = head->prev;
-	head->prev->next = new;
-	head->prev = new;
-	new->next = head;
-}
-
 t_map	creat_map(int fd, t_data *data)
 {
 	char	*line;

@@ -18,104 +18,24 @@ int	all_searched(t_map_direct **index, t_data *data)
 		}
 		y++;
 	}
-	return (0);
+	print_error();
 }
 
 int	serch_goal(t_data *data, t_map_direct **index)
 {
-	if (all_searched(index, data) == 0)
-		return (-1);
+	all_searched(index, data);
 	move_to_player_y(data);
 	if (data->map->row[data->player_x] != 'P')
 		serch_all(data);
-	if (index[data->player_y][data->player_x].up != 1)
-	{
-		index[data->player_y][data->player_x].up == 1;
-		if (data->map->prev->row[data->player_x] != '1')
-		{
-			if (data->map->prev->row[data->player_x] == 'C')
-				data->collected++;
-			if (data->map->prev->row[data->player_x] == 'E')
-			{
-				data->exit_flag = 1;
-				if (data->collected == data->c_num)
-					return (0);
-			}
-			else
-			{
-				current_pos_img(data);
-				data->map->prev->row[data->player_x] = 'P';
-			}
-			data->player_y -= 1;
-		}
-		serch_goal(data, index);
-	}
-	if (index[data->player_y][data->player_x].down != 1)
-	{
-		index[data->player_y][data->player_x].down == 1;
-		if (data->map->next->row[data->player_x] != '1')
-		{
-			if (data->map->next->row[data->player_x] == 'C')
-				data->collected++;
-			if (data->map->next->row[data->player_x] == 'E')
-			{
-				data->exit_flag = 1;
-				if (data->collected == data->c_num)
-					return (0);
-			}
-			else
-			{
-				current_pos_img(data);
-				data->map->next->row[data->player_x] = 'P';
-			}
-			data->player_y += 1;
-		}
-		serch_goal(data, index);
-	}
-	if (index[data->player_y][data->player_x].right != 1)
-	{
-		index[data->player_y][data->player_x].right == 1;
-		if (data->map->row[data->player_x + 1] != '1')
-		{
-			if (data->map->row[data->player_x + 1] == 'C')
-				data->collected++;
-			if (data->map->row[data->player_x + 1] == 'E')
-			{
-				data->exit_flag = 1;
-				if (data->collected == data->c_num)
-					return (0);
-			}
-			else
-			{
-				current_pos_img(data);
-				data->map->row[data->player_x + 1] = 'P';
-			}
-			data->player_x += 1;
-		}
-		serch_goal(data, index);
-	}
-	if (index[data->player_y][data->player_x].left != 1)
-	{
-		index[data->player_y][data->player_x].left == 1;
-		if (data->map->row[data->player_x - 1] != '1')
-		{
-			if (data->map->row[data->player_x - 1] == 'C')
-				data->collected++;
-			if (data->map->row[data->player_x - 1] == 'E')
-			{
-				data->exit_flag = 1;
-				if (data->collected == data->c_num)
-					return (0);
-			}
-			else
-			{
-				current_pos_img(data);
-				data->map->row[data->player_x - 1] = 'P';
-			}
-			data->player_x -= 1;
-		}
-		serch_goal(data, index);
-	}
+	if (index[data->player_y][data->player_x].up != 1 && go_up(data, index) == 1)
+		return (1);
+	if (index[data->player_y][data->player_x].down != 1 && go_down(data, index) == 1)
+		return (1);
+	if (index[data->player_y][data->player_x].right != 1 && go_right(data, index) == 1)
+		return (1);
+	if (index[data->player_y][data->player_x].left != 1 && go_left(data, index) == 1)
+		return (1);
+	serch_goal(data, index);
 }
 
 int	check_goal(t_data *data)

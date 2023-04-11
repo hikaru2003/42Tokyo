@@ -1,24 +1,28 @@
 NAME = so_long
 
-SRCS	=	srcs/main.c					\
-			srcs/check_file.c			\
+SRCS	=	srcs/check_file.c			\
+			srcs/check_goal.c			\
 			srcs/check_map.c			\
-			srcs/error.c				\
-			srcs/get_next_line_utils.c	\
-			srcs/get_next_line.c		\
-			srcs/init.c					\
-			srcs/ft_strchr.c			\
-			srcs/ft_strlen.c			\
+			srcs/creat_map.c			\
 			srcs/destroy.c				\
 			srcs/draw.c					\
-			srcs/next_frame.c			\
-			srcs/ft_strcmp.c			\
+			srcs/error.c				\
+			srcs/free.c					\
 			srcs/ft_print_conv.c		\
 			srcs/ft_printf.c			\
 			srcs/ft_put.c				\
-			srcs/to_hexa.c				\
-			srcs/free.c					\
+			srcs/ft_strchr.c			\
+			srcs/ft_strcmp.c			\
+			srcs/ft_strlen.c			\
+			srcs/get_next_line_utils.c	\
+			srcs/get_next_line.c		\
+			srcs/go_direct.c			\
+			srcs/init.c					\
+			srcs/main.c					\
 			srcs/next_frame_tool.c		\
+			srcs/next_frame.c			\
+			srcs/to_hexa.c				\
+
 
 OBJS = $(SRCS:%.c=%.o)
 
