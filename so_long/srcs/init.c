@@ -12,6 +12,32 @@
 
 #include "so_long.h"
 
+void	map_direct_init(t_map_direct **index, t_data *data)
+{
+	int	x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (y < data->height)
+	{
+		x = 0;
+		index[y] = (t_map_direct *)malloc(sizeof(t_map_direct) * data->width);
+		if (!index[y])
+			print_error();
+		while (x < data->width)
+		{
+			index[y][x].up = 0;
+			index[y][x].down = 0;
+			index[y][x].right = 0;
+			index[y][x].left = 0;
+			x++;
+		}
+		y++;
+	}
+}
+
+
 void	index_init(t_map_index *index)
 {
 	index->x = 0;
