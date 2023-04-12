@@ -12,6 +12,28 @@
 
 #include "so_long.h"
 
+void	map_status_init(int **map_status, t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < data->height)
+	{
+		x = 0;
+		map_status[y] = (int *)malloc(sizeof(int) * data->width);
+		if (!map_status)
+			print_error(data);
+		while (x < data->width)
+		{
+			map_status[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+}
+
 void	map_direct_init(t_map_direct **index, t_data *data)
 {
 	int	x;
@@ -24,7 +46,7 @@ void	map_direct_init(t_map_direct **index, t_data *data)
 		x = 0;
 		index[y] = (t_map_direct *)malloc(sizeof(t_map_direct) * data->width);
 		if (!index[y])
-			print_error();
+			print_error(data);
 		while (x < data->width)
 		{
 			index[y][x].up = 0;

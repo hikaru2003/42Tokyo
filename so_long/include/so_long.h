@@ -17,7 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <libc.h>
+// # include <libc.h>
+// # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -25,12 +26,12 @@
 # include <string.h>
 # include <limits.h>
 # include <unistd.h>
-# include <mlx.h>
 # include <errno.h>
 # include <limits.h>
 # include <sys/types.h> //pid_t fork(void);
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
 # define KEY_ESC		65307
 
@@ -101,7 +102,11 @@ int		check_file(char *file);
 //check_goal.c
 int		all_searched(t_map_direct **index, t_data *data);
 int		serch_goal(t_data *data, t_map_direct **index);
-int		check_goal(t_data *;data)
+int		check_goal(t_data *data);
+// another pattern
+// void	updata_map_status(int **map_status, t_data *data);
+// void	check_map_status(int **map_status, t_data *data);
+// int	check_goal(t_data *data);
 
 //check_map.c
 t_map	creat_map(int fd, t_data *data);
@@ -152,10 +157,10 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_free(char **str);
 
 //go_direct.c
-int		go_up(t_data *data, t_map_direct **index)
-int		go_down(t_data *data, t_map_direct **index)
-int		go_right(t_data *data, t_map_direct **index)
-int		go_left(t_data *data, t_map_direct **index)
+int		go_up(t_data *data, t_map_direct **index);
+int		go_down(t_data *data, t_map_direct **index);
+int		go_right(t_data *data, t_map_direct **index);
+int		go_left(t_data *data, t_map_direct **index);
 
 //init.c
 void	index_init(t_map_index *index);

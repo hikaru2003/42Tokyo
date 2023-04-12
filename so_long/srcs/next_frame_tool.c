@@ -43,6 +43,7 @@ void	move_to_player_y(t_data *data)
 	int	y;
 
 	y = 0;
+	data->map = data->head.next;
 	while (y < data->player_y)
 	{
 		data->map = data->map->next;

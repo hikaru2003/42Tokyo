@@ -14,7 +14,7 @@
 
 int	next_frame(int keycode, t_data *data)
 {
-	data->map = data->head.next;
+	// data->map = data->head.next;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(data->mlx, data->win);
