@@ -27,8 +27,9 @@ int	main(int argc, char **argv)
 	data->head = creat_map(check_file(argv[1]), data);
 	if (check_map(data) != 0)
 		exit(1);
-	data->win = mlx_new_window(data->mlx, data->width * 32,
-			data->height * 32, "so_long");
+	// data->win = mlx_new_window(data->mlx, data->width * 32,
+	// 		data->height * 32, "so_long");
+	data->win = mlx_new_window(data->mlx, 0, 0, "so_long");
 	mlx_hook(data->win, 2, 1, next_frame, data);
 	mlx_hook(data->win, 17, 1, ft_destroy, data);
 	mlx_loop_hook(data->mlx, draw_map, data);
