@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 18:06:08 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:18:52 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ int	check_map(t_data *data)
 		y++;
 		data->map = data->map->next;
 	}
+	check_goal(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 19:34:52 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/16 19:25:46 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-// # include <libc.h>
-// # include <mlx.h>
+# include <libc.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -60,6 +60,15 @@ typedef struct s_map_index
 	int	height;
 	int	width;
 }	t_map_index;
+
+typedef struct s_map_status
+{
+	int	status;
+	int	up;
+	int	down;
+	int	right;
+	int	left;
+}	t_map_status;
 
 typedef struct s_map_direct
 {
@@ -104,9 +113,9 @@ int		all_searched(t_map_direct **index, t_data *data);
 int		serch_goal(t_data *data, t_map_direct **index);
 int		check_goal(t_data *data);
 // another pattern
-// void	updata_map_status(int **map_status, t_data *data);
-// void	check_map_status(int **map_status, t_data *data);
-// int	check_goal(t_data *data);
+void	updata_map_status(t_map_status **map, t_data *data);
+void	check_map_status(t_map_status **map, t_data *data);
+int		check_goal(t_data *data);
 
 //check_map.c
 t_map	creat_map(int fd, t_data *data);
@@ -163,9 +172,12 @@ int		go_right(t_data *data, t_map_direct **index);
 int		go_left(t_data *data, t_map_direct **index);
 
 //init.c
+// void	map_status_init(int **map_status, t_data *data);
+void	map_status_init(t_map_status **map, t_data *data);
+void	map_direct_init(t_map_direct **index, t_data *data);
 void	index_init(t_map_index *index);
-void	data_init(t_data *data);
 void	img_init(t_data *data);
+void	data_init(t_data *data);
 
 //next_frame_tool.c
 void	serch_all(t_data *data);

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   go_direct.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/16 19:56:03 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/16 19:56:04 by hmorisak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	go_up(t_data *data, t_map_direct **index)
 {
-	index[data->player_y][data->player_x].up == 1;
+	index[data->player_y][data->player_x].up = 1;
 	if (data->map->prev->row[data->player_x] != '1')
 	{
 		if (data->map->prev->row[data->player_x] == 'C')
@@ -25,7 +37,7 @@ int	go_up(t_data *data, t_map_direct **index)
 
 int	go_down(t_data *data, t_map_direct **index)
 {
-	index[data->player_y][data->player_x].down == 1;
+	index[data->player_y][data->player_x].down = 1;
 	if (data->map->next->row[data->player_x] != '1')
 	{
 		if (data->map->next->row[data->player_x] == 'C')
@@ -48,7 +60,7 @@ int	go_down(t_data *data, t_map_direct **index)
 
 int	go_right(t_data *data, t_map_direct **index)
 {
-	index[data->player_y][data->player_x].right == 1;
+	index[data->player_y][data->player_x].right = 1;
 	if (data->map->row[data->player_x + 1] != '1')
 	{
 		if (data->map->row[data->player_x + 1] == 'C')
@@ -71,7 +83,7 @@ int	go_right(t_data *data, t_map_direct **index)
 
 int	go_left(t_data *data, t_map_direct **index)
 {
-	index[data->player_y][data->player_x].left == 1;
+	index[data->player_y][data->player_x].left = 1;
 	if (data->map->row[data->player_x - 1] != '1')
 	{
 		if (data->map->row[data->player_x - 1] == 'C')
