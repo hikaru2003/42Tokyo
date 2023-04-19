@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <libc.h>
-# include <mlx.h>
+// # include <libc.h>
+// # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -113,7 +113,7 @@ int		all_searched(t_map_direct **index, t_data *data);
 int		serch_goal(t_data *data, t_map_direct **index);
 int		check_goal(t_data *data);
 // another pattern
-void	updata_map_status(t_map_status **map, t_data *data);
+void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y);
 void	check_map_status(t_map_status **map, t_data *data);
 int		check_goal(t_data *data);
 
