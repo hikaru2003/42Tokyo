@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/16 19:25:46 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:17:37 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-// # include <libc.h>
-// # include <mlx.h>
+# include <libc.h>
+# include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
@@ -103,6 +103,7 @@ typedef struct s_data
 	int		collected;
 	int		exit_flag;
 	int		step;
+	char	**array;
 }	t_data;
 
 //check_file.c
@@ -113,7 +114,11 @@ int		all_searched(t_map_direct **index, t_data *data);
 int		serch_goal(t_data *data, t_map_direct **index);
 int		check_goal(t_data *data);
 // another pattern
+// void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y);
+
+char	**map_to_structure(t_data *data);
 void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y);
+
 void	check_map_status(t_map_status **map, t_data *data);
 int		check_goal(t_data *data);
 
@@ -141,6 +146,7 @@ void	file_error(void);
 void	print_error(t_data *data);
 
 //free.c
+int		array_free(t_data *data);
 int		map_free(t_data *data);
 int		data_free(t_data *data);
 
@@ -148,6 +154,7 @@ int		data_free(t_data *data);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *c);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strdup(const char *s1);
 
 //printf
 size_t	ft_strlen(const char *c);
@@ -172,7 +179,6 @@ int		go_right(t_data *data, t_map_direct **index);
 int		go_left(t_data *data, t_map_direct **index);
 
 //init.c
-// void	map_status_init(int **map_status, t_data *data);
 void	map_status_init(t_map_status **map, t_data *data);
 void	map_direct_init(t_map_direct **index, t_data *data);
 void	index_init(t_map_index *index);

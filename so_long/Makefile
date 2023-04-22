@@ -13,15 +13,16 @@ SRCS	=	srcs/check_file.c			\
 			srcs/ft_put.c				\
 			srcs/ft_strchr.c			\
 			srcs/ft_strcmp.c			\
+			srcs/ft_strdup.c			\
 			srcs/ft_strlen.c			\
 			srcs/get_next_line_utils.c	\
 			srcs/get_next_line.c		\
-			srcs/go_direct.c			\
 			srcs/init.c					\
 			srcs/main.c					\
 			srcs/next_frame_tool.c		\
 			srcs/next_frame.c			\
 			srcs/to_hexa.c				\
+			# srcs/go_direct.c			\
 
 
 OBJS = $(SRCS:%.c=%.o)

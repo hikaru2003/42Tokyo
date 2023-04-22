@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 21:24:48 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:23:21 by hmorisak         ###   ########.fr       */
+/*   Created: 2022/10/11 20:44:55 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/22 12:38:38 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	write_get_file_error(char *err_msg, char *file)
+char	*ft_strdup(const char *s1)
 {
-	write(STDERR, "zsh: ", 5);
-	write(STDERR, err_msg, ft_strlen(err_msg));
-	write(STDERR, ": ", 2);
-	write(STDERR, file, ft_strlen(file));
-	write(STDERR, "\n", 1);
-	exit(1);
+	char	*tmp;
+	size_t	slen;
+	int		i;
+
+	slen = ft_strlen((char *)s1);
+	tmp = (char *)malloc(sizeof(char) * (slen + 1));
+	if (!tmp)
+		return (NULL);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		tmp[i] = s1[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
 
-void	file_error(void)
-{
-	write(2, "error\n", 6);
-	exit(1);
-}
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	const char s1[] = "helloworld";
+// 	printf("%s\n", ft_strdup(s1));
 
-void	print_error(t_data *data)
-{
-	write(2, "error\n", 6);
-	map_free(data);
-	data_free(data);
-	exit(1);
-}
+// 	return (0);
+// }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close.c                                            :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:28:15 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 18:49:29 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:23:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_destroy(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+	array_free(data);
 	map_free(data);
 	data_free(data);
 	exit(0);

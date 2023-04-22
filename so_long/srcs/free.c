@@ -6,11 +6,27 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:23:23 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 18:07:27 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:24:32 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	array_free(t_data *data)
+{
+	int	y;
+
+	y = 0;
+	if (!data->array)
+		return (0);
+	while (y <= data->height)
+	{
+		free(data->array[y]);
+		y++;
+	}
+	free(data->array);
+	return (0);
+}
 
 int	map_free(t_data *data)
 {

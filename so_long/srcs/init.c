@@ -6,33 +6,37 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:33:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/16 19:13:08 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:20:41 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void	map_status_init(int **map_status, t_data *data)
-// {
-// 	int	x;
-// 	int	y;
+void	map_status_init(t_map_status **map, t_data *data)
+{
+	int	x;
+	int	y;
 
-// 	x = 0;
-// 	y = 0;
-// 	while (y < data->height)
-// 	{
-// 		x = 0;
-// 		map_status[y] = (int *)malloc(sizeof(int) * data->width);
-// 		if (!map_status)
-// 			print_error(data);
-// 		while (x < data->width)
-// 		{
-// 			map_status[y][x] = 0;
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
+	x = 0;
+	y = 0;
+	while (y < data->height)
+	{
+		x = 0;
+		map[y] = (t_map_status *)malloc(sizeof(t_map_status) * data->width);
+		if (!map[y])
+			print_error(data);
+		while (x < data->width)
+		{
+			map[y][x].status = 0;
+			map[y][x].up = 0;
+			map[y][x].down = 0;
+			map[y][x].right = 0;
+			map[y][x].left = 0;
+			x++;
+		}
+		y++;
+	}
+}
 
 void	map_direct_init(t_map_direct **index, t_data *data)
 {
