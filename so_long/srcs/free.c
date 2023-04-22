@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:23:23 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:24:32 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:44:56 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ int	array_free(t_data *data)
 		y++;
 	}
 	free(data->array);
+	return (0);
+}
+
+int	map_status_free(t_map_status **map, t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < data->height)
+	{
+		free(map[y]);
+		y++;
+	}
+	free(map);
 	return (0);
 }
 

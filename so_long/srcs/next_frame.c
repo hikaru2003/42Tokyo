@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 18:41:42 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/10 19:02:55 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:54:20 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	next_frame(int keycode, t_data *data)
 {
-	// data->map = data->head.next;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(data->mlx, data->win);

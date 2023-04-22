@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 18:53:34 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:21:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:51:22 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,31 @@ char	**map_to_structure(t_data *data)
 	return (array);
 }
 
-void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y)
+void	update_map_status(t_map_status **map, t_data *data, int x, int y)
 {
-	if (data->array[player_y][player_x] == '1')
+	if (data->array[y][x] == '1' || x <= 0 ||
+		x >= data->width - 1 || y <= 0 || y >= data->height - 1)
 		return ;
-	if (player_x <= 0 || player_x >= data->width - 1 || player_y <= 0
-		|| player_y >= data->height - 1)
-		return ;
-	map[player_y][player_x].status = 1;
-	if (map[player_y][player_x].up == 0)
+	map[y][x].status = 1;
+	if (map[y][x].up == 0)
 	{
-		map[player_y][player_x].up = 1;
-		update_map_status(map, data, player_x, player_y - 1);
+		map[y][x].up = 1;
+		update_map_status(map, data, x, y - 1);
 	}
-	if (map[player_y][player_x].down == 0)
+	if (map[y][x].down == 0)
 	{
-		map[player_y][player_x].down = 1;
-		update_map_status(map, data, player_x, player_y + 1);
+		map[y][x].down = 1;
+		update_map_status(map, data, x, y + 1);
 	}
-	if (map[player_y][player_x].right == 0)
+	if (map[y][x].right == 0)
 	{
-		map[player_y][player_x].right = 1;
-		update_map_status(map, data, player_x + 1, player_y);
+		map[y][x].right = 1;
+		update_map_status(map, data, x + 1, y);
 	}
-	if (map[player_y][player_x].left == 0)
+	if (map[y][x].left == 0)
 	{
-		map[player_y][player_x].left = 1;
-		update_map_status(map, data, player_x - 1, player_y);
+		map[y][x].left = 1;
+		update_map_status(map, data, x - 1, y);
 	}
 }
 
@@ -96,6 +94,7 @@ int	check_goal(t_data *data)
 	map_status_init(map, data);
 	update_map_status(map, data, data->player_x, data->player_y);
 	check_map_status(map, data);
+	map_status_free(map, data);
 	array_free(data);
 	return (1);
 }

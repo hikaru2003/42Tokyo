@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:17:37 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:51:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,9 @@ int		check_file(char *file);
 int		all_searched(t_map_direct **index, t_data *data);
 int		serch_goal(t_data *data, t_map_direct **index);
 int		check_goal(t_data *data);
-// another pattern
-// void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y);
 
 char	**map_to_structure(t_data *data);
-void	update_map_status(t_map_status **map, t_data *data, int player_x, int player_y);
-
+void	update_map_status(t_map_status **map, t_data *data, int x, int y);
 void	check_map_status(t_map_status **map, t_data *data);
 int		check_goal(t_data *data);
 
@@ -147,6 +144,7 @@ void	print_error(t_data *data);
 
 //free.c
 int		array_free(t_data *data);
+int		map_status_free(t_map_status **map, t_data *data);
 int		map_free(t_data *data);
 int		data_free(t_data *data);
 

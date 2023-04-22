@@ -22,7 +22,6 @@ SRCS	=	srcs/check_file.c			\
 			srcs/next_frame_tool.c		\
 			srcs/next_frame.c			\
 			srcs/to_hexa.c				\
-			# srcs/go_direct.c			\
 
 
 OBJS = $(SRCS:%.c=%.o)
