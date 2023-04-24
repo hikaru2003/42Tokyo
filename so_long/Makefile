@@ -32,7 +32,7 @@ CFLAGS = -Wall -Wextra -Werror -I include
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	rm -f $(OBJS) $(M_OBJS) $(B_OBJS)
