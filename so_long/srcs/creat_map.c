@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:55:37 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:48:27 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:59:25 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_map	creat_map(int fd, t_data *data)
 	while (1)
 	{
 		line = get_next_line(fd);
+		if (data->height == 0 && !line)
+			print_error(data);
 		if (!line)
 			break ;
 		map = (t_map *)malloc(sizeof(t_map));

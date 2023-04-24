@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:26:20 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:51:49 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:14:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_data
 	int		player_x;
 	int		player_y;
 	int		c_num;
+	int		e_num;
 	int		collected;
 	int		exit_flag;
 	int		step;
@@ -123,6 +124,7 @@ int		check_goal(t_data *data);
 t_map	creat_map(int fd, t_data *data);
 void	top_bottom_check(t_data *data);
 void	middle_check(t_data *data, int y);
+void	check_map_elements(t_data *data);
 int		check_map(t_data *data);
 
 //creat_map.c

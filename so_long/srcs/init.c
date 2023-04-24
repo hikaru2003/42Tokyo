@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 21:33:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:20:41 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:13:25 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	data_init(t_data *data)
 	data->player_x = 0;
 	data->player_y = 0;
 	data->c_num = 0;
+	data->e_num = 0;
 	data->collected = 0;
 	data->exit_flag = 0;
 	data->step = 0;

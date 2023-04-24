@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/16 16:18:52 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/24 16:10:59 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	top_bottom_check(t_data *data)
 			print_error(data);
 		x++;
 	}
+	if (data->map->row[x] != '\n' && data->map->row[x] != '\0')
+		print_error(data);
 }
 
 void	middle_check(t_data *data, int y)
@@ -45,8 +47,20 @@ void	middle_check(t_data *data, int y)
 		}
 		if (data->map->row[x] == 'C')
 			data->c_num++;
+		if (data->map->row[x] == 'E')
+			data->e_num++;
 		x++;
 	}
+	if (data->map->row[x] != '\n' && data->map->row[x] != '\0')
+		print_error(data);
+}
+
+void	check_map_elements(t_data *data)
+{
+	if (data->c_num < 1)
+		print_error(data);
+	if (data->e_num != 1)
+		print_error(data);
 }
 
 int	check_map(t_data *data)
@@ -64,6 +78,7 @@ int	check_map(t_data *data)
 		y++;
 		data->map = data->map->next;
 	}
+	check_map_elements(data);
 	check_goal(data);
 	return (0);
 }
