@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 17:23:23 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/22 13:44:56 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/25 13:01:18 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ int	array_free(t_data *data)
 
 int	map_status_free(t_map_status **map, t_data *data)
 {
-	int	x;
 	int	y;
 
-	x = 0;
 	y = 0;
 	while (y < data->height)
 	{
