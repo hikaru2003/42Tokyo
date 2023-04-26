@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 13:55:41 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/26 14:09:35 by hikaru           ###   ########.fr       */
+/*   Created: 2023/04/26 13:31:14 by hikaru            #+#    #+#             */
+/*   Updated: 2023/04/26 14:07:44 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-static char	**ft_free(char **array)
+char	**ft_free(char **array)
 {
 	int	i;
 
@@ -26,84 +27,80 @@ static char	**ft_free(char **array)
 	return (NULL);
 }
 
-char	*ft_strncpy(char *s, int start, size_t len)
+char	*ft_strncpy(char *str, int start, int strlen)
 {
+	int		i;
 	char	*tmp;
-	size_t	i;
 
 	i = 0;
-	tmp = (char *)malloc(len + 1);
+	tmp = (char *)malloc(strlen + 1);
 	if (!tmp)
 		return (NULL);
-	while (i < len)
+	while(i < strlen)
 	{
-		tmp[i] = s[start + i];
+		tmp[i] = str[start + i];
 		i++;
 	}
 	tmp[i] = '\0';
 	return (tmp);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *str)
 {
 	int		i;
-	int		x;
+	int		j;
 	int		start;
 	int		count;
 	char	**array;
 
 	i = 0;
-	x = 0;
-	start = 0;
+	j = 0;
 	count = 0;
-	if (s == NULL)
+	if (!str)
 		return (NULL);
-	while (s[i])
+	while (str[i])
 	{
-		while (s[i] && s[i] == c)
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		if (s[i])
+		if (str[i])
 			count++;
-		while (s[i] && s[i] != c)
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
 	}
 	array = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!array)
 		return (NULL);
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		while (s[i] && s[i] == c)
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		if (s[i])
+		if (str[i])
 			start = i;
-		while (s[i] && s[i] != c)
+		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
-		array[x] = ft_strncpy(s, start, (size_t)(i - start));
-		if (!array[x])
+		array[j] = ft_strncpy(str, start, i - start);
+		if (!array[j])
 			return (ft_free(array));
-		x++;
+		j++;
 	}
-	array[x] = NULL;
+	array[j] = NULL;
 	return (array);
 }
 
 // #include <stdio.h>
 // int main(void)
 // {
-// 	// char const str[] = tab = ft_split("     ", ' ');;
-// 	// char charset = ' ';
-// 	// char **tmp = ft_split(str, charset);
+// 	char	*str = "hello world\nI'm	hikaru	morisaki";
+// 	char	**tmp;
 
-// 	// int i = 0;
-// 	// while (tmp[i] != NULL)
-// 	// // {
-// 	// 	printf("%s\n", tmp[i]);
-// 	// 	i++;
-// 	// }
-
-// 	char **tab;
-// 	tab = ft_split("", ' ');
-// 	printf("%s\n", *tab);
+// 	tmp = ft_split(str);
+// 	int i = 0;
+// 	while (tmp[i] != NULL)
+// 	{
+// 		printf("%s\n", tmp[i]);
+// 		i++;
+// 	}
+// 	printf("%d\n", i);
 // 	return (0);
 // }
