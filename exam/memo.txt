@@ -1,3 +1,6 @@
 要チェック
 flood_fill.c
 ft_itoa.c 0の時に0と表示されるようにするために、if (nbr <= 0) digit++; と書く！
+ft_list_remove_if.c 答え通りにやってもコンパイルエラーになる
+	関数ポインタの宣言の段階で void (*cmp)()の引数の中身書いてないからダメ
+	引数をvoid (*cmp)(const char *, const char *)とすればうまくいくが、書き換えていいのか？
