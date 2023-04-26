@@ -1,0 +1,3 @@
+要チェック
+flood_fill.c
+ft_itoa.c 0の時に0と表示されるようにするために、if (nbr <= 0) digit++; と書く！
