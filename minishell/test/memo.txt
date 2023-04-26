@@ -1,0 +1,6 @@
+・readlineを含むときのコンパイル方法
+　gcc -lreadline <file>
+
+・.my_historyにreadlineで読み込んだテキストが書き込まれている
+
+
