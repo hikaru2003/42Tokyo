@@ -4,8 +4,8 @@ ft_itoa.c 0の時に0と表示されるようにするために、if (nbr <= 0) 
 ft_list_remove_if.c 答え通りにやってもコンパイルエラーになる
 	関数ポインタの宣言の段階で void (*cmp)()の引数の中身書いてないからダメ
 	引数をvoid (*cmp)(const char *, const char *)とすればうまくいくが、書き換えていいのか？
-
+rev_wstr.c
 
 現在の進捗
-ft_list_remove_ifまで終了
+sort以外終了
 ft_splitはもうちょい復習
