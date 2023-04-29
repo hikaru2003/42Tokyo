@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/29 20:26:27 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/02/23 20:44:00 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/29 20:13:46 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*line;
+	char	*tmp;
+	char	*rtn;
+	size_t	len;
 
-	rl_outstream = stderr;
-	// using_history();
-	// read_history(".my_history");
-	while (1)
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	tmp = (char *)malloc(sizeof(char) * (len + 1));
+	if (!tmp)
+		return (NULL);
+	rtn = tmp;
+	while (*s1 != '\0')
 	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-			add_history(line);
-		pipex(line, envp);
-		wait(NULL);
-		free (line);
+		*tmp = *s1;
+		tmp++;
+		s1++;
 	}
-	// write_history(".my_history");
-	exit(0);
+	while (*s2 != '\0')
+	{
+		*tmp = *s2;
+		tmp++;
+		s2++;
+	}
+	*tmp = '\0';
+	return (rtn);
 }

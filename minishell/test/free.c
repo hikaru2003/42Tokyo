@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/29 20:26:27 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/03/22 20:09:51 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/29 20:07:42 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*char_double_free(char **str)
 {
-	char	*line;
+	size_t	i;
 
-	rl_outstream = stderr;
-	// using_history();
-	// read_history(".my_history");
-	while (1)
+	i = 0;
+	while (str[i])
 	{
-		line = readline("minishell$ ");
-		if (!line)
-			break ;
-		if (*line)
-			add_history(line);
-		pipex(line, envp);
-		wait(NULL);
-		free (line);
+		free(str[i]);
+		i++;
 	}
-	// write_history(".my_history");
-	exit(0);
+	free(str);
+	return (NULL);
+}
+
+char	*char_single_free(char **str)
+{
+	if (*str)
+		free(*str);
+	*str = NULL;
+	return (NULL);
 }
