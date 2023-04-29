@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:38 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:47:57 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:50:26 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	exec(char *line, char **envp)
 	char	**path;
 	char	*filepath;
 
-	cmd = ft_split(line, ' '); //\t, \nもtokenizerで対応する
+	cmd = ft_split(line, ' ');
 	path = get_path(cmd[0], envp);
 	filepath = check_path(cmd, path);
 	char_double_free(path);
