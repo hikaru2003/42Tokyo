@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:55:41 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/02/23 20:30:45 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 16:58:32 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ static int	check(char **array, size_t i)
 {
 	if (array[i] == NULL)
 	{
-		while (i >= 0)
+		while (i != 0)
 		{
 			free(array[i]);
 			i--;
 		}
+		free(array[i]);
 		free(array);
 		return (1);
 	}

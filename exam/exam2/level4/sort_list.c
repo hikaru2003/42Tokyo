@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   sort_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 15:16:39 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 11:52:09 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/29 09:09:49 by hikaru            #+#    #+#             */
+/*   Updated: 2023/04/29 11:29:05 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
-void	ft_putnbr_fd(int n, int fd)
+t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
 {
-	long	num;
-	long	quotient;
-	long	mod;
-	char	c;
+	t_list	*start;
+	int		tmp;
 
-	num = (long)n;
-	if (n < 0)
+	start = lst;
+	tmp = 0;
+	while (lst->next)
 	{
-		num *= -1;
-		write(fd, "-", 1);
+		if (cmp(lst->data, lst->next->data) == 0)
+		{
+			tmp = lst->data;
+			lst->data = lst->next->data;
+			lst->next->data = tmp;
+			lst = start;
+		}
+		else
+			lst = lst->next;
 	}
-	quotient = num / 10;
-	mod = num % 10;
-	if (quotient != 0)
-		ft_putnbr_fd((int)quotient, fd);
-	c = mod + '0';
-	write(fd, &c, sizeof(char));
+	lst = start;
+	return (lst);
 }
-
-// int	main(void)
-// {
-// 	int	n =3002;
-
-// 	ft_putnbr_fd(n, 1);
-// 	return (0);
-// }

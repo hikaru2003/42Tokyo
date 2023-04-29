@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.h                                          :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 19:12:18 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/26 19:17:03 by hikaru           ###   ########.fr       */
+/*   Created: 2023/04/29 12:38:40 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/29 12:42:12 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct s_list
+#include "ft_list.h"
+
+int	ft_list_size(t_list *begin_list)
 {
-	struct s_list	*next;
-	void	*data;
-}	t_list;
+	int	i;
 
-
+	i = 0;
+	while (begin_list)
+	{
+		begin_list = begin_list->next;
+		i++;
+	}
+	return (0);
+}

@@ -3,35 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   sort_int_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 08:55:57 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/29 09:00:18 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/04/29 11:31:01 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	sort_int_tab(int *tab, unsigned int size)
 {
 	unsigned int	i;
-	unsigned int	j;
 	int				tmp;
 
 	i = 0;
-	j = 0;
 	tmp = 0;
 	while (i < size)
 	{
-		j = 0;
-		while (j < size)
+		if (tab[i] > tab[i + 1])
 		{
-			if (tab[j] > tab[j + 1])
-			{
-				tmp = tab[j];
-				tab[j] = tab[j + 1];
-				tab[j + 1] = tmp;
-			}
-			j++;
+			tmp = tab[i];
+			tab[i] = tmp[i + 1];
+			tmp[i + 1] = tmp;
+			i = 0;
 		}
-		i++;
+		else
+			i++;
 	}
 }

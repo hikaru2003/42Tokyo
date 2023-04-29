@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_list.c                                        :+:      :+:    :+:   */
+/*   ft_list.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 09:09:49 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/29 09:10:56 by hikaru           ###   ########.fr       */
+/*   Created: 2023/04/29 12:40:06 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/29 12:40:42 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
-
-t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+typedef struct	s_list
 {
-	t_list	*start;
-
-	start = lst;
-	while (lst)
-	{
-		
-	}
-}
+	struct s_list	*next;
+	void			*data;
+}	t_list;
