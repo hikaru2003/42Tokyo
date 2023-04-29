@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:38 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:38:43 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:47:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ int	pipex(char *line, char **envp)
 	pid_t	pid;
 	int		pipefd[2];
 
-	if (*line == '\0' || is_cmd(line, envp) == -1) //enterのみの時に、command not foundにしたくないから
+	//enterのみの時に、command not foundにしたくないから
+	if (*line == '\0' || is_cmd(line, envp) == -1)
 		return (-1);
 	pipe(pipefd);
 	pid = fork();
