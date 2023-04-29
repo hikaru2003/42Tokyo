@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:08:57 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:30:26 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*check_path(char **cmd, char **path);
 void	exec(char *line, char **envp);
 int		is_cmd(char *argv, char **envp);
 int		all_space(char *argv);
-void	pipex(char *line, char **envp);
+int	pipex(char *line, char **envp);
 
 //readline.c
 

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/29 20:26:27 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:30:45 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		if (*line)
 			add_history(line);
-		pipex(line, envp);
-		wait(NULL);
+		if (pipex(line, envp) != -1)
+			wait(NULL);
 		free (line);
 	}
 	// write_history(".my_history");

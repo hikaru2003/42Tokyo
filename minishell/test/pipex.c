@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:38 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:24:13 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/29 21:38:43 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	is_cmd(char *argv, char **envp)
 	if (filepath == NULL || all_space(argv) == 0)
 	{
 		char_single_free(&filepath);
-		write(STDERR, "zsh: command not found: ", 24);
+		write(STDERR, "bash: command not found: ", 24);
 		if (all_space(argv) == 0)
 			write(STDERR, argv, ft_strlen(argv));
 		else
@@ -112,13 +112,13 @@ int	all_space(char *argv)
 	return (0);
 }
 
-void	pipex(char *line, char **envp)
+int	pipex(char *line, char **envp)
 {
 	pid_t	pid;
 	int		pipefd[2];
 
 	if (*line == '\0' || is_cmd(line, envp) == -1) //enterのみの時に、command not foundにしたくないから
-		return ;
+		return (-1);
 	pipe(pipefd);
 	pid = fork();
 	if (pid < 0)
@@ -136,7 +136,8 @@ void	pipex(char *line, char **envp)
 	else
 	{
 		close(pipefd[1]);
-		// dup2(pipefd[0], 0);
+		// dup2(pipefd[0], 0);	 これ入れると、minishell$が2回で終了してしまう？
 		close(pipefd[0]);
 	}
+	return (0);
 }

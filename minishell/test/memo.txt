@@ -23,3 +23,17 @@ Change what’s displayed on the screen to reflect the current contents of rl_li
 add_history (line);
 If you want the user to be able to get at the line later, (with C-p for example),
 you must call add_history() to save the line away in a history list of such lines.
+
+
+
+
+<<進捗>>
+とりあえず、コマンド一つ、パイプなどを考慮していない。
+unset PATHの時に、pwd,cdなどは、bashでは実行できるはずだが、ほかのコマンド同様に
+	bash: pwd: No such file or directory
+と表示されてしまう
+cd は実行はできるが、ディレクトリは移動できていない
+スペースは無視して実行できるが、タブが入るとcommand not foundなどになって実行できない。
+改行は、bashでもcommand not foundになるっぽいからスペースとタブだけでいいのかも？
+add_historyはどこに保存されているのかわからないから、.my_historyを作ったがいらないっぽい
+tokenizarでスペース、タブ、改行で区切ってからpipex関数に入るようにする。（tokenizerはまだやってない）
