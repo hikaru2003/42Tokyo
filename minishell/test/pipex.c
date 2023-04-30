@@ -6,20 +6,20 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:38 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 17:22:30 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:03:28 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**get_path(char *cmd, char **envp)
+char	**get_path(char *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
+	while (environ[i] && ft_strncmp(environ[i], "PATH=", 5))
 		i++;
-	if (!envp[i])
+	if (!environ[i])
 	{
 		write(2, "bash: ", 6);
 		write(2, cmd, ft_strlen(cmd));
@@ -27,7 +27,7 @@ char	**get_path(char *cmd, char **envp)
 		perror("");
 		return (NULL);
 	}
-	return (ft_split(envp[i] + 5, ':'));
+	return (ft_split(environ[i] + 5, ':'));
 }
 
 char	*check_path(char **cmd, char **path)
@@ -52,31 +52,31 @@ char	*check_path(char **cmd, char **path)
 	return (NULL);
 }
 
-void	exec(char *line, char **envp)
+void	exec(char *line)
 {
 	char	**cmd;
 	char	**path;
 	char	*filepath;
 
 	cmd = ft_split(line, ' ');
-	path = get_path(cmd[0], envp);
+	path = get_path(cmd[0]);
 	filepath = check_path(cmd, path);
 	char_double_free(path);
-	if (execve(filepath, cmd, envp) == -1)
+	if (execve(filepath, cmd, environ) == -1)
 	{
 		perror("execve error");
 		exit(127);
 	}
 }
 
-int	is_cmd(char *argv, char **envp)
+int	is_cmd(char *argv)
 {
 	char	**cmd;
 	char	**path;
 	char	*filepath;
 
 	cmd = ft_split(argv, ' ');
-	path = get_path(cmd[0], envp);
+	path = get_path(cmd[0]);
 	if (!path)
 		return (-1);
 	filepath = check_path(cmd, path);
@@ -112,14 +112,14 @@ int	all_space(char *argv)
 	return (0);
 }
 
-int	pipex(char *line, char **envp)
+int	pipex(char *line)
 {
 	pid_t	pid;
 	int		pipefd[2];
 	int		wstatus;
 
 	//enterのみの時に、command not foundにしたくないから
-	if (*line == '\0' || is_cmd(line, envp) == -1)
+	if (*line == '\0' || is_cmd(line) == -1)
 		return (-1);
 	pipe(pipefd);
 	pid = fork();
@@ -133,7 +133,7 @@ int	pipex(char *line, char **envp)
 		close(pipefd[0]);
 		// dup2(pipefd[1], 1);	とりあえず、コマンドは一回のみ
 		close(pipefd[1]);
-		exec(line, envp);
+		exec(line);
 	}
 	else
 	{

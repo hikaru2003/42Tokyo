@@ -40,9 +40,10 @@ add_historyはどこに保存されているのかわからないから、.my_hi
 tokenizarでスペース、タブ、改行で区切ってからpipex関数に入るようにする。（tokenizerはまだやってない）
 
 4/30
-builtin commandのうち、cdのみ実行ずみ、cd でホームディレクトリにも移動できるようにしてある。
+builtin commandのうち、echo -n, cd, pwd, envのみ実装済み、cd でホームディレクトリにも移動できるようにしてある。
+残り　export, unset, exit
 test.sh 作成したけど、よくわかんない。status NGになってしまう。
 *dprintfは実装したほうがいいらしい
 *printfよりもputstrのほうがいい
 echo -n 実装済み、　\は対応する？ ※bashでは\nはn、\\nは\nが表示される。
-何か文字を打った後に、ctrl+Dを押しても終了しない
+minishell$：何か文字を打った後に、ctrl+Dを押しても終了しない

@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:57:28 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 20:56:28 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:04:06 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,13 @@ int	built_in_cmd(char *line)
 	// }
 	if (ft_strncmp(cmd[0], "env", 4) == 0)
 	{
-		
+		i = 0;
+		while (environ[i])
+		{
+			printf("%s\n", environ[i]);
+			i++;
+		}
+		return (0);
 	}
 	// if (ft_strncmp(cmd[0], "exit", 5) == 0)
 	// {

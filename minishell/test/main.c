@@ -6,13 +6,13 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
-/*   Updated: 2023/04/30 17:03:18 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:00:44 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
 	char	*line;
 	int		wstatus;
@@ -29,7 +29,7 @@ int	main(int argc, char **argv, char **envp)
 		if (*line)
 			add_history(line);
 		if (built_in_cmd(line) != 0)
-			wstatus = pipex(line, envp);
+			wstatus = pipex(line);
 		free (line);
 	}
 	// write_history(".my_history");

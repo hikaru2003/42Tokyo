@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 20:59:13 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:04:44 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ char	*ft_strncpy(char const *s, int start, size_t len);
 char	**ft_split(char const *s, char c);
 
 //pipex.c
-char	**get_path(char *cmd, char **envp);
+char	**get_path(char *cmd);
 char	*check_path(char **cmd, char **path);
-void	exec(char *line, char **envp);
-int		is_cmd(char *argv, char **envp);
+void	exec(char *line);
+int		is_cmd(char *argv);
 int		all_space(char *argv);
-int		pipex(char *line, char **envp);
+int		pipex(char *line);
 
 //readline.c
 
