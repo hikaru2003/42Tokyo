@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 16:15:12 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:59:13 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
+
+extern char	**environ;
 
 //built_in_cmd.c
 int		built_in_cmd(char *line);
@@ -62,5 +64,6 @@ size_t	ft_strlen(const char *c);
 //libft2.c
 void	*ft_memset(void *buf, int ch, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

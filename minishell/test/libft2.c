@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:09:06 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 16:10:05 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:30:22 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	*tmp = '\0';
 	return (rtn);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	slen;
+	size_t	i;
+
+	if (s)
+	{
+		slen = ft_strlen(s);
+		i = 0;
+		while (i < slen)
+		{
+			write(fd, &s[i], sizeof(char));
+			i++;
+		}
+	}
 }
