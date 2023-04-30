@@ -6,11 +6,11 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 20:21:43 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 20:13:43 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 16:02:45 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

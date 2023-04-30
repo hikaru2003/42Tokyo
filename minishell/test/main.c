@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 20:09:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 15:30:52 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
+/*   Updated: 2023/04/30 17:03:18 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*char_double_free(char **str)
+int	main(int argc, char **argv, char **envp)
 {
-	size_t	i;
+	char	*line;
+	int		wstatus;
 
-	i = 0;
-	while (str[i])
+	wstatus = 0;
+	rl_outstream = stderr;
+	// using_history();
+	// read_history(".my_history");
+	while (1)
 	{
-		free(str[i]);
-		i++;
+		line = readline("minishell$ ");
+		if (!line)
+			break ;
+		if (*line)
+			add_history(line);
+		if (built_in_cmd(line) != 0)
+			wstatus = pipex(line, envp);
+		free (line);
 	}
-	free(str);
-	return (NULL);
-}
-
-char	*char_single_free(char **str)
-{
-	if (*str)
-		free(*str);
-	*str = NULL;
-	return (NULL);
+	// write_history(".my_history");
+	exit(wstatus);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:46:56 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 16:15:12 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 #define STDOUT 1
 #define STDERR 2
 
+//built_in_cmd.c
+int		built_in_cmd(char *line);
+
 //ft_free.c
 char	*char_double_free(char **str);
 char	*char_single_free(char **str);
@@ -38,9 +41,6 @@ char	*char_single_free(char **str);
 //ft_split.c
 char	*ft_strncpy(char const *s, int start, size_t len);
 char	**ft_split(char const *s, char c);
-
-//ft_strjoin.c
-char	*ft_strjoin(char const *s1, char const *s2);
 
 //pipex.c
 char	**get_path(char *cmd, char **envp);
@@ -52,11 +52,15 @@ int		pipex(char *line, char **envp);
 
 //readline.c
 
-//tool.c
+//libft1.c
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *c);
+
+//libft2.c
+void	*ft_memset(void *buf, int ch, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

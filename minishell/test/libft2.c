@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   libft2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 20:44:00 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 20:13:46 by hmorisak         ###   ########.fr       */
+/*   Created: 2023/04/30 16:09:06 by hmorisak          #+#    #+#             */
+/*   Updated: 2023/04/30 16:10:05 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
+
+void	*ft_memset(void *buf, int ch, size_t n)
+{
+	unsigned char	*tmp;
+
+	tmp = (unsigned char *)buf;
+	while (n--)
+	{
+		*tmp = (unsigned char)ch;
+		tmp++;
+	}
+	return (buf);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

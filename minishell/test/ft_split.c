@@ -6,11 +6,11 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:55:41 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 19:56:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:30:59 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
 
 static char	**ft_free(char **array)
 {

@@ -6,11 +6,11 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:38 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/29 21:50:26 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/04/30 17:22:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
 
 char	**get_path(char *cmd, char **envp)
 {
@@ -116,6 +116,7 @@ int	pipex(char *line, char **envp)
 {
 	pid_t	pid;
 	int		pipefd[2];
+	int		wstatus;
 
 	//enterのみの時に、command not foundにしたくないから
 	if (*line == '\0' || is_cmd(line, envp) == -1)
@@ -139,6 +140,7 @@ int	pipex(char *line, char **envp)
 		close(pipefd[1]);
 		// dup2(pipefd[0], 0);	 これ入れると、minishell$が2回で終了してしまう？
 		close(pipefd[0]);
+		wait(&wstatus);
 	}
-	return (0);
+	return (wstatus);
 }

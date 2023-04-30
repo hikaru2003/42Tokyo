@@ -1,11 +1,12 @@
 NAME = minishell
 
-SRCS	=	free.c				\
+SRCS	=	built_in_cmd.c		\
+			free.c				\
 			ft_split.c			\
-			ft_strjoin.c		\
+			libft1.c			\
+			libft2.c			\
+			main.c				\
 			pipex.c				\
-			readline.c			\
-			tool.c				\
 
 OBJS = $(SRCS:%.c=%.o)
 
