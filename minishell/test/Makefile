@@ -1,6 +1,7 @@
 NAME = minishell
 
 SRCS	=	built_in_cmd.c		\
+			env_to_list.c		\
 			free.c				\
 			ft_split.c			\
 			libft1.c			\

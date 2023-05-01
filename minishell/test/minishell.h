@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 18:56:51 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/30 21:04:44 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:58:55 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,27 @@
 #define STDOUT 1
 #define STDERR 2
 
+// #define TRUE 0
+// #define FALSE -1
+
+typedef struct s_list
+{
+	char			*env;
+	struct s_list	*next;
+	struct s_list	*prev;
+}	t_list;
+
 extern char	**environ;
 
 //built_in_cmd.c
-int		built_in_cmd(char *line);
+int		unset_path(char *path, t_list *env_head);
+int		built_in_cmd(char *line, t_list *env_head);
+
+//env_to_list.c
+void	insert(t_list *head, t_list *list);
+void	delete(t_list *list);
+t_list	*free_list(t_list *head);
+t_list	*env_to_list(void);
 
 //ft_free.c
 char	*char_double_free(char **str);
