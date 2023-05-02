@@ -32,8 +32,8 @@ you must call add_history() to save the line away in a history list of such line
 とりあえず、コマンド一つ、パイプなどを考慮していない。
 unset PATHの時に、pwd,cdなどは、bashでは実行できるはずだが、ほかのコマンド同様に
 	bash: pwd: No such file or directory
-と表示されてしまう
-cd は実行はできるが、ディレクトリは移動できていない
+と表示されてしまう	**対応済み
+cd は実行はできるが、ディレクトリは移動できていない	**対応済み
 スペースは無視して実行できるが、タブが入るとcommand not foundなどになって実行できない。
 改行は、bashでもcommand not foundになるっぽいからスペースとタブだけでいいのかも？
 add_historyはどこに保存されているのかわからないから、.my_historyを作ったがいらないっぽい
@@ -47,3 +47,4 @@ test.sh 作成したけど、よくわかんない。status NGになってしま
 *printfよりもputstrのほうがいい
 echo -n 実装済み、　\は対応する？ ※bashでは\nはn、\\nは\nが表示される。
 minishell$：何か文字を打った後に、ctrl+Dを押しても終了しない
+minishellの中で２回./minishellを実行してmake fclean　すると、全てのファイルが消える？　lsしても何も出てこない
