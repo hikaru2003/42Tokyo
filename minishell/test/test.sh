@@ -14,7 +14,7 @@ assert(){
 
 	diff cmp out >/dev/null && echo -n ' diff OK' || echo ' diff NG'
 
-	if ["$actual" = "$expected"]; then
+	if [ "$actual" = "$expected" ]; then
 		echo -n ' status OK'
 	else
 		echo -n " status NG, expected $expected but got $actual"

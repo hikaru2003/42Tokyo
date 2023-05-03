@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:29:05 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/01 22:59:12 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/03 20:42:14 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ int	main(int argc, char **argv)
 		if (*line)
 			add_history(line);
 		if (built_in_cmd(line, env_head) != TRUE)
-			wstatus = pipex(line);
+			wstatus = pipex(line, env_head);
 		free (line);
 	}
+	free_t_list(env_head);
 	// write_history(".my_history");
 	exit(wstatus);
+}
+
+__attribute__((destructor))
+static void	destructor(void){
+	system("leaks -q minishell");
 }

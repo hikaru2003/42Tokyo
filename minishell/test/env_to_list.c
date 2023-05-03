@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:03:24 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/01 22:57:17 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/03 19:27:51 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ void	insert(t_list *head, t_list *list)
 	list->prev = head->prev;
 	head->prev = list;
 	list->next = head;
+	head->count++;
 }
 
-void	delete(t_list *list)
+void	delete(t_list *head, t_list *list)
 {
 	list->prev->next = list->next;
 	list->next->prev = list->prev;
 	free(list->env);
 	free(list);
+	head->count--;
 }
 
 t_list	*free_list(t_list *head)
@@ -54,6 +56,7 @@ t_list	*env_to_list(void)
 	head = (t_list *)malloc(sizeof(t_list));
 	if (!head)
 		return (NULL);
+	head->count = 0;
 	head->next = head;
 	head->prev = head;
 	i = 0;

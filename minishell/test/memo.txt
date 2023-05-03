@@ -48,3 +48,12 @@ test.sh 作成したけど、よくわかんない。status NGになってしま
 echo -n 実装済み、　\は対応する？ ※bashでは\nはn、\\nは\nが表示される。
 minishell$：何か文字を打った後に、ctrl+Dを押しても終了しない
 minishellの中で２回./minishellを実行してmake fclean　すると、全てのファイルが消える？　lsしても何も出てこない
+
+Gordlen Week
+cd ないディレクトリの時にエラーを返す
+environ ではなくlist envから二次元配列を作ってexecuve -> free(二次元配列) **実装済み
+ls > echo testを実行すると
+ls: test: No such file or directory
+echo(file)が作成され、中身はなし
+ls > file1 file2を実行すると
+file1にはfile2という文字列が書かれる、file2の中身を書き出すわけではない

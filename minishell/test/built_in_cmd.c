@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:57:28 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/05/01 23:10:45 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/03 21:35:33 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	unset_path(char *path, t_list *env_head)
 		//pathとenvがpathの長さ分一致 && 次のenvの値が '=' である
 		if (ft_strncmp(path, tmp->env, len) == 0 && tmp->env[len] == '=')
 		{
-			delete(tmp);
+			delete(env_head, tmp);
 			return (TRUE);
 		}
 		tmp = tmp->next;
@@ -46,6 +46,20 @@ int	print_env(t_list *env_head)
 	return (TRUE);
 }
 
+int	free_cmd(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		free(cmd[i]);
+		i++;
+	}
+	free(cmd);
+	return (TRUE);
+}
+
 //builtin commandで実行できたときはTURE,実行できなかったときはFALSEを返す
 int	built_in_cmd(char *line, t_list *env_head)
 {
@@ -63,7 +77,7 @@ int	built_in_cmd(char *line, t_list *env_head)
 		if (!cmd[i])
 		{
 			printf("\n");
-			return (TRUE);
+			return (free_cmd(cmd));
 		}
 		if (ft_strncmp(cmd[1], "-n", 3) == 0)
 			i = 2;
@@ -75,7 +89,7 @@ int	built_in_cmd(char *line, t_list *env_head)
 		}
 		if (ft_strncmp(cmd[1], "-n", 3) != 0)
 			ft_putstr_fd("\n", 1);
-		return (TRUE);
+		return (free_cmd(cmd));
 	}
 	if (ft_strncmp(cmd[0], "cd", 3) == 0)
 	{
@@ -83,12 +97,12 @@ int	built_in_cmd(char *line, t_list *env_head)
 			chdir(ft_strjoin("/Users/", getlogin()));
 		else
 			chdir(cmd[1]);
-		return (TRUE);
+		return (free_cmd(cmd));
 	}
 	if (ft_strncmp(cmd[0], "pwd", 4) == 0)
 	{
 		printf("%s\n", getcwd(cwd, 512));
-		return (TRUE);
+		return (free_cmd(cmd));
 	}
 	// if (ft_strncmp(cmd[0], "export", 7) == 0)
 	// {
@@ -98,15 +112,17 @@ int	built_in_cmd(char *line, t_list *env_head)
 	{
 		if (cmd[1])
 			unset_path(cmd[1], env_head);
-		return (TRUE);
+		return (free_cmd(cmd));
 	}
 	if (ft_strncmp(cmd[0], "env", 4) == 0)
 	{
-		return (print_env(env_head));
+		print_env(env_head);
+		return (free_cmd(cmd));
 	}
-	// if (ft_strncmp(cmd[0], "exit", 5) == 0)
-	// {
-		
-	// }
+	if (ft_strncmp(cmd[0], "exit", 5) == 0)
+	{
+		exit(0);
+	}
+	free_cmd(cmd);
 	return (FALSE); //builtin commandではなかった時
 }
