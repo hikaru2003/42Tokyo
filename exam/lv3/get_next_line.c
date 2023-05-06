@@ -83,7 +83,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-
 static char	*ft_getline(int fd, char *save)
 {
 	char	*buff;
