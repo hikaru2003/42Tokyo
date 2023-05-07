@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.h                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:56:30 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/06 14:27:17 by hikaru           ###   ########.fr       */
+/*   Created: 2023/05/07 22:28:54 by hikaru            #+#    #+#             */
+/*   Updated: 2023/05/07 22:29:13 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL_H
-#define GNL_H
+#include "minishell.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
+int	ft_env(t_list *env_head)
+{
+	t_list	*tmp;
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <libc.h>
-
-char	*get_next_line(int fd);
-
-#endif
+	tmp = env_head->next;
+	while (tmp != env_head)
+	{
+		dprintf(1, "%s=%s\n", tmp->key, tmp->value);
+		tmp = tmp->next;
+	}
+	return (TRUE);
+}

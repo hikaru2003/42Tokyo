@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.h                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:56:30 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/06 14:27:17 by hikaru           ###   ########.fr       */
+/*   Created: 2023/05/07 22:28:17 by hikaru            #+#    #+#             */
+/*   Updated: 2023/05/07 22:28:24 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL_H
-#define GNL_H
+#include "minishell.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
+int	ft_unset(char **cmd, t_list *env_head)
+{
+	int		i;
+	t_list	*tmp;
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <libc.h>
-
-char	*get_next_line(int fd);
-
-#endif
+	i = 1;
+	tmp = env_head->next;
+	while (cmd[i])
+	{
+		tmp = env_head->next;
+		while (tmp != env_head)
+		{
+			if (ft_strcmp(cmd[i], tmp->key) == 0)
+				delete(env_head, tmp);
+			tmp = tmp->next;
+		}
+		i++;
+	}
+	return (TRUE);
+}

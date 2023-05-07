@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/24 16:10:59 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:49:49 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int	check_map(t_data *data)
 		data->map = data->map->next;
 	}
 	check_map_elements(data);
+	printf("check map element\n");
+	printf("%d\n", data->width);
 	check_goal(data);
+	printf("check goal")
 	return (0);
 }

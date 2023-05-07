@@ -1,8 +1,4 @@
-#include <libc.h>
-
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 256
-#endif
+#include "gnl.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -15,18 +11,15 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
-	size_t	i = 0;
-	size_t	n = ft_strlen(s) + 1;
-
-	if (!s)
+	if (!str)
 		return (NULL);
-	while (i < n)
+	while (*str)
 	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return ((void *)s + i);
-		i++;
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
 	}
 	return (NULL);
 }
@@ -82,7 +75,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(str, s + start, len + 1);
 	return (str);
 }
-
 
 static char	*ft_getline(int fd, char *save)
 {
@@ -151,4 +143,22 @@ char	*get_next_line(int fd)
 	line = ft_line(save);
 	save = ft_save(save);
 	return (line);
+}
+
+int	main(void)
+{
+	int		fd;
+	char	*buf;
+
+	fd = open("get_next_line.c", O_RDONLY);
+	while (1)
+	{
+		buf = get_next_line(fd);
+		printf("%s", buf);
+		free(buf);
+		if (!buf)
+			break ;
+	}
+	close(fd);
+	return (0);
 }

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.h                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:56:30 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/06 14:27:17 by hikaru           ###   ########.fr       */
+/*   Created: 2023/05/07 22:27:32 by hikaru            #+#    #+#             */
+/*   Updated: 2023/05/07 22:27:40 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL_H
-#define GNL_H
+#include "minishell.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <libc.h>
-
-char	*get_next_line(int fd);
-
-#endif
+void	ft_exit(char **cmd)
+{
+	if (cmd[1] && cmd[2])
+	{
+		dprintf(2, "bash: exit: too many arguments\n");
+		exit(255);
+	}
+	else if (cmd[1])
+	{
+		if (atoi_check(cmd[1]) == TRUE)
+			exit(ft_atoi(cmd[1]));
+		dprintf(2, "bash: exit: %s: numeric argument required\n", cmd[1]);
+		exit(255);
+	}
+	exit(0);
+}

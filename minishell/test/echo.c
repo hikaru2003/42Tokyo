@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnl.h                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:56:30 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/06 14:27:17 by hikaru           ###   ########.fr       */
+/*   Created: 2023/05/07 22:24:57 by hikaru            #+#    #+#             */
+/*   Updated: 2023/05/07 22:25:08 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GNL_H
-#define GNL_H
+#include "minishell.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
-# endif
+int	ft_echo(char **cmd)
+{
+	int	i;
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <libc.h>
-
-char	*get_next_line(int fd);
-
-#endif
+	i = 1;
+	if (!cmd[i])
+		dprintf(1, "\n");
+	if (ft_strcmp(cmd[i], "-n") == 0)
+		i = 2;
+	while (cmd[i])
+	{
+		dprintf(1, "%s", cmd[i]);
+		if (cmd[++i])
+			dprintf(1, " ");
+	}
+	if (ft_strcmp(cmd[1], "-n") != 0)
+		dprintf(1, "\n");
+	return (TRUE);
+}

@@ -6,12 +6,13 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:03:24 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/03 19:27:51 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/07 22:14:05 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//list->headの順になる
 void	insert(t_list *head, t_list *list)
 {
 	head->prev->next = list;
@@ -25,7 +26,8 @@ void	delete(t_list *head, t_list *list)
 {
 	list->prev->next = list->next;
 	list->next->prev = list->prev;
-	free(list->env);
+	free(list->key);
+	free(list->value);
 	free(list);
 	head->count--;
 }
@@ -40,17 +42,41 @@ t_list	*free_list(t_list *head)
 	while (list != head)
 	{
 		tmp = list->next;
-		free(list->env);
+		free(list->key);
+		free(list->value);
 		free(list);
 		list = tmp;
 	}
 	return (NULL);
 }
 
-t_list	*env_to_list(void)
+static t_list	*make_list(t_list *head, int i)
+{
+	size_t	pos;
+	t_list	*list;
+
+	pos = 0;
+	list = (t_list *)malloc(sizeof(t_list));
+	if (!list)
+		return(NULL);
+	while (environ[i][pos] != '=')
+		pos++;
+	list->key = ft_substr(environ[i], 0, pos);
+	if (!list->key)
+		return (free_list(head));
+	list->value = ft_substr(environ[i], pos + 1, ft_strlen(environ[i])); //ft_strlen(environ[i] - pos)?
+	if (!list->value)
+		return (free_list(head));
+	list->sort_flag = 0;
+	if (ft_strcmp(list->key, "_") == 0)
+		list->sort_flag = 1;
+	insert(head, list);
+	return (head);
+}
+
+t_list	*env_to_list(char **environ)
 {
 	t_list	*head;
-	t_list	*list;
 	int		i;
 
 	head = (t_list *)malloc(sizeof(t_list));
@@ -62,11 +88,8 @@ t_list	*env_to_list(void)
 	i = 0;
 	while (environ[i])
 	{
-		list = (t_list *)malloc(sizeof(t_list));
-		list->env = ft_strjoin("", environ[i]);
-		if (!list->env)
-			return (free_list(head));
-		insert(head, list);
+		if (make_list(head, i) == NULL)
+			return (NULL);
 		i++;
 	}
 	return (head);

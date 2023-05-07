@@ -1,16 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   libft3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/11 15:08:26 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/05/07 18:57:42 by hikaru           ###   ########.fr       */
+/*   Created: 2023/05/07 22:14:49 by hikaru            #+#    #+#             */
+/*   Updated: 2023/05/07 22:16:27 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
+
+void	*ft_memset(void *buf, int ch, size_t n)
+{
+	unsigned char	*tmp;
+
+	tmp = (unsigned char *)buf;
+	while (n--)
+	{
+		*tmp = (unsigned char)ch;
+		tmp++;
+	}
+	return (buf);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned char	*c1;
+	unsigned char	*c2;
+
+	c1 = (unsigned char *)s1;
+	c2 = (unsigned char *)s2;
+	while (*c1 != '\0' || *c2 != '\0')
+	{
+		if (*c1 != *c2)
+			return (*c1 - *c2);
+		c1++;
+		c2++;
+	}
+	return (0);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -24,24 +54,3 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (NULL);
 }
-
-// #include <string.h>
-// #include <stdio.h>
-
-// int main(void)
-// {
-// 	char s[] = "tripouille";
-
-// 	printf("%s\n", strchr(s, 't'));
-// 	printf("%s\n", ft_strchr(s, 't'));
-// 	printf("%s\n", strchr(s, 'l'));
-// 	printf("%s\n", ft_strchr(s, 'l'));
-// 	printf("%s\n", strchr(s, 'z'));
-// 	printf("%s\n", ft_strchr(s, 'z'));
-// 	printf("%s\n", strchr(s, 0));
-// 	printf("%s\n", ft_strchr(s, 0));
-// 	printf("%s\n", strchr(s, 't' + 256));
-// 	printf("%s\n", ft_strchr(s, 't' + 256));
-
-// 	return (0);
-// }

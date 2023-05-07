@@ -57,3 +57,16 @@ ls: test: No such file or directory
 echo(file)が作成され、中身はなし
 ls > file1 file2を実行すると
 file1にはfile2という文字列が書かれる、file2の中身を書き出すわけではない
+
+
+cd .. | ls
+cddirしないはず
+echo a "" c 
+-> a  c
+echo a $nothing c
+-> a c
+
+export *
+
+envの時は _=/usr/bin/env があってexportの時はないのに、env | wc -l と export | wc -l　が同じ行数になる
+何か、envの時にはないパスがexportの時にあるっぽい

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creat_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:55:37 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/04/24 15:59:25 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:48:03 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,16 @@ t_map	creat_map(int fd, t_data *data)
 			print_error(data);
 		if (!line)
 			break ;
+		if (ft_strlen(line) > 1000)
+			print_error(data);
 		map = (t_map *)malloc(sizeof(t_map));
 		if (!map)
 			return (data->head);
 		map->row = line;
 		insert(&data->head, map);
 		data->height++;
+		if (data->height > 500)
+			print_error(data);
 	}
 	data->width = ft_strlen(data->head.next->row) - 1;
 	return (data->head);
