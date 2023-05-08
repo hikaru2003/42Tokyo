@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:18:27 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/07 22:44:21 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/08 15:16:44 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,9 @@ void	do_export(char **cmd, t_list *env_head, int i)
 				return (export_append(cmd, env_head, i, j));
 			else if (cmd[i][j] == '=')
 				return (export_equal(cmd, env_head, i, j));
-			else if (('a' <= cmd[i][j] && cmd[i][j] <= 'z') || ('A' <= cmd[i][j] && cmd[i][j] <= 'Z') || cmd[i][j] == '_' || ('0' <= cmd[i][j] && cmd[i][j] <= '9'))
+			else if (('a' <= cmd[i][j] && cmd[i][j] <= 'z')
+				|| ('A' <= cmd[i][j] && cmd[i][j] <= 'Z')
+				|| cmd[i][j] == '_' || ('0' <= cmd[i][j] && cmd[i][j] <= '9'))
 				j++;
 			else
 			{
