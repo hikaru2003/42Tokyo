@@ -1,0 +1,5 @@
+FACE_LIST=("🐬" "🐰" "🐣" "🐧" "🐒" "🐴" "🐶" "🦊" "🐺" "🐯" "🐨" "🦭 " "🐻" "🐢" "🦉" "🦁" "🦔" "🦈" "🐳" "🐊" "🐼" "🐐" "🦙" "🐪")
+alias randomize_face='FACE1=${FACE_LIST[$((1 + $RANDOM % ${#FACE_LIST[@]}))]} FACE2=${FACE_LIST[$((1 + $RANDOM % ${#FACE_LIST[@]}))]}'
+precmd () { randomize_face }
+setopt PROMPT_SUBST
+PS1='$FACE1%1~$FACE2%f$>'
