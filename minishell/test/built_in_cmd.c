@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:57:28 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/05/07 22:40:58 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/08 15:14:43 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	built_in_cmd(char **cmd, t_list *env_head, t_node *node)
 	char	cwd[512];
 
 	ft_memset(cwd, '\0', 512);
-	if (ft_strcmp(cmd[0], "echo") != 0 && ft_strcmp(cmd[0], "cd") != 0 && ft_strcmp(cmd[0], "pwd") != 0 && ft_strcmp(cmd[0], "export") != 0 && ft_strcmp(cmd[0], "unset") != 0 && ft_strcmp(cmd[0], "env") != 0 && ft_strcmp(cmd[0], "exit") != 0)
+	if (ft_strcmp(cmd[0], "echo") != 0 && ft_strcmp(cmd[0], "cd") != 0
+		&& ft_strcmp(cmd[0], "pwd") != 0 && ft_strcmp(cmd[0], "export") != 0
+		&& ft_strcmp(cmd[0], "unset") != 0 && ft_strcmp(cmd[0], "env") != 0
+		&& ft_strcmp(cmd[0], "exit") != 0)
 		return (FALSE);
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));

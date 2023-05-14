@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   export1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:18:27 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/07 22:20:41 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/08 15:26:38 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	is_new_key(t_list *env_head, t_list *new_list)
 			free(new_list);
 			return (FALSE);
 		}
-		list =list->next;
+		list = list->next;
 	}
 	return (TRUE);
 }
@@ -114,12 +114,15 @@ void	do_export(char **cmd, t_list *env_head, int i)
 				return (export_append(cmd, env_head, i, j));
 			else if (cmd[i][j] == '=')
 				return (export_equal(cmd, env_head, i, j));
-			else if (('a' <= cmd[i][j] && cmd[i][j] <= 'z') || ('A' <= cmd[i][j] && cmd[i][j] <= 'Z') || cmd[i][j] == '_' || ('0' <= cmd[i][j] && cmd[i][j] <= '9'))
+			else if (('a' <= cmd[i][j] && cmd[i][j] <= 'z')
+				|| ('A' <= cmd[i][j] && cmd[i][j] <= 'Z')
+				|| cmd[i][j] == '_' || ('0' <= cmd[i][j] && cmd[i][j] <= '9'))
 				j++;
 			else
 			{
 				dprintf(1, "%d, %c\n", j, cmd[i][j]);
-				dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
+				dprintf(1, "bash: export: `%s':\
+				 not a valid identifier\n", cmd[i]);
 				exit(1);
 			}
 		}

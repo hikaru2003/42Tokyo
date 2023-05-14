@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 13:03:24 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/07 22:14:05 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/08 15:15:13 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static t_list	*make_list(t_list *head, int i)
 	pos = 0;
 	list = (t_list *)malloc(sizeof(t_list));
 	if (!list)
-		return(NULL);
+		return (NULL);
 	while (environ[i][pos] != '=')
 		pos++;
 	list->key = ft_substr(environ[i], 0, pos);
 	if (!list->key)
 		return (free_list(head));
-	list->value = ft_substr(environ[i], pos + 1, ft_strlen(environ[i])); //ft_strlen(environ[i] - pos)?
+	list->value = ft_substr(environ[i], pos + 1, ft_strlen(environ[i]));
 	if (!list->value)
 		return (free_list(head));
 	list->sort_flag = 0;
