@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:53 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/08 15:24:28 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:24:59 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_export(char **cmd, t_list *env_head)
 			do_export(cmd, env_head, i);
 		else
 		{
-			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]); 
+			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
 			exit(1);
 		}
 		i++;

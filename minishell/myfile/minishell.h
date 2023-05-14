@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:47 by snemoto           #+#    #+#             */
-/*   Updated: 2023/05/07 22:31:18 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/14 11:27:49 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,9 @@ int		ft_cd(char **cmd, char *cwd);
 //echo.c
 int		ft_echo(char **cmd);
 
+//env_to_array.c
+char	**list_to_array(t_list *env_head);
+
 //env_to_list.c
 void	insert(t_list *head, t_list *list);
 void	delete(t_list *head, t_list *list);
@@ -243,4 +246,3 @@ int		ft_pwd(char *cwd);
 int		ft_unset(char **cmd, t_list *env_head);
 
 #endif
-
