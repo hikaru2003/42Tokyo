@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export2.c                                          :+:      :+:    :+:   */
+/*   builtin_export2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:53 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/08 15:24:59 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/16 14:26:46 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	reset_flag(t_list *env_head)
 			tmp->sort_flag = 0;
 		tmp = tmp->next;
 	}
+	exit (0);
 	return (TRUE);
 }
 
@@ -98,7 +99,10 @@ int	ft_export(char **cmd, t_list *env_head)
 	while (cmd[i])
 	{
 		if (ft_strcmp(cmd[i], "_") == 0)
+		{
+			exit (0);
 			return (TRUE);
+		}
 		if (('a' <= cmd[i][0] && cmd[i][0] <= 'z')
 			|| ('A' <= cmd[i][0] && cmd[i][0] <= 'Z') || cmd[i][0] == '_')
 			do_export(cmd, env_head, i);
@@ -109,5 +113,6 @@ int	ft_export(char **cmd, t_list *env_head)
 		}
 		i++;
 	}
+	exit (0);
 	return (TRUE);
 }
