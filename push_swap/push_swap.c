@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 19:40:08 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/03/27 19:51:48 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:14:25 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	push_swap(t_stack *a_head, int element_num)
 	b_head.next = &b_head;
 	b_head.prev = &b_head;
 	pivot.current = 0;
+	pivot.prev = 0;
 	pivot.prev = grouping(a_head, &b_head, pivot, element_num);
 	while (pivot.prev != 0)
 	{
