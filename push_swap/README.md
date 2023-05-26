@@ -14,7 +14,7 @@ now sorting...
 <result>
 sorted!!
 count = 186732
-\time = 1.464353
+time = 1.464353
 ```
 昇順にソートできていれば
 ```bash
