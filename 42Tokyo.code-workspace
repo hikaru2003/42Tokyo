@@ -30,7 +30,8 @@
 			"vector": "c",
 			"compare": "c",
 			"concepts": "c",
-			"dirent.h": "c"
+			"dirent.h": "c",
+			"philo.h": "c"
 		}
 	}
 }
