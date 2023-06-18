@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:54:29 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/15 15:10:41 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/18 18:41:35 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_mutex(t_data *data)
 			return (FALSE);
 		i++;
 	}
-	if (pthread_mutex_init(&data->lock, NULL))
-		return (FALSE);	
+	if (pthread_mutex_init(&data->eat, NULL))
+		return (FALSE);
 	if (pthread_mutex_init(&data->write, NULL))
 		return (FALSE);
 	return (TRUE);

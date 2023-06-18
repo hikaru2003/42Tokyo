@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:28:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/15 20:58:25 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/18 18:40:26 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@
 # define EAT_MSG "is eating"
 # define SLEEP_MSG "is sleeping"
 # define THINK_MSG "is thinking"
+# define DIED "died"
 
-
-typedef	struct s_philo
+typedef struct s_philo
 {
-	t_data		*data;
-	pthread_t	id;
-	// int			pos;
-	int			eat_num;
-	int			next_eat_time;
-	int			right_fork;
-	int			left_fork;
+	struct s_data	*data;
+	pthread_t		th;
+	int				id;
+	int				eat_num;
+	unsigned long	next_eat_time;
+	int				right_fork;
+	int				left_fork;
 }	t_philo;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	int				philo_num;
-	int				start_time;
+	unsigned long	start_time;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -52,15 +52,33 @@ typedef	struct s_data
 	int				die_flag;
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	lock;
+	pthread_mutex_t	eat;
 	pthread_mutex_t	write;
 }	t_data;
 
+//action.c
+unsigned long	get_time(void);
+void			print_msg(t_philo *philo, char *str);
+void			take_fork(t_philo *philo, t_data *data);
+void			eating(t_philo *philo);
+void			sleeping(unsigned long time, t_data *data);
 
-int		ft_atoi(const char *str);
-int		is_int(char *str); //数字以外、マイナス、オーバーフローはFALSE
+//ft_atoi.c
+int				ft_atoi(const char *str);
+int				is_int(char *str); //数字以外、マイナス、オーバーフローはFALSE
 
+//ft_init.c
+int				init_mutex(t_data *data);
+void			init_philo(t_data *data);
+int				init_data(t_data *data);
 
+//main.c
+int				check_param(int argc, char **argv, t_data *data);
 
+//philo.c
+void			*routine(void *philo_data);
+void			check_died(t_data *data);
+void			destroy_mutex(t_data *data);
+int				philo(t_data *data);
 
 #endif

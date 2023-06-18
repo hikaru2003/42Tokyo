@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 18:39:58 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/06/15 11:47:25 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/18 18:35:34 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	is_int(char *str)
 	sum = 0;
 	while (*str == ' ' || ('\t' <= *str && *str <= '\r'))
 		str++;
-	// if (*str == NULL)
-	// 	return (FALSE);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
@@ -80,7 +78,7 @@ int	is_int(char *str)
 		if (check_flow(sum, *str, flag) < 0)
 			return (FALSE);
 	}
-	if (*str != NULL)
+	if (*str != '\0')
 		return (FALSE);
 	return (TRUE);
 }

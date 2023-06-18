@@ -1,4 +1,4 @@
-NAME = 
+NAME = philo
 
 SRCS	=	$(shell echo *.c)
 
@@ -6,7 +6,7 @@ OBJDIR = obj/
 
 OBJS = $(SRCS:%.c=$(OBJDIR)%.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
 
 all: $(OBJDIR) $(NAME)
 
