@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:16 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/18 18:41:57 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/19 14:17:19 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	eating(t_philo *philo)
 	print_msg(philo, EAT_MSG);
 	pthread_mutex_lock(&data->eat);
 	philo->next_eat_time = get_time() + data->time_to_die;
+	philo->eat_num++;
 	pthread_mutex_unlock(&data->eat);
 	sleeping(data->time_to_eat, data);
-	philo->eat_num++;
 	pthread_mutex_unlock(&data->fork[philo->right_fork]);
 	pthread_mutex_unlock(&data->fork[philo->left_fork]);
 }
@@ -62,7 +62,9 @@ void	sleeping(unsigned long time, t_data *data)
 	while (get_time() - start < time)
 	{
 		usleep(time);
+		pthread_mutex_lock(&data->dead);
 		if (data->die_flag == TRUE)
-			break ;
+			exit (0);
+		pthread_mutex_unlock(&data->dead);
 	}
 }

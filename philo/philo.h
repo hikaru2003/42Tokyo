@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:28:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/18 18:40:26 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/18 20:45:18 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_data
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	eat;
+	pthread_mutex_t	dead;
 	pthread_mutex_t	write;
 }	t_data;
 
