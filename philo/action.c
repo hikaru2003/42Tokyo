@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:16 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 14:17:19 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/19 14:39:46 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	sleeping(unsigned long time, t_data *data)
 	while (get_time() - start < time)
 	{
 		usleep(time);
-		pthread_mutex_lock(&data->dead);
+		pthread_mutex_lock(&data->eat);
 		if (data->die_flag == TRUE)
 			exit (0);
-		pthread_mutex_unlock(&data->dead);
+		pthread_mutex_unlock(&data->eat);
 	}
 }

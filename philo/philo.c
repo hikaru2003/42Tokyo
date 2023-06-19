@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:15:59 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 14:17:54 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/19 15:00:22 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	*routine(void *philo_data)
 	philo = (t_philo *)philo_data;
 	data = philo->data;
 	if (philo->id % 2 == 1 && data->philo_num > 1)
-		usleep(data->time_to_eat * 2);
+		usleep(data->time_to_eat * 100);
 	while (1)
 	{
-		pthread_mutex_lock(&data->dead);
+		pthread_mutex_lock(&data->eat);
 		if (data->die_flag == TRUE)
 			exit (0);
-		pthread_mutex_unlock(&data->dead);
-		pthread_mutex_lock(&data->eat);
+		// pthread_mutex_unlock(&data->eat);
+		// pthread_mutex_lock(&data->eat);
 		if (philo->eat_num >= data->num_must_eat)
 			exit (0);
 		pthread_mutex_unlock(&data->eat);
@@ -62,10 +62,10 @@ void	check_died(t_data *data)
 			pthread_mutex_unlock(&data->eat);
 			i++;
 		}
-		pthread_mutex_lock(&data->dead);
+		pthread_mutex_lock(&data->eat);
 		if (data->die_flag == TRUE)
 			exit (0) ;
-		pthread_mutex_unlock(&data->dead);
+		pthread_mutex_unlock(&data->eat);
 		pthread_mutex_lock(&data->eat);
 		if (data->philo[0].eat_num >= data->num_must_eat)
 			exit (0) ;

@@ -1,0 +1,4 @@
+変更箇所
+
+philo.c 23 usleep*100に変更
+lockするのをeatとdeadからeatのみに変更
