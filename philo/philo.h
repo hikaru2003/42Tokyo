@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:28:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 14:39:54 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/19 19:35:44 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <limits.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# include <string.h>
 
 # define TRUE 0
 # define FALSE 1
@@ -39,6 +41,7 @@ typedef struct s_philo
 	unsigned long	next_eat_time;
 	int				right_fork;
 	int				left_fork;
+	unsigned long	start_time;
 }	t_philo;
 
 typedef struct s_data
@@ -62,7 +65,9 @@ unsigned long	get_time(void);
 void			print_msg(t_philo *philo, char *str);
 void			take_fork(t_philo *philo, t_data *data);
 void			eating(t_philo *philo);
-void			sleeping(unsigned long time, t_data *data);
+int				check_dead_flag(t_philo *philo);
+unsigned long	sleeping(unsigned long time, t_data *data);
+// void			sleeping(unsigned long time, t_data *data);
 
 //ft_atoi.c
 int				ft_atoi(const char *str);
