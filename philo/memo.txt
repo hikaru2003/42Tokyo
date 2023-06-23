@@ -2,3 +2,35 @@
 
 philo.c 23 usleep*100に変更
 lockするのをeatとdeadからeatのみに変更
+
+死亡時刻より前に起きたことをdieの後に出力してもいいのか
+1005 122 is sleeping
+1010 113 is thinking
+1010 87 has taken a fork
+1011 109 has taken a fork
+1012 35 died
+1011 67 has taken a fork
+1010 1 is thinking
+1006 52 is sleeping
+1010 62 is sleeping
+1003 88 is sleeping
+1009 107 is eating
+1010 89 has taken a fork
+1010 115 is thinking
+1010 43 has taken a fork
+1010 65 is thinking
+1005 108 is sleeping
+1004 104 is sleeping
+1013 81 is thinking
+1008 117 is thinking
+1012 121 is thinking
+1012 29 has taken a fork
+1007 84 is sleeping
+1010 95 is thinking
+1009 101 is thinking
+1005 28 is sleeping
+1006 116 is sleeping
+
+
+タイムラグが起きる→すべてのフィロがその影響を受けて、next_eat_timeを変更しなきゃいけないはず
+タイムラグをdataの変数にしてget_time()-timerugとすれば、next_eat_timeを変更しなくてもいいのではないか

@@ -6,7 +6,7 @@ OBJDIR = obj/
 
 OBJS = $(SRCS:%.c=$(OBJDIR)%.o)
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=thread -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=thread -g
 
 all: $(OBJDIR) $(NAME)
 

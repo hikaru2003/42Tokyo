@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:16 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 21:31:18 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/21 23:44:47 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@ void	print_msg(t_philo *philo, char *str)
 {
 	unsigned long	time, t1, t2;
 
+	if (strcmp(str, DIED) == 0)
+	{
+		time = get_time() - philo->start_time;
+		printf("%ld %d %s\n", time, philo->id, str);
+		return ;
+	}
 	pthread_mutex_lock(&philo->data->eat);
-	time = get_time() - philo->data->start_time;
+	time = get_time() - philo->start_time;
 	pthread_mutex_unlock(&philo->data->eat);
 	t1 = get_time();
 	pthread_mutex_lock(&philo->data->write);
 	printf("%ld %d %s\n", time, philo->id, str);
 	pthread_mutex_unlock(&philo->data->write);
-	if (strcmp(str, DIED) == 0)
-		return ;
 	t2 = get_time();
 	pthread_mutex_lock(&philo->data->eat);
 	philo->start_time += t2 - t1;
@@ -96,7 +100,7 @@ unsigned long	sleeping(unsigned long time, t_data *data)
 		if (data->die_flag == TRUE)
 		{
 			pthread_mutex_unlock(&data->eat);
-			break ;
+			return (-1);
 		}
 		pthread_mutex_unlock(&data->eat);
 	}

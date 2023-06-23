@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:27:08 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/18 18:41:18 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/20 17:08:41 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ int	main(int argc, char **argv)
 		return (FALSE);
 	if (philo(&data) == FALSE)
 		return (FALSE);
+	return (TRUE);
 }

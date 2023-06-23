@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:15:59 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 21:27:37 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/21 19:50:48 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*routine(void *philo_data)
 {
 	t_philo	*philo;
 	t_data	*data;
-	unsigned long	time_rug;
+	// unsigned long	time_rug;
 
 	philo = (t_philo *)philo_data;
 	data = philo->data;
@@ -30,18 +30,19 @@ void	*routine(void *philo_data)
 		if (philo->data->die_flag == TRUE || philo->eat_num >= data->num_must_eat)
 		{
 			pthread_mutex_unlock(&data->eat);
-			return (NULL);
+			break ;
 		}
 		pthread_mutex_unlock(&data->eat);
 		eating(philo);
 		if (check_dead_flag(philo) == FALSE)
 			print_msg(philo, SLEEP_MSG);
-		time_rug = sleeping(data->time_to_sleep, data);
+		// time_rug = sleeping(data->time_to_sleep, data);
+		sleeping(data->time_to_sleep, data);
 		// philo->start_time += time_rug;
-		pthread_mutex_lock(&data->eat);
-		data->start_time += time_rug;
-		philo->next_eat_time += time_rug;
-		pthread_mutex_unlock(&data->eat);
+		// pthread_mutex_lock(&data->eat);
+		// data->start_time += time_rug;
+		// philo->next_eat_time += time_rug;
+		// pthread_mutex_unlock(&data->eat);
 		if (check_dead_flag(philo) == FALSE)
 			print_msg(philo, THINK_MSG);
 	}
@@ -69,7 +70,7 @@ void	check_died(t_data *data)
 				pthread_mutex_unlock(&data->eat);
 				return ;
 			}
-			if (data->philo[i].eat_num >= data->num_must_eat) //index=0のみ見ればいいのでは？一番下の行
+			if (data->philo[i].eat_num >= data->num_must_eat)
 				ate_count++;
 			pthread_mutex_unlock(&data->eat);
 			i++;
@@ -100,19 +101,16 @@ int	philo(t_data *data)
 	int	i;
 
 	i = 0;
-	// pthread_mutex_lock(&data->eat);
 	data->start_time = get_time() + 10;
 	while (i < data->philo_num)
 	{
-		data->philo[i].start_time = get_time();
-		// data->philo[i].next_eat_time += (int)data->philo[i].start_time;
+		data->philo[i].start_time = data->start_time;
 		data->philo[i].next_eat_time += (int)data->start_time;
 		if (pthread_create(&data->philo[i].th, NULL, &routine, &data->philo[i]) != 0)
 			return (FALSE);
 		i++;
 	}
 	check_died(data);
-	// pthread_mutex_unlock(&data->eat);
 	i = 0;
 	while (i < data->philo_num)
 	{
