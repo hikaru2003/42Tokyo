@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 16:15:59 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/24 16:42:43 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:14:40 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	philo(t_data *data)
 	data->start_time = get_time() + 10;
 	while (i < data->philo_num)
 	{
-		data->philo[i].next_eat_time += (int)data->start_time;
+		data->philo[i].next_eat_time += data->start_time;
 		if (pthread_create(&data->philo[i].th, NULL,
 				&routine, &data->philo[i]) != 0)
 			return (FALSE);

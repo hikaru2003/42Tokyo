@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:28:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/24 16:43:24 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:59:03 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 
 //action.c
 void			take_fork(t_philo *philo, t_data *data);
+void			only_one(t_philo *philo, t_data *data);
 void			eating(t_philo *philo);
 int				check_dead_flag(t_philo *philo);
 void			sleeping(unsigned long time, t_data *data);

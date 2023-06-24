@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 21:03:16 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/24 16:42:50 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:16:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,32 @@ void	take_fork(t_philo *philo, t_data *data)
 		print_msg(philo, FORK_MSG, get_time() - data->start_time);
 }
 
+void	only_one(t_philo *philo, t_data *data)
+{
+	pthread_mutex_lock(&data->fork[philo->right_fork]);
+	print_msg(philo, FORK_MSG, get_time() - data->start_time);
+	while (1)
+	{
+		usleep(data->time_to_die);
+		pthread_mutex_lock(&data->eat);
+		if (data->die_flag == TRUE)
+			break ;
+		pthread_mutex_unlock(&data->eat);
+	}
+	pthread_mutex_unlock(&data->eat);
+	pthread_mutex_unlock(&data->fork[philo->right_fork]);
+}
+
 void	eating(t_philo *philo)
 {
 	t_data	*data;
 
 	data = philo->data;
+	if (data->philo_num == 1)
+	{
+		only_one(philo, data);
+		return ;
+	}
 	take_fork(philo, data);
 	if (check_dead_flag(philo) == FALSE)
 		print_msg(philo, EAT_MSG, get_time() - data->start_time);
