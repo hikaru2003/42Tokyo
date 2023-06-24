@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:28:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/19 19:35:44 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/24 16:43:24 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_philo
 	unsigned long	next_eat_time;
 	int				right_fork;
 	int				left_fork;
-	unsigned long	start_time;
 }	t_philo;
 
 typedef struct s_data
@@ -52,22 +51,19 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_must_eat;
+	int				max_eat_philo;
 	int				die_flag;
 	t_philo			*philo;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	eat;
-	// pthread_mutex_t	dead;
 	pthread_mutex_t	write;
 }	t_data;
 
 //action.c
-unsigned long	get_time(void);
-void			print_msg(t_philo *philo, char *str);
 void			take_fork(t_philo *philo, t_data *data);
 void			eating(t_philo *philo);
 int				check_dead_flag(t_philo *philo);
-unsigned long	sleeping(unsigned long time, t_data *data);
-// void			sleeping(unsigned long time, t_data *data);
+void			sleeping(unsigned long time, t_data *data);
 
 //ft_atoi.c
 int				ft_atoi(const char *str);
@@ -79,9 +75,11 @@ void			init_philo(t_data *data);
 int				init_data(t_data *data);
 
 //main.c
+unsigned long	get_time(void);
 int				check_param(int argc, char **argv, t_data *data);
 
 //philo.c
+void			print_msg(t_philo *philo, char *str, unsigned long time);
 void			*routine(void *philo_data);
 void			check_died(t_data *data);
 void			destroy_mutex(t_data *data);

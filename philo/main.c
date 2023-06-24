@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 23:27:08 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/20 17:08:41 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/24 16:47:17 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+unsigned long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * (unsigned long)1000 + time.tv_usec / 1000);
+}
 
 int	check_param(int argc, char **argv, t_data *data)
 {
@@ -28,6 +36,7 @@ int	check_param(int argc, char **argv, t_data *data)
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
 	data->die_flag = FALSE;
+	data->max_eat_philo = 0;
 	data->num_must_eat = INT_MAX;
 	if (argc == 6)
 		data->num_must_eat = ft_atoi(argv[5]);

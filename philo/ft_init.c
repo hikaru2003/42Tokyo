@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 11:54:29 by hikaru            #+#    #+#             */
-/*   Updated: 2023/06/18 18:41:35 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/06/24 16:31:01 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	init_data(t_data *data)
 	data->philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	if (!data->philo)
 		return (FALSE);
-	data->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->philo_num);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->philo_num);
 	if (!data->fork)
 	{
 		free(data->philo);
