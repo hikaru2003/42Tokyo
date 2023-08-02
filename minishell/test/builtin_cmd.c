@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:57:28 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/05/23 20:04:21 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/02 18:03:38 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	built_in_cmd(char **cmd, t_list *env_head)
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 0)
-		return (ft_cd(cmd, cwd));
+		return (ft_cd(cmd, cwd, env_head));
 	if (ft_strcmp(cmd[0], "pwd") == 0)
 		return (ft_pwd(cwd));
 	if (ft_strcmp(cmd[0], "export") == 0)

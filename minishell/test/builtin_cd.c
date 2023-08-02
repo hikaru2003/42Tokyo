@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:26:04 by hikaru            #+#    #+#             */
-/*   Updated: 2023/07/04 10:10:44 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/02 18:06:57 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,28 @@ void	ft_chdir(char **cmd, DIR *dir)
 		dprintf(2, "bash: cd: %s: No such file or directory\n", cmd[1]);
 }
 
-int	ft_cd(char **cmd, char *cwd)
+void	update_oldpwd(char *oldpwd, t_list *env_head)
 {
-	DIR	*dir;
+	t_list	*tmp;
 
+	tmp = env_head->next;
+	while (tmp != env_head)
+	{
+		if (ft_strcmp("OLDPWD", tmp->key) == 0)
+		{
+			tmp->value = ft_strdup(oldpwd);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+}
+
+int	ft_cd(char **cmd, char *cwd, t_list *env_head)
+{
+	DIR		*dir;
+	char	*oldpwd;
+
+	oldpwd = getcwd(cwd, 512);
 	if (!cmd[1])
 		chdir(ft_strjoin("/Users/", getlogin()));
 	else if (chdir(cmd[1]) == -1)
@@ -46,5 +64,6 @@ int	ft_cd(char **cmd, char *cwd)
 		return (FALSE);
 		// exit(1);
 	}
+	update_oldpwd(oldpwd, env_head);
 	return (TRUE);
 }
