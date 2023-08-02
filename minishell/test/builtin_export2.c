@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:53 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/16 14:26:46 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/07/21 19:00:06 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ int	reset_flag(t_list *env_head)
 			tmp->sort_flag = 0;
 		tmp = tmp->next;
 	}
-	exit (0);
 	return (TRUE);
 }
 
-void	find_min(t_list *env_head, t_list *sort, t_list *min)
+t_list	*find_min(t_list *env_head, t_list *sort, t_list *min)
 {
 	while (sort != env_head)
 	{
@@ -35,6 +34,7 @@ void	find_min(t_list *env_head, t_list *sort, t_list *min)
 			min = sort;
 		sort = sort->next;
 	}
+	return (min);
 }
 
 int	print_export(t_list *env_head)
@@ -54,12 +54,29 @@ int	print_export(t_list *env_head)
 		if (sort == env_head)
 			return (reset_flag(env_head));
 		min = sort;
-		find_min(env_head, sort, min);
+		min = find_min(env_head, sort, min);
 		min->sort_flag = 1;
-		dprintf(1, "declare -x %s=\"%s\"\n", min->key, min->value);
+		if (strcmp(min->value, "\0") == 0)
+			dprintf(1, "declare -x %s\n", min->key);
+		else
+			dprintf(1, "declare -x %s=\"%s\"\n", min->key, min->value);
 		i++;
 	}
 	return (reset_flag(env_head));
+}
+
+int	check_exist(char *cmd, t_list *env_head)
+{
+	t_list	*list;
+
+	list = env_head->next;
+	while (list != env_head)
+	{
+		if (strcmp(list->key, cmd) == 0)
+			return (TRUE);
+		list = list->next;
+	}
+	return (FALSE);
 }
 
 void	non_equal(char **cmd, t_list *env_head, int i)
@@ -77,14 +94,17 @@ void	non_equal(char **cmd, t_list *env_head, int i)
 		else
 		{
 			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
-			exit(1);
+			return ;
+			// exit(1);
 		}
 	}
+	if (check_exist(cmd[i], env_head) == TRUE)
+		return ;
 	list = (t_list *)malloc(sizeof(t_list));
 	if (!list)
 		exit(1);
 	list->key = ft_strdup(cmd[i]);
-	list->value = NULL;
+	list->value = ft_strdup("\0");
 	list->sort_flag = 0;
 	insert(env_head, list);
 }
@@ -100,7 +120,7 @@ int	ft_export(char **cmd, t_list *env_head)
 	{
 		if (ft_strcmp(cmd[i], "_") == 0)
 		{
-			exit (0);
+			// exit(0);
 			return (TRUE);
 		}
 		if (('a' <= cmd[i][0] && cmd[i][0] <= 'z')
@@ -109,10 +129,10 @@ int	ft_export(char **cmd, t_list *env_head)
 		else
 		{
 			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
-			exit(1);
+			// exit(1);
+			return (FALSE);
 		}
 		i++;
 	}
-	exit (0);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:18:27 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/15 19:32:59 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/02 15:55:49 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	export_append(char **cmd, t_list *env_head, int i, int len)
 		exit(1);
 	if (is_append(list, env_head) == FALSE)
 		insert(env_head, list);
-	exit (0);
 }
 
 int	is_new_key(t_list *env_head, t_list *new_list)
@@ -98,7 +97,6 @@ void	export_equal(char **cmd, t_list *env_head, int i, int len)
 		exit(1);
 	if (is_new_key(env_head, list) == TRUE)
 		insert(env_head, list);
-	exit (0);
 }
 
 void	do_export(char **cmd, t_list *env_head, int i)
@@ -122,10 +120,10 @@ void	do_export(char **cmd, t_list *env_head, int i)
 				j++;
 			else
 			{
-				dprintf(STDOUT_FILENO, "%d, %c\n", j, cmd[i][j]);
-				dprintf(STDOUT_FILENO, "bash: export: `%s':\
-				 not a valid identifier\n", cmd[i]);
-				exit(1);
+				// dprintf(STDOUT_FILENO, "%d, %c\n", j, cmd[i][j]); //for check
+				dprintf(STDOUT_FILENO, "bash: export: `%s': not a valid identifier\n", cmd[i]);
+				 return ;
+				// exit(1);
 			}
 		}
 	}

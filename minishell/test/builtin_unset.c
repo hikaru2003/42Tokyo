@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:28:17 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/15 19:33:58 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:39:41 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ int	ft_unset(char **cmd, t_list *env_head)
 		while (tmp != env_head)
 		{
 			if (ft_strcmp(cmd[i], tmp->key) == 0)
+			{
 				delete(env_head, tmp);
+				break ;
+			}
 			tmp = tmp->next;
 		}
 		i++;
 	}
-	exit (0);
 	return (TRUE);
 }

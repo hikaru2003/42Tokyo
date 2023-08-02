@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:26:04 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/15 19:34:30 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/07/04 10:10:44 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_chdir(char **cmd, DIR *dir)
 
 int	ft_cd(char **cmd, char *cwd)
 {
-	DIR				*dir;
+	DIR	*dir;
 
 	if (!cmd[1])
 		chdir(ft_strjoin("/Users/", getlogin()));
@@ -43,8 +43,8 @@ int	ft_cd(char **cmd, char *cwd)
 			dprintf(2, "bash: cd: %s: No such file or directory\n", cmd[1]);
 		else
 			ft_chdir(cmd, dir);
-		exit(1);
+		return (FALSE);
+		// exit(1);
 	}
-	exit (0);
 	return (TRUE);
 }

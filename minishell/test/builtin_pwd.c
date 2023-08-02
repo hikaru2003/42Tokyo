@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:30:21 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/15 19:33:52 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/05/23 17:10:56 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 int	ft_pwd(char *cwd)
 {
 	dprintf(STDOUT_FILENO, "%s\n", getcwd(cwd, 512));
-	exit (0);
 	return (TRUE);
 }
