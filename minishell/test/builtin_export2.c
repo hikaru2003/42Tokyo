@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:53 by hikaru            #+#    #+#             */
-/*   Updated: 2023/07/21 19:00:06 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/04 12:38:07 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,7 @@ int	reset_flag(t_list *env_head)
 			tmp->sort_flag = 0;
 		tmp = tmp->next;
 	}
-	return (TRUE);
-}
-
-t_list	*find_min(t_list *env_head, t_list *sort, t_list *min)
-{
-	while (sort != env_head)
-	{
-		if (sort->sort_flag == 0 && ft_strcmp(min->key, sort->key) > 0)
-			min = sort;
-		sort = sort->next;
-	}
-	return (min);
+	return (0);
 }
 
 int	print_export(t_list *env_head)
@@ -79,12 +68,10 @@ int	check_exist(char *cmd, t_list *env_head)
 	return (FALSE);
 }
 
-void	non_equal(char **cmd, t_list *env_head, int i)
+void	non_equal(char **cmd, t_list *env_head, int i, int j)
 {
-	int		j;
 	t_list	*list;
 
-	j = 0;
 	while (cmd[i][j])
 	{
 		if (('a' <= cmd[i][j] && cmd[i][j] <= 'z')
@@ -94,8 +81,8 @@ void	non_equal(char **cmd, t_list *env_head, int i)
 		else
 		{
 			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
+			g_var.g_last_status = 1;
 			return ;
-			// exit(1);
 		}
 	}
 	if (check_exist(cmd[i], env_head) == TRUE)
@@ -111,7 +98,7 @@ void	non_equal(char **cmd, t_list *env_head, int i)
 
 int	ft_export(char **cmd, t_list *env_head)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	if (!cmd[1])
@@ -119,20 +106,16 @@ int	ft_export(char **cmd, t_list *env_head)
 	while (cmd[i])
 	{
 		if (ft_strcmp(cmd[i], "_") == 0)
-		{
-			// exit(0);
-			return (TRUE);
-		}
+			continue ;
 		if (('a' <= cmd[i][0] && cmd[i][0] <= 'z')
 			|| ('A' <= cmd[i][0] && cmd[i][0] <= 'Z') || cmd[i][0] == '_')
 			do_export(cmd, env_head, i);
 		else
 		{
 			dprintf(1, "bash: export: `%s': not a valid identifier\n", cmd[i]);
-			// exit(1);
-			return (FALSE);
+			g_var.g_last_status = 1;
 		}
 		i++;
 	}
-	return (TRUE);
+	return (g_var.g_last_status);
 }

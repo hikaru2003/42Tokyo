@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:24:57 by hikaru            #+#    #+#             */
-/*   Updated: 2023/05/23 19:59:09 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:49:26 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_echo(char **cmd)
 	if (!cmd[i])
 	{
 		dprintf(STDOUT_FILENO, "\n");
-		return (TRUE);
+		return (0);
 	}
 	if (ft_strcmp(cmd[i], "-n") == 0)
 		i = 2;
@@ -32,5 +32,5 @@ int	ft_echo(char **cmd)
 	}
 	if (ft_strcmp(cmd[1], "-n") != 0)
 		dprintf(STDOUT_FILENO, "\n");
-	return (TRUE);
+	return (0);
 }

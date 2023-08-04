@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:57:28 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/08/02 18:03:38 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/03 18:53:06 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	built_in_cmd(char **cmd, t_list *env_head)
 
 	ft_memset(cwd, '\0', 512);
 	if (is_builtin(cmd) == FALSE)
-		return (FALSE);
+		return (0);
 	if (ft_strcmp(cmd[0], "echo") == 0)
 		return (ft_echo(cmd));
 	if (ft_strcmp(cmd[0], "cd") == 0)
@@ -56,7 +56,7 @@ int	built_in_cmd(char **cmd, t_list *env_head)
 	if (ft_strcmp(cmd[0], "env") == 0)
 		return (ft_env(env_head));
 	if (ft_strcmp(cmd[0], "exit") == 0)
-		ft_exit(cmd);
+		return (ft_exit(cmd));
 	free_cmd(cmd);
-	return (TRUE);
+	return (0);
 }

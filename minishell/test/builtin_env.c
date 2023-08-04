@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:28:54 by hikaru            #+#    #+#             */
-/*   Updated: 2023/07/21 18:39:29 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/03 18:50:03 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int	ft_env(t_list *env_head)
 			dprintf(STDOUT_FILENO, "%s=%s\n", tmp->key, tmp->value);
 		tmp = tmp->next;
 	}
-	return (TRUE);
+	return (0);
 }

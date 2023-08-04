@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:26:04 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/02 18:06:57 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/04 12:37:40 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,8 @@ int	ft_cd(char **cmd, char *cwd, t_list *env_head)
 			dprintf(2, "bash: cd: %s: No such file or directory\n", cmd[1]);
 		else
 			ft_chdir(cmd, dir);
-		return (FALSE);
-		// exit(1);
+		return (1);
 	}
 	update_oldpwd(oldpwd, env_head);
-	return (TRUE);
+	return (0);
 }

@@ -6,20 +6,19 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:27:32 by hikaru            #+#    #+#             */
-/*   Updated: 2023/07/04 10:30:52 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/03 18:54:11 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(char **cmd)
+int	ft_exit(char **cmd)
 {
+	dprintf(STDERR_FILENO, "exit\n");
 	if (cmd[1] && cmd[2])
 	{
-		dprintf(STDERR_FILENO, "exit\n");
 		dprintf(STDERR_FILENO, "bash: exit: too many arguments\n");
-		// exit(255);
-		return ;
+		return (1);
 	}
 	else if (cmd[1])
 	{

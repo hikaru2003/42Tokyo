@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:18:27 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/02 15:55:49 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/04 12:34:53 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	do_export(char **cmd, t_list *env_head, int i)
 	int		j;
 
 	if (ft_strchr(cmd[i], '=') == NULL)
-		non_equal(cmd, env_head, i);
+		non_equal(cmd, env_head, i, 0);
 	else
 	{
 		j = 0;
@@ -120,10 +120,10 @@ void	do_export(char **cmd, t_list *env_head, int i)
 				j++;
 			else
 			{
-				// dprintf(STDOUT_FILENO, "%d, %c\n", j, cmd[i][j]); //for check
-				dprintf(STDOUT_FILENO, "bash: export: `%s': not a valid identifier\n", cmd[i]);
-				 return ;
-				// exit(1);
+				dprintf(STDOUT_FILENO, "bash: export: `%s':\
+				 not a valid identifier\n", cmd[i]);
+				g_var.g_last_status = 1;
+				return ;
 			}
 		}
 	}
