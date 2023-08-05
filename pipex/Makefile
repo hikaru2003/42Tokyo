@@ -49,3 +49,5 @@ bonus:	$(OBJS) $(B_OBJS)
 	@make WITH_BONUS=1
 
 re: fclean all
+
+.PHONY: all clean fclean bonus re
