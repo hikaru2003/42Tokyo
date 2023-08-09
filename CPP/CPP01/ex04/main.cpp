@@ -6,13 +6,15 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:27:49 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/09 20:13:02 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/09 20:16:07 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include <fstream>
+
+// TODO: テスト用のファイルを作成して提出する必要がある
 
 int	main(int argc, char **argv)
 {

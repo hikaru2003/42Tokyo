@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:24:16 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 20:40:00 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/06 15:30:43 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ public:
 	void	setType(std::string type);
 };
 
-Weapon::Weapon(std::string type)
+Weapon::Weapon(std::string type) : type_(type)
 {
-	type_ = type;
 }
 
 Weapon::~Weapon()

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:28:02 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 20:40:18 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:24:48 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ public:
 	void	setWeapon(Weapon &weapon);
 };
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name) : name_(name)
 {
-	name_ = name;
 }
 
 HumanB::~HumanB()

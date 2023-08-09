@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 18:54:06 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 20:41:20 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/09 17:26:08 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,8 @@ int main(void)
 	
 	return 0;
 }
+
+// __attribute__((destructor))
+// static void	destructor(void){
+// 	system("leaks -q weapon");
+// }
