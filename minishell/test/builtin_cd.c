@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:26:04 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/04 12:37:40 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:45:57 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,20 @@ void	update_oldpwd(char *oldpwd, t_list *env_head)
 	}
 }
 
+char	*find_home_dir(t_list *env_head)
+{
+	t_list	*tmp;
+
+	tmp = env_head->next;
+	while (tmp != env_head)
+	{
+		if (ft_strcmp(tmp->key, "HOME") == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return ("/Users");
+}
+
 int	ft_cd(char **cmd, char *cwd, t_list *env_head)
 {
 	DIR		*dir;
@@ -53,7 +67,7 @@ int	ft_cd(char **cmd, char *cwd, t_list *env_head)
 
 	oldpwd = getcwd(cwd, 512);
 	if (!cmd[1])
-		chdir(ft_strjoin("/Users/", getlogin()));
+		chdir(find_home_dir(env_head));
 	else if (chdir(cmd[1]) == -1)
 	{
 		dir = opendir(getcwd(cwd, 512));
