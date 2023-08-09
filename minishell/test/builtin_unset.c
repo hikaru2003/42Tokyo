@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:28:17 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/03 18:58:14 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/09 16:22:38 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,25 @@ int	ft_unset(char **cmd, t_list *env_head)
 	tmp = env_head->next;
 	while (cmd[i])
 	{
-		tmp = env_head->next;
-		while (tmp != env_head)
+		if (ft_strchr(cmd[i], '[') || ft_strchr(cmd[i], ']'))
 		{
-			if (ft_strcmp(cmd[i], tmp->key) == 0)
+			dprintf(1, "bash: unset: `%s': not a valid identifier\n", cmd[i]);
+			g_var.g_last_status = 1;
+		}
+		else
+		{
+			tmp = env_head->next;
+			while (tmp != env_head)
 			{
-				delete(env_head, tmp);
-				break ;
+				if (ft_strcmp(cmd[i], tmp->key) == 0)
+				{
+					delete(env_head, tmp);
+					break ;
+				}
+				tmp = tmp->next;
 			}
-			tmp = tmp->next;
 		}
 		i++;
 	}
-	return (0);
+	return (g_var.g_last_status);
 }
