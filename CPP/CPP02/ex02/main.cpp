@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 14:30:33 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/13 12:49:22 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/12 14:30:14 by hikaru            #+#    #+#             */
+/*   Updated: 2023/08/13 22:52:09 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Fixed.hpp"
 
-#include <iostream>
-#include <string>
-
-class Fixed
+int main( void )
 {
-private:
-	int fp_number_;
-	static const int bits_ = 8;
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	
-public:
-	// constructor
-	Fixed();
-	// destructor
-	~Fixed();
-	// copy constructor
-	Fixed(const Fixed &fixed);
-	// copy assignment operator
-	Fixed &operator=(const Fixed &fixed);
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
 	
-	// method
-	int	getRawBits(void) const;
-	void setRawBits(int const raw);
-};
+	std::cout << b << std::endl;
+	
+	std::cout << Fixed::max( a, b ) << std::endl;
+	
+	return 0;
+}
