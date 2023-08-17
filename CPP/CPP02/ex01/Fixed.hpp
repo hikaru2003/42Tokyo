@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:30:33 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/13 18:24:55 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/16 21:34:19 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ public:
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;
 	int		toInt(void) const;
+	
+	// overload
+	// rhs:right hand side, lhs:left hand side
+	bool	operator>(Fixed &rhs);
 };
 
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
