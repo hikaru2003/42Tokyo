@@ -1,7 +1,9 @@
-NAME = ex00
+NAME = ex02
 
 SRCS =	main.cpp		\
 		ClapTrap.cpp	\
+		ScavTrap.cpp	\
+		FlagTrap.cpp	\
 
 OBJS = $(SRCS:.cpp=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:01:02 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/08/17 17:59:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:54:16 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 // constructor
 ClapTrap::ClapTrap()
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "ClapTrap Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "ClapTrap Constructor called" << std::endl;
 	name_   = name;
 	hit_    = 10;
 	energy_ = 10;
@@ -49,7 +49,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &clap)
 // destructor
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called" << std::endl;
 }
 
 // method
@@ -76,7 +76,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (energy_ <= 0)
-		std::cout << "no energy points left" << std::endl;
+		std::cout << "ClapTrap: no energy points left" << std::endl;
 	else
 	{
 		energy_--;

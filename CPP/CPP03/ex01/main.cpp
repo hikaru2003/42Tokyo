@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:58:49 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/08/17 17:59:45 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:16:19 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {
 	ClapTrap	hikaru("hikaru");
-	ClapTrap	mori("mori");
+	ScavTrap	mori("mori");
 
 	hikaru.get_status();
 	mori.get_status();
+	mori.guardGate();
 	hikaru.set_attack(6);
 	mori.set_attack(4);
 	

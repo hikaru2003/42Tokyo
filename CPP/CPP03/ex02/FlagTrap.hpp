@@ -1,48 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   FlagTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 16:59:07 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/08/18 18:55:42 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/19 17:06:32 by hikaru            #+#    #+#             */
+/*   Updated: 2023/08/19 18:29:30 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
-#include <string>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class FlagTrap : public ClapTrap
 {
-protected:
-	std::string		name_;
-	unsigned int	hit_, energy_, attack_;
 public:
 	// constructor
-	ClapTrap();
-	ClapTrap(std::string name);
+	FlagTrap();
+	FlagTrap(std::string name);
 	
 	// destructor
-	~ClapTrap();
+	~FlagTrap();
 	
 	// copy constructor
-	ClapTrap(const ClapTrap &clap);
+	FlagTrap(const FlagTrap &flag);
 
 	// copy assignment operator
-	ClapTrap &operator=(const ClapTrap &clap);
-	
+	FlagTrap &operator=(const FlagTrap &flag);
+
 	// method
 	void	attack(const std::string &target);
-	void	takeDamage(unsigned int amount);
-	void	beRepaired(unsigned int amount);
-
-	void			get_status(void);
-	unsigned int	get_attack(void);
-	unsigned int	get_hit(void);
-	unsigned int	get_energy(void);
-
-	void	set_attack(unsigned int amount);
+	void	highFivesGuys(void);
+	
 };
