@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:30:14 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/20 20:09:01 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/20 20:36:53 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ int main( void )
 	std::cout << b << std::endl;
 	
 	std::cout << Fixed::max( a, b ) << std::endl;
+
+
+	// Fixed const c( 10 );
+	// Fixed const d( 42.42f );
+
+	// std::cout << "c is " << c.toFloat() << std::endl;
+	// std::cout << "d is " << d.toFloat() << std::endl;
+
+	// std::cout << "c + d = " << (c + d) << std::endl;
+	// std::cout << "c - d = " << (c - d) << std::endl;
+	// std::cout << "c * d = " << (c * d) << std::endl;
+	// std::cout << "c / d = " << (c / d) << std::endl;
+
+	// std::cout << "1: true, 0: false" << std::endl;
+	// std::cout << "c < d -> " << (c < d) << std::endl;
+	// std::cout << "c <= d -> " << (c <= d) << std::endl;
+	// std::cout << "c > d -> " << (c > d) << std::endl;
+	// std::cout << "c >= d -> " << (c >= d) << std::endl;
+	// std::cout << "c == d -> " << (c == d) << std::endl;
+	// std::cout << "c != d -> " << (c != d) << std::endl;
 	
 	return 0;
 }
