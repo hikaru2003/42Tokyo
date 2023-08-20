@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:30:43 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/16 18:47:04 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 14:27:55 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,27 @@ static bool	is_redirects(t_token *tok)
 		|| equal_op(tok, ">>") || equal_op(tok, "<<"));
 }
 
-void	append_command_element(t_node *command, t_token **rest, t_token *tok)
+void	append_cmd_elm(t_node *node, t_token **rest, t_token *tok)
 {
 	if (tok->kind == TK_WORD)
 	{
-		append_tok(&command->args, tokdup(tok));
+		append_tok(&node->args, tokdup(tok));
 		tok = tok->next;
 	}
-	else if (is_eof(tok->next) && is_redirects(tok))
+	else if (is_redirects(tok) && tok->next->kind != TK_WORD)
 	{
 		ft_dprintf(STDERR_FILENO, "%s", ERROR_PREFIX);
 		ft_dprintf(2, "syntax error near unexpected token `newline'\n");
-		g_var.g_syntax_error = true;
+		node->node_error = true;
 		tok = tok->next;
 	}
 	else if (equal_op(tok, ">") && tok->next->kind == TK_WORD)
-		append_node(&command->redirects, redirect_out(&tok, tok));
-	else if (equal_op(tok, "<") && tok->next->kind == TK_WORD)
-		append_node(&command->redirects, redirect_in(&tok, tok));
+		append_node(&node->redirects, redirect_out(&tok, tok));
 	else if (equal_op(tok, ">>") && tok->next->kind == TK_WORD)
-		append_node(&command->redirects, redirect_append(&tok, tok));
+		append_node(&node->redirects, redirect_append(&tok, tok));
+	else if (equal_op(tok, "<") && tok->next->kind == TK_WORD)
+		append_node(&node->redirects, redirect_in(&tok, tok));
 	else if (equal_op(tok, "<<") && tok->next->kind == TK_WORD)
-		append_node(&command->redirects, redirect_heredoc(&tok, tok));
+		append_node(&node->redirects, redirect_heredoc(&tok, tok));
 	*rest = tok;
 }

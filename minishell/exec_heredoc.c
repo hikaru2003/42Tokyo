@@ -6,13 +6,13 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:26:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/03 18:47:23 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 10:38:14 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*expand_heredoc_line(char *line, t_list *head)
+static char	*expand_heredoc_line(char *line, t_list *head, int status)
 {
 	char	*new_word;
 	char	*p;
@@ -26,7 +26,7 @@ static char	*expand_heredoc_line(char *line, t_list *head)
 		if (is_variable(p))
 			expand_variable_str(&new_word, &p, p, head);
 		else if (is_special_parameter(p))
-			expend_special_parameter_str(&new_word, &p, p);
+			expand_special_prmt_str(&new_word, &p, p, &status);
 		else
 			append_char(&new_word, *p++);
 	}
@@ -34,7 +34,7 @@ static char	*expand_heredoc_line(char *line, t_list *head)
 	return (new_word);
 }
 
-int	read_heredoc(const char *delim, bool is_delim_unquoted, t_list *head)
+int	read_heredoc(const char *delim, bool is_unqt, t_list *head, int status)
 {
 	char	*line;
 	int		pfd[2];
@@ -44,16 +44,16 @@ int	read_heredoc(const char *delim, bool is_delim_unquoted, t_list *head)
 	while (1)
 	{
 		line = readline("> ");
-		if (line == NULL || g_var.g_rl_term || ft_strcmp(line, delim) == 0)
+		if (line == NULL || check_state() || ft_strcmp(line, delim) == 0)
 			break ;
-		if (is_delim_unquoted)
-			line = expand_heredoc_line(line, head);
+		if (is_unqt)
+			line = expand_heredoc_line(line, head, status);
 		ft_dprintf(pfd[1], "%s\n", line);
 		free(line);
 	}
 	free(line);
 	close(pfd[1]);
-	if (g_var.g_rl_term)
+	if (check_state())
 	{
 		close(pfd[0]);
 		return (-1);

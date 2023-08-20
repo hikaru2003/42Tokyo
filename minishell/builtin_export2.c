@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:22:53 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/14 21:04:59 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 11:00:35 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ static int	check_exist(char *cmd, t_list *env_head)
 	return (FALSE);
 }
 
-void	non_equal(char **cmd, t_list *env_head, int i, int j)
+int	non_equal(char **cmd, t_list *env_head, int i, int j)
 {
 	t_list	*list;
+	int		status;
 
+	status = 0;
 	while (cmd[i][j])
 	{
 		if (is_alpha_num_under(cmd[i][j]))
@@ -81,43 +83,43 @@ void	non_equal(char **cmd, t_list *env_head, int i, int j)
 		{
 			ft_dprintf(STDOUT_FILENO, "%s", ERROR_PREFIX);
 			ft_dprintf(1, "export: `%s': not a valid identifier\n", cmd[i]);
-			g_var.g_last_status = 1;
-			return ;
+			return (1);
 		}
 	}
 	if (check_exist(cmd[i], env_head) == TRUE)
-		return ;
+		return (status);
 	list = (t_list *)malloc(sizeof(t_list));
-	if (!list)
-		fatal_error("malloc");
 	list->key = ft_strdup(cmd[i]);
 	list->value = ft_strdup("\0");
-	if (!list->key || !list->value)
+	if (!list || !list->key || !list->value)
 		fatal_error("strdup");
 	list->sort_flag = 0;
 	insert(env_head, list);
+	return (status);
 }
 
-int	ft_export(char **cmd, t_list *env_head, t_node *node)
+int	ft_export(char **cmd, t_list *env_head, t_node *node, int *last_status)
 {
 	int	i;
+	int	status;
 
 	i = 1;
 	if (!cmd[1])
 		return (print_export(env_head, node));
+	status = *last_status;
 	while (cmd[i])
 	{
 		if (ft_strcmp(cmd[i], "_") == 0)
 			continue ;
 		if (is_alpha_under(cmd[i][0]))
-			do_export(cmd, env_head, i);
+			do_export(cmd, env_head, i, &status);
 		else
 		{
 			ft_dprintf(STDOUT_FILENO, "%s", ERROR_PREFIX);
 			ft_dprintf(1, "export: `%s': not a valid identifier\n", cmd[i]);
-			g_var.g_last_status = 1;
+			status = 1;
 		}
 		i++;
 	}
-	return (g_var.g_last_status);
+	return (status);
 }

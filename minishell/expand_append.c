@@ -6,23 +6,11 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:53:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/08 08:53:11 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 10:39:59 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	append_num(char **dst, unsigned int num)
-{
-	if (num == 0)
-	{
-		append_char(dst, '0');
-		return ;
-	}
-	if (num / 10 != 0)
-		append_num(dst, num / 10);
-	append_char(dst, '0' + (num % 10));
-}
 
 void	append_char(char **s, char c)
 {
@@ -43,7 +31,7 @@ void	append_char(char **s, char c)
 	*s = new;
 }
 
-void	append_single_quote(char **dst, char **rest, char *p)
+char	*append_single_quote(char **dst, char *p)
 {
 	if (*p == SINGLE_QUOTE_CHAR)
 	{
@@ -55,13 +43,13 @@ void	append_single_quote(char **dst, char **rest, char *p)
 			append_char(dst, *p++);
 		}
 		append_char(dst, *p++);
-		*rest = p;
+		return (p);
 	}
 	else
 		assert_error("Expected single quote");
 }
 
-void	append_double_quote(char **dst, char **rest, char *p, t_list *head)
+char	*append_double_quote(char **dst, char *p, t_list *head, int *status)
 {
 	if (*p == DOUBLE_QUOTE_CHAR)
 	{
@@ -73,12 +61,12 @@ void	append_double_quote(char **dst, char **rest, char *p, t_list *head)
 			else if (is_variable(p))
 				expand_variable_str(dst, &p, p, head);
 			else if (is_special_parameter(p))
-				expend_special_parameter_str(dst, &p, p);
+				expand_special_prmt_str(dst, &p, p, status);
 			else
 				append_char(dst, *p++);
 		}
 		append_char(dst, *p++);
-		*rest = p;
+		return (p);
 	}
 	else
 		assert_error("Expected double quote");

@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:55:39 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/03 18:48:29 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 15:15:19 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	handler(int signum)
 {
-	g_var.g_sig = signum;
+	g_sig = signum;
 }
 
 void	reset_sig(int signum)
@@ -52,14 +52,17 @@ void	setup_sigint(void)
 
 int	check_state(void)
 {
-	if (g_var.g_sig == 0)
+	int	rl_term;
+
+	rl_term = 0;
+	if (g_sig == 0)
 		;
-	else if (g_var.g_sig == SIGINT)
+	else if (g_sig == SIGINT)
 	{
-		g_var.g_sig = 0;
-		g_var.g_rl_term = true;
+		g_sig = 0;
+		rl_term = 1;
 		rl_replace_line("", 0);
 		rl_done = 1;
 	}
-	return (0);
+	return (rl_term);
 }

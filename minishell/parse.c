@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 19:30:43 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/14 18:53:16 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 14:02:20 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static bool	is_control_operator(t_token *tok)
 	return (false);
 }
 
-static t_node	*new_command_node(t_token **rest, t_token *tok)
+static t_node	*new_cmd_node(t_token **rest, t_token *tok)
 {
 	t_node	*node;
 
 	node = new_node(ND_SIMPLE_CMD);
-	append_command_element(node, &tok, tok);
+	append_cmd_elm(node, &tok, tok);
 	while (tok && !is_eof(tok) && !is_control_operator(tok))
-		append_command_element(node, &tok, tok);
+		append_cmd_elm(node, &tok, tok);
 	*rest = tok;
 	return (node);
 }
@@ -67,7 +67,7 @@ t_node	*parse(t_token **rest, t_token *tok, t_list *head)
 	node->inpipe[1] = -1;
 	node->outpipe[0] = -1;
 	node->outpipe[1] = STDOUT_FILENO;
-	node->command = new_command_node(&tok, tok);
+	node->command = new_cmd_node(&tok, tok);
 	if (equal_op(tok, "|"))
 		node->next = parse(&tok, tok->next, head);
 	*rest = tok;

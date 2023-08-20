@@ -6,16 +6,15 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:01:19 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/16 18:16:00 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 14:21:46 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	wait_pipeline(pid_t last_pid)
+static int	wait_pipeline(pid_t last_pid, int status)
 {
 	pid_t	wait_result;
-	int		status;
 	int		wstatus;
 
 	while (1)
@@ -73,7 +72,8 @@ static void	exec_child(char **argv, t_list *head, t_node *node)
 	path = argv[0];
 	if (path == NULL)
 		return ;
-	reset_signal();
+	reset_sig(SIGQUIT);
+	reset_sig(SIGINT);
 	prepare_pipe_child(node);
 	do_redirect(node->command->redirects);
 	if (ft_strchr(path, '/') == NULL)
@@ -89,7 +89,7 @@ static void	exec_child(char **argv, t_list *head, t_node *node)
 	fatal_error("execve");
 }
 
-static pid_t	exec_pipeline(t_node *node, t_list *head)
+static pid_t	exec_pipeline(t_node *node, t_list *head, int status)
 {
 	pid_t	pid;
 	char	**argv;
@@ -104,33 +104,34 @@ static pid_t	exec_pipeline(t_node *node, t_list *head)
 		if (is_builtin(argv) != TRUE)
 			exec_child(argv, head, node);
 		else
-			exit(built_in_cmd(argv, head, node));
+			exit(built_in_cmd(argv, head, node, status));
 	}
 	free_array(argv);
 	close_pipe(node);
 	if (node->next)
-		return (exec_pipeline(node->next, head));
+		return (exec_pipeline(node->next, head, status));
 	return (pid);
 }
 
-int	expand_and_exec(t_node *node, t_list *head)
+int	expand_and_exec(t_node *node, t_list *head, int *last_status)
 {
 	int		status;
 	char	**argv;
 
-	expand_variable(node, head);
+	status = *last_status;
+	expand_variable(node, head, &status);
 	expand_quote_removal(node);
-	if (open_redir_file(node, head) < 0)
+	if (open_redir_file(node, head, status) < 0)
 		return (ERRPR_OPEN_REDIR);
 	argv = token_list_to_argv(node->command->args);
 	if (is_builtin(argv) == TRUE && !node->next)
 	{
 		do_redirect(node->command->redirects);
-		status = built_in_cmd(argv, head, node);
+		status = built_in_cmd(argv, head, node, status);
 		reset_redirect(node->command->redirects);
 	}
 	else
-		status = wait_pipeline(exec_pipeline(node, head));
+		status = wait_pipeline(exec_pipeline(node, head, status), status);
 	free_array(argv);
 	return (status);
 }

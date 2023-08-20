@@ -6,18 +6,33 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:53:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/03 17:54:55 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 10:46:04 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	expend_special_parameter_str(char **dst, char **rest, char *p)
+static void	append_num(char **dst, unsigned int num)
 {
+	if (num == 0)
+	{
+		append_char(dst, '0');
+		return ;
+	}
+	if (num / 10 != 0)
+		append_num(dst, num / 10);
+	append_char(dst, '0' + (num % 10));
+}
+
+void	expand_special_prmt_str(char **dst, char **rest, char *p, int *status)
+{
+	unsigned int	num;
+
 	if (!is_special_parameter(p))
 		assert_error("Expected special parameter");
 	p += 2;
-	append_num(dst, g_var.g_last_status);
+	num = *status;
+	append_num(dst, num);
 	*rest = p;
 }
 
@@ -45,7 +60,7 @@ void	expand_variable_str(char **dst, char **rest, char *p, t_list *head)
 	*rest = p;
 }
 
-static void	expand_variable_tok(t_token *tok, t_list *head)
+static void	expand_variable_tok(t_token *tok, t_list *head, int *status)
 {
 	char	*new_word;
 	char	*p;
@@ -59,28 +74,28 @@ static void	expand_variable_tok(t_token *tok, t_list *head)
 	while (*p && !is_metacharacter(*p))
 	{
 		if (*p == SINGLE_QUOTE_CHAR)
-			append_single_quote(&new_word, &p, p);
+			p = append_single_quote(&new_word, p);
 		else if (*p == DOUBLE_QUOTE_CHAR)
-			append_double_quote(&new_word, &p, p, head);
+			p = append_double_quote(&new_word, p, head, status);
 		else if (is_variable(p))
 			expand_variable_str(&new_word, &p, p, head);
 		else if (is_special_parameter(p))
-			expend_special_parameter_str(&new_word, &p, p);
+			expand_special_prmt_str(&new_word, &p, p, status);
 		else
 			append_char(&new_word, *p++);
 	}
 	free(tok->word);
 	tok->word = new_word;
-	expand_variable_tok(tok->next, head);
+	expand_variable_tok(tok->next, head, status);
 }
 
-void	expand_variable(t_node *node, t_list *head)
+void	expand_variable(t_node *node, t_list *head, int *status)
 {
 	if (node == NULL)
 		return ;
-	expand_variable_tok(node->args, head);
-	expand_variable_tok(node->filename, head);
-	expand_variable(node->redirects, head);
-	expand_variable(node->command, head);
-	expand_variable(node->next, head);
+	expand_variable_tok(node->args, head, status);
+	expand_variable_tok(node->filename, head, status);
+	expand_variable(node->redirects, head, status);
+	expand_variable(node->command, head, status);
+	expand_variable(node->next, head, status);
 }

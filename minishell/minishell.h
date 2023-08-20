@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:47 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/16 18:16:46 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 14:32:14 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define ERRPR_OPEN_REDIR 1
 # define SINGLE_QUOTE_CHAR '\''
 # define DOUBLE_QUOTE_CHAR '"'
-# define ERROR_PREFIX "bash: "
+# define ERROR_PREFIX "minishell: "
 
 # include <unistd.h>
 # include <stdio.h>
@@ -57,80 +57,75 @@ typedef enum e_node_kind
 	ND_REDIR_HEREDOC,
 }	t_node_kind;
 
-typedef struct s_global
-{
-	volatile sig_atomic_t	g_sig;
-	bool					g_syntax_error;
-	bool					g_rl_term;
-	int						g_last_status;
-}	t_global;
-
-extern t_global				g_var;
-extern char					**environ;
+extern char						**environ;
+extern volatile sig_atomic_t	g_sig;
 
 typedef struct s_list
 {
-	int						count;
-	char					*key;
-	char					*value;
-	struct s_list			*next;
-	struct s_list			*prev;
-	int						sort_flag;
+	int							count;
+	char						*key;
+	char						*value;
+	struct s_list				*next;
+	struct s_list				*prev;
+	int							sort_flag;
 }	t_list;
 
 typedef struct s_args
 {
-	int						flag;
-	int						spec;
-	int						width;
-	int						has_prec;
-	int						prec;
-	int						pad;
+	int							flag;
+	int							spec;
+	int							width;
+	int							has_prec;
+	int							prec;
+	int							pad;
 }	t_args;
 
-typedef struct s_token		t_token;
-typedef struct s_node		t_node;
+typedef struct s_token			t_token;
+typedef struct s_node			t_node;
 
 struct s_token
 {
-	char					*word;
-	t_token_kind			kind;
-	t_token					*next;
+	char						*word;
+	int							tok_error;
+	t_token_kind				kind;
+	t_token						*next;
 };
 
 struct s_node
 {
-	t_token					*args;
-	t_token					*filename;
-	t_token					*delim;
-	t_node_kind				kind;
-	t_node					*redirects;
-	t_node					*command;
-	t_node					*next;
-	bool					is_delim_unquote;
-	int						filefd;
-	int						targetfd;
-	int						new_targetfd;
-	int						inpipe[2];
-	int						outpipe[2];
+	t_token						*args;
+	t_token						*filename;
+	t_token						*delim;
+	t_node_kind					kind;
+	t_node						*redirects;
+	t_node						*command;
+	t_node						*next;
+	bool						is_delim_unquote;
+	int							filefd;
+	int							targetfd;
+	int							new_targetfd;
+	int							inpipe[2];
+	int							outpipe[2];
+	int							node_error;
 };
 
 //built_in
 void	insert(t_list *head, t_list *list);
 void	delete(t_list *head, t_list *list);
+t_list	*make_list(t_list *head, int i);
 int		is_builtin(char **cmd);
-int		built_in_cmd(char **cmd, t_list *env_head, t_node *node);
+int		built_in_cmd(char **cmd, t_list *env_head, t_node *node, int status);
 
 int		ft_cd(char **cmd, char *cwd, t_list *env_head);
 int		ft_exit(char **cmd);
 int		ft_echo(char **cmd, t_node *node);
 int		ft_pwd(char *cwd, t_node *node);
-int		ft_unset(char **cmd, t_list *env_head);
 int		ft_env(t_list *env_head, t_node *node);
+int		ft_unset(char **cmd, t_list *env_head, int *last_status);
 
-void	do_export(char **cmd, t_list *env_head, int i);
-void	non_equal(char **cmd, t_list *env_head, int i, int j);
-int		ft_export(char **cmd, t_list *env_head, t_node *node);
+void	do_export(char **cmd, t_list *env_head, int i, int *status);
+int		non_equal(char **cmd, t_list *env_head, int i, int j);
+int		ft_export(char **cmd, t_list *env_head, t_node *node, int *last_status);
 
 // destructor
 char	**free_array(char **array);
@@ -146,22 +141,22 @@ void	assert_error(const char *msg)
 void	err_exit(const char *location, const char *msg, int status)
 		__attribute__((noreturn));
 void	xperror(const char *location);
-void	tokenize_error(const char *location, char **rest, char *line);
+void	tokenize_error(const char *loc, char **rest, char *line, t_token *head);
 
 // exec
-int		read_heredoc(const char *delim, bool is_delim_unquoted, t_list *head);
+int		read_heredoc(const char *delim, bool is_unqt, t_list *head, int status);
 
 void	prepare_pipe(t_node *node);
 void	prepare_pipe_child(t_node *node);
 void	close_pipe(t_node *node);
 
-int		expand_and_exec(t_node *node, t_list *head);
+int		expand_and_exec(t_node *node, t_list *head, int *last_status);
 
 void	do_redirect(t_node *redir);
 void	reset_redirect(t_node *redir);
 
 int		change_fd(int fd);
-int		open_redir_file(t_node *redir, t_list *head);
+int		open_redir_file(t_node *redir, t_list *head, int status);
 
 char	*ft_getenv(t_list *head, char *name);
 char	*search_path(const char *filename, t_list *head);
@@ -170,9 +165,8 @@ char	**token_list_to_argv(t_token *tok);
 
 // expand
 void	append_char(char **s, char c);
-void	append_num(char **dst, unsigned int num);
-void	append_single_quote(char **dst, char **rest, char *p);
-void	append_double_quote(char **dst, char **rest, char *p, t_list *head);
+char	*append_single_quote(char **dst, char *p);
+char	*append_double_quote(char **dst, char *p, t_list *head, int *status);
 
 bool	is_alpha_under(char c);
 bool	is_alpha_num_under(char c);
@@ -181,13 +175,13 @@ bool	is_special_parameter(char *s);
 
 void	expand_quote_removal(t_node *node);
 
-void	expend_special_parameter_str(char **dst, char **rest, char *p);
+void	expand_special_prmt_str(char **dst, char **rest, char *p, int *status);
 void	expand_variable_str(char **dst, char **rest, char *p, t_list *head);
-void	expand_variable(t_node *node, t_list *head);
+void	expand_variable(t_node *node, t_list *head, int *status);
 
 // parse
 t_token	*tokdup(t_token *tok);
-void	append_command_element(t_node *command, t_token **rest, t_token *tok);
+void	append_cmd_elm(t_node *cmd, t_token **rest, t_token *tok);
 
 t_node	*redirect_out(t_token **rest, t_token *tok);
 t_node	*redirect_in(t_token **rest, t_token *tok);
@@ -204,16 +198,13 @@ void	ignore_sig(int signum);
 void	setup_sigint(void);
 int		check_state(void);
 
-void	setup_signal(void);
-void	reset_signal(void);
-
 // tokenize
 bool	is_blank(char c);
 bool	is_metacharacter(char c);
 bool	is_word(const char *s);
 bool	is_eof(t_token *tok);
 
-t_token	*word(char **rest, char *line);
+t_token	*word(char **rest, char *line, t_token *tok_head);
 
 t_token	*new_token(char *word, t_token_kind kind);
 bool	check_op(const char *s, const char *keyword);

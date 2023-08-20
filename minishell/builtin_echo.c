@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:24:57 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/19 16:30:00 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:30:05 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	is_option(char **cmd, int *i)
+static bool	is_option(char *cmd)
 {
-	int		j;
+	int	i;
 
-	j = 2;
-	while (cmd[*i] && cmd[*i][0] == '-' && cmd[*i][1] == 'n')
+	i = 2;
+	if (cmd[0] == '-' && cmd[1] == 'n')
 	{
-		j = 2;
-		while (cmd[*i][j] && cmd[*i][j] == 'n')
-			j++;
-		if (cmd[*i][j])
-			break ;
-		(*i)++;
+		while (cmd[i] && cmd[i] == 'n')
+			i++;
+		if (cmd[i] != '\0')
+			return (FALSE);
+		return (TRUE);
 	}
-	if (*i == 1)
-		return (FALSE);
-	return (TRUE);
+	return (FALSE);
 }
 
 int	ft_echo(char **cmd, t_node *node)
@@ -42,7 +39,9 @@ int	ft_echo(char **cmd, t_node *node)
 		ft_dprintf(node->outpipe[1], "\n");
 		return (0);
 	}
-	flag = is_option(cmd, &i);
+	flag = is_option(cmd[i]);
+	if (flag == TRUE)
+		i = 2;
 	while (cmd[i])
 	{
 		ft_dprintf(node->outpipe[1], "%s", cmd[i]);

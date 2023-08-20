@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 13:46:33 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/03 18:32:04 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/18 19:33:41 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	xperror(const char *location)
 	perror(location);
 }
 
-void	tokenize_error(const char *location, char **rest, char *line)
+void	tokenize_error(const char *loc, char **rest, char *line, t_token *tok)
 {
-	g_var.g_syntax_error = true;
+	tok->tok_error = true;
 	ft_dprintf(STDERR_FILENO, "%s", ERROR_PREFIX);
-	ft_dprintf(STDERR_FILENO, "syntax err near '%c' in %s\n", *line, location);
+	ft_dprintf(STDERR_FILENO, "syntax err near '%c' in %s\n", *line, loc);
 	while (*line)
 		line++;
 	*rest = line;

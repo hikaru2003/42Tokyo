@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:42:59 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/14 18:56:20 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 13:23:08 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static bool	skip_blank(char **rest, char *line)
 
 t_token	*tokenize(char *line)
 {
-	t_token	head;
+	t_token	tok_head;
 	t_token	*tok;
 
-	head.next = NULL;
-	tok = &head;
+	tok_head.next = NULL;
+	tok = &tok_head;
 	while (*line)
 	{
 		if (skip_blank(&line, line))
@@ -79,12 +79,12 @@ t_token	*tokenize(char *line)
 		}
 		else if (is_word(line))
 		{
-			tok->next = word(&line, line);
+			tok->next = word(&line, line, &tok_head);
 			tok = tok->next;
 		}
 		else
-			tokenize_error("Unexpected Token", &line, line);
+			tokenize_error("Unexpected Token", &line, line, &tok_head);
 	}
 	tok->next = new_token(NULL, TK_EOF);
-	return (head.next);
+	return (tok_head.next);
 }

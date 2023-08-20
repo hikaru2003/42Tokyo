@@ -6,42 +6,25 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:52 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/16 18:44:57 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 14:31:37 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_global	g_var;
+volatile sig_atomic_t	g_sig;
 
-static void	init_g_var(t_global g_var)
+static void	setup_signal(void)
 {
-	g_var.g_sig = 0;
-	g_var.g_syntax_error = false;
-	g_var.g_rl_term = false;
-	g_var.g_last_status = 0;
-}
+	extern int	_rl_echo_control_chars;
 
-static t_list	*make_list(t_list *head, int i)
-{
-	size_t	pos;
-	t_list	*list;
-
-	pos = 0;
-	list = (t_list *)malloc(sizeof(t_list));
-	if (!list)
-		return (NULL);
-	while (environ[i][pos] != '=')
-		pos++;
-	list->key = ft_substr(environ[i], 0, pos);
-	list->value = ft_substr(environ[i], pos + 1, ft_strlen(environ[i]));
-	if (!list->key || !list->value)
-		return (free_list(head));
-	list->sort_flag = 0;
-	if (ft_strcmp(list->key, "_") == 0)
-		list->sort_flag = 1;
-	insert(head, list);
-	return (head);
+	g_sig = 0;
+	_rl_echo_control_chars = 0;
+	rl_outstream = stderr;
+	if (isatty(STDIN_FILENO))
+		rl_event_hook = check_state;
+	ignore_sig(SIGQUIT);
+	setup_sigint();
 }
 
 static t_list	*env_to_list(char **environ)
@@ -62,38 +45,48 @@ static t_list	*env_to_list(char **environ)
 	return (head);
 }
 
+static bool	check_error(t_node *node)
+{
+	if (node->command->node_error)
+		return (true);
+	if (node->next)
+		return (check_error(node->next));
+	return (false);
+}
+
 static void	handle_line(char *line, int *status, t_list *head)
 {
 	t_token	*tok;
-	t_token	*tmp;
+	t_token	*tok_head;
 	t_node	*node;
 
 	tok = tokenize(line);
-	tmp = tok;
+	tok_head = tok;
 	free(line);
 	if (is_eof(tok))
 		;
-	else if (g_var.g_syntax_error)
+	else if (tok_head->tok_error)
 		*status = ERROR_TOKENIZE;
 	else
 	{
 		node = parse(&tok, tok, head);
-		if (g_var.g_syntax_error)
+		if (check_error(node))
 			*status = ERROR_PARSE;
 		else
-			*status = expand_and_exec(node, head);
+			*status = expand_and_exec(node, head, status);
 		free_node(node);
 	}
-	free_tok(tmp);
+	free_tok(tok_head);
 }
 
 int	main(void)
 {
 	char	*line;
 	t_list	*head;
+	int		status;
 
 	setup_signal();
-	init_g_var(g_var);
+	status = 0;
 	head = env_to_list(environ);
 	if (head == NULL)
 		fatal_error("malloc");
@@ -104,9 +97,8 @@ int	main(void)
 			break ;
 		if (*line)
 			add_history(line);
-		g_var.g_syntax_error = false;
-		handle_line(line, &g_var.g_last_status, head);
+		handle_line(line, &status, head);
 	}
 	free_list(head);
-	exit(g_var.g_last_status);
+	exit(status);
 }

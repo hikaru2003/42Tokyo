@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:26:04 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/14 19:28:52 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 16:17:18 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ static void	ft_chdir(char **cmd, DIR *dir)
 static void	update_oldpwd(char *oldpwd, t_list *env_head)
 {
 	t_list	*tmp;
+	char	*old;
 
 	tmp = env_head->next;
 	while (tmp != env_head)
 	{
 		if (ft_strcmp("OLDPWD", tmp->key) == 0)
 		{
+			old = tmp->value;
 			tmp->value = ft_strdup(oldpwd);
 			if (tmp->value == NULL)
 				fatal_error("strdup");
+			free(old);
 			break ;
 		}
 		tmp = tmp->next;
@@ -77,6 +80,8 @@ int	ft_cd(char **cmd, char *cwd, t_list *env_head)
 			ft_dprintf(2, "bash: cd: %s: No such file or directory\n", cmd[1]);
 		else
 			ft_chdir(cmd, dir);
+		free(dir->__dd_buf);
+		free(dir);
 		return (1);
 	}
 	update_oldpwd(oldpwd, env_head);

@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:18:27 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/12 14:06:28 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/18 20:27:34 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ static void	export_equal(char **cmd, t_list *env_head, int i, int len)
 		insert(env_head, list);
 }
 
-void	do_export(char **cmd, t_list *env_head, int i)
+void	do_export(char **cmd, t_list *env_head, int i, int *status)
 {
 	int	j;
 
 	if (ft_strchr(cmd[i], '=') == NULL)
-		non_equal(cmd, env_head, i, 0);
+		*status = non_equal(cmd, env_head, i, 0);
 	else
 	{
 		j = 0;
@@ -126,7 +126,7 @@ void	do_export(char **cmd, t_list *env_head, int i)
 			{
 				ft_dprintf(STDOUT_FILENO, "%s", ERROR_PREFIX);
 				ft_dprintf(1, "export: `%s': not a valid identifier\n", cmd[i]);
-				g_var.g_last_status = 1;
+				*status = 1;
 				return ;
 			}
 		}
