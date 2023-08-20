@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:28:17 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/20 11:00:13 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 20:48:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,28 @@
 
 static int	check_unset(char *cmd, int *status)
 {
+	int	i;
+
+	i = 1;
 	if (!is_alpha_under(*cmd))
 	{
-		ft_dprintf(1, "bash: unset: `%s': not a valid identifier\n", cmd);
+		ft_dprintf(2, "%s", ERROR_PREFIX);
+		ft_dprintf(2, "unset: `%s': not a valid identifier\n", cmd);
 		*status = 1;
 		return (FALSE);
+	}
+	while (cmd[i])
+	{
+		if (!('a' <= cmd[i] && cmd[i] <= 'z')
+			&& !('A' <= cmd[i] && cmd[i] <= 'Z')
+			&& cmd[i] != '_' && !('0' <= cmd[i] && cmd[i] <= '9'))
+		{
+			ft_dprintf(2, "%s", ERROR_PREFIX);
+			ft_dprintf(2, "unset: `%s': not a valid identifier\n", cmd);
+			*status = 1;
+			return (FALSE);
+		}
+		i++;
 	}
 	return (TRUE);
 }

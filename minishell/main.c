@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:52 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 14:31:37 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 18:58:35 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	setup_signal(void)
 	if (isatty(STDIN_FILENO))
 		rl_event_hook = check_state;
 	ignore_sig(SIGQUIT);
-	setup_sigint();
+	setup_sig(SIGINT);
 }
 
 static t_list	*env_to_list(char **environ)
@@ -92,7 +92,10 @@ int	main(void)
 		fatal_error("malloc");
 	while (1)
 	{
-		line = readline("minishell$ ");
+		if (g_sig == SIGINT)
+			line = readline("\n");
+		else
+			line = readline("minishell$ ");
 		if (line == NULL)
 			break ;
 		if (*line)

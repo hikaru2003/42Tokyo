@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:26:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 15:46:13 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 18:36:00 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ static void	check_redir_file(t_node *node, t_list *head, int status)
 		node->filefd = open(node->filename->word,
 				O_RDONLY);
 	else if (node->kind == ND_REDIR_HEREDOC)
+	{
 		node->filefd = read_heredoc(node->delim->word,
 				node->is_delim_unquote, head, status);
+		if (isatty(STDIN_FILENO))
+			rl_event_hook = check_state;
+	}
 	else
 		assert_error("open_redir_file");
 }

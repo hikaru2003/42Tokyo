@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+         #
+#    By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/30 11:51:36 by snemoto           #+#    #+#              #
-#    Updated: 2023/08/20 16:10:47 by snemoto          ###   ########.fr        #
+#    Updated: 2023/08/20 21:53:27 by hmorisak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ OBJS	= $(SRCS:%.c=$(OBJDIR)%.o)
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror $(INCLUDE)
-# CFLAGS	= -Wall -Wextra -Werror -fsanitize=address $(INCLUDE)
 LIBS	= -lreadline
 
 # **************************************************************************** #

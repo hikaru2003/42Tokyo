@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:47 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 14:32:14 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/20 22:23:15 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int		is_builtin(char **cmd);
 int		built_in_cmd(char **cmd, t_list *env_head, t_node *node, int status);
 
 int		ft_cd(char **cmd, char *cwd, t_list *env_head);
+void	ft_chdir(char **cmd, DIR *dir);
 int		ft_exit(char **cmd);
 int		ft_echo(char **cmd, t_node *node);
 int		ft_pwd(char *cwd, t_node *node);
@@ -195,7 +196,7 @@ t_node	*parse(t_token **rest, t_token *tok, t_list *head);
 // signal
 void	reset_sig(int signum);
 void	ignore_sig(int signum);
-void	setup_sigint(void);
+void	setup_sig(int signum);
 int		check_state(void);
 
 // tokenize
