@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:26:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/16 18:16:36 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/22 15:37:35 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ static bool	is_redirect(t_node *node)
 		return (true);
 	else
 		return (false);
+}
+
+static int	change_fd(int fd)
+{
+	int	newfd;
+
+	newfd = dup(fd);
+	if (newfd == -1)
+		fatal_error("dup");
+	if (close(fd) < 0)
+		fatal_error("close");
+	return (newfd);
 }
 
 void	do_redirect(t_node *redir)

@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:52 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 18:58:35 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:33:13 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ static void	handle_line(char *line, int *status, t_list *head)
 
 int	main(void)
 {
-	char	*line;
-	t_list	*head;
-	int		status;
+	char		*line;
+	t_list		*head;
+	static int	status;
 
-	setup_signal();
 	status = 0;
+	setup_signal();
 	head = env_to_list(environ);
 	if (head == NULL)
 		fatal_error("malloc");

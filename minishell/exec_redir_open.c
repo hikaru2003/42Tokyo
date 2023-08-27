@@ -6,23 +6,11 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 12:26:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 18:36:00 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/24 16:24:28 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	change_fd(int fd)
-{
-	int	newfd;
-
-	newfd = fd + 10;
-	if (dup2(fd, newfd) == -1)
-		fatal_error("dup2");
-	if (close(fd) < 0)
-		fatal_error("close");
-	return (newfd);
-}
 
 static void	check_redir_file(t_node *node, t_list *head, int status)
 {

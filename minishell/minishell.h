@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 11:49:47 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 22:23:15 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:35:25 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ int		expand_and_exec(t_node *node, t_list *head, int *last_status);
 void	do_redirect(t_node *redir);
 void	reset_redirect(t_node *redir);
 
-int		change_fd(int fd);
 int		open_redir_file(t_node *redir, t_list *head, int status);
 
 char	*ft_getenv(t_list *head, char *name);

@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:53:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 10:46:04 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:20:25 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,12 @@ void	expand_variable_str(char **dst, char **rest, char *p, t_list *head)
 		append_char(&name, *p++);
 	value = ft_getenv(head, name);
 	free(name);
+	name = value;
 	if (value)
 		while (*value)
 			append_char(dst, *value++);
 	*rest = p;
+	free(name);
 }
 
 static void	expand_variable_tok(t_token *tok, t_list *head, int *status)

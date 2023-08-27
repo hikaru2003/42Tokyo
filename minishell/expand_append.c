@@ -6,7 +6,7 @@
 /*   By: snemoto <snemoto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:53:26 by snemoto           #+#    #+#             */
-/*   Updated: 2023/08/20 10:39:59 by snemoto          ###   ########.fr       */
+/*   Updated: 2023/08/22 14:14:47 by snemoto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	append_char(char **s, char c)
 	size = 2;
 	if (*s)
 		size += ft_strlen(*s);
-	new = malloc(size);
+	new = (char *)malloc(size);
 	if (new == NULL)
 		fatal_error("malloc");
 	if (*s)
