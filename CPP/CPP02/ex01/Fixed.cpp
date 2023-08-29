@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:30:35 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/16 21:31:11 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/26 13:03:20 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ Fixed::Fixed(const Fixed &fixed)
 }
 
 // copy assignment operator
-// ex00ではgetRawBitsを呼び出していたが、今回は値を直接代入している <- 出力結果からgetRawBitsを呼び出していないことがわかるから
 Fixed &Fixed::operator=(const Fixed &fixed)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &fixed)
 		this->fp_number_ = fixed.fp_number_;
+		// this->fp_number_ = fixed.getRawBits();
 	return (*this);
 }
 
@@ -57,13 +57,13 @@ Fixed::~Fixed()
 // method
 int	Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->fp_number_);
 }
 
 void Fixed::setRawBits(int const raw)
 {
-	std::cout << "setRawBits member function called" << std::endl;
+	// std::cout << "setRawBits member function called" << std::endl;
 	this->fp_number_ = raw;
 }
 

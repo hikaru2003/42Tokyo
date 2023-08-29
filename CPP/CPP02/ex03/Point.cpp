@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:30:46 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/22 21:14:22 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/26 12:22:11 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ Point &Point::operator=(const Point &point)
 }
 
 // method
+void	Point::get_x() const
+{
+	std::cout << "x is " << x_ << std::endl;
+}
+
+void	Point::get_y() const
+{
+	std::cout << "y is " << y_ << std::endl;
+}
+
 float	Point::get_difference_x(const Point &p1, const Point &p2)
 {
 	return ((p1.x_ - p2.x_).toFloat());

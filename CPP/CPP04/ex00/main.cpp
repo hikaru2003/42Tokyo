@@ -5,27 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 14:30:14 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 12:23:26 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/26 12:37:03 by hikaru            #+#    #+#             */
+/*   Updated: 2023/08/26 12:44:23 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Point.hpp"
+#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
-bool	bsp(Point const a, Point const b, Point const c, Point const point);
-
-int main( void )
+int	main()
 {
-	Point	a(0, 0);
-	Point	b(5, 5);
-	Point	c(10, 0);
-	Point	p1(0, 0);
-	Point	p2(2, 1);
-	Point	p3(5, 10);
-	
-	std::cout << bsp(a, b, c, p1) << std::endl;
-	std::cout << bsp(a, b, c, p2) << std::endl;
-	std::cout << bsp(a, b, c, p3) << std::endl;
-	
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	i->makeSound(); //will output the cat sound!
+	j->makeSound();
+	meta->makeSound();
+
 	return 0;
 }

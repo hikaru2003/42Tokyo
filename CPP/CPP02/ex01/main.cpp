@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:30:14 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/20 19:42:04 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/26 13:02:53 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int main( void )
 	Fixed a;
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
-	Fixed const d( b );
+	// Fixed const d( b );
+	Fixed d;
+	d = b;
 
 	a = Fixed( 1234.4321f );
 

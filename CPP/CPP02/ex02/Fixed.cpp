@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 14:30:35 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/20 20:22:19 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/26 13:08:39 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ Fixed::Fixed(const Fixed &fixed)
 }
 
 // copy assignment operator
-// ex00ではgetRawBitsを呼び出していたが、今回は値を直接代入している <- 出力結果からgetRawBitsを呼び出していないことがわかるから
 Fixed &Fixed::operator=(const Fixed &fixed)
 {
 	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &fixed)
-		this->fp_number_ = fixed.fp_number_;
+		this->fp_number_ = fixed.getRawBits();
 	return (*this);
 }
 
