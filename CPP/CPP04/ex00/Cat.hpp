@@ -3,10 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:09:43 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 13:09:44 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/29 16:59:57 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Animal.hpp"
+
+class Cat : 
+{
+private:
+	/* data */
+public:
+	Cat(/* args */);
+	~Cat();
+};
+
+Cat::Cat(/* args */)
+{
+}
+
+Cat::~Cat()
+{
+}

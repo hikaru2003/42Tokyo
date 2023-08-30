@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:41:57 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/06 18:21:06 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 17:59:10 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Weapon.hpp"
 
-std::string	Weapon::getType()
+const std::string	&Weapon::getType()
 {
 	return (type_);
 }
