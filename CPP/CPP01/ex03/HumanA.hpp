@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:26:41 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/06 15:30:16 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:27:15 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,3 @@ public:
 	inline ~HumanA();
 	void	attack();
 };
-
-HumanA::HumanA(std::string name, Weapon &weapon) :name_(name), weapon_(weapon)
-{
-}
-
-HumanA::~HumanA()
-{
-}

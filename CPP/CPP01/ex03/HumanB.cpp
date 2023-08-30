@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:34:12 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/09 17:24:42 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:28:17 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
+
+HumanB::HumanB(std::string name) : name_(name)
+{
+}
+
+HumanB::~HumanB()
+{
+}
 
 void	HumanB::attack()
 {

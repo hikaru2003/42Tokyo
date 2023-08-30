@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:32:12 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 19:35:32 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:27:27 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanA.hpp"
+
+HumanA::HumanA(std::string name, Weapon &weapon) :name_(name), weapon_(weapon)
+{
+}
+
+HumanA::~HumanA()
+{
+}
 
 void	HumanA::attack()
 {

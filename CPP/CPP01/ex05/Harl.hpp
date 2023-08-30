@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 20:17:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/12 13:23:46 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:29:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,3 @@ public:
 	inline ~Harl();
 	void complain(std::string level);
 };
-
-Harl::Harl(/* args */)
-{
-}
-
-Harl::~Harl()
-{
-}

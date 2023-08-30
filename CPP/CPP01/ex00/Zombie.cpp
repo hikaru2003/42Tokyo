@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 14:13:19 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 15:09:03 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:26:29 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+
+inline Zombie::Zombie( std::string s )
+{
+	name_ = s;
+	std::cout << name_ << ": this is constructor\n";
+}
+
+inline Zombie::~Zombie()
+{
+	std::cout << name_ << ": this is destructor\n";
+}
 
 void	Zombie::announce(void)
 {

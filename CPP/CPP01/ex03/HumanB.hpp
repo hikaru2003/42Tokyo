@@ -6,7 +6,7 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 19:28:02 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/30 17:42:04 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/08/30 20:28:08 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,3 @@ public:
 	void	attack();
 	void	setWeapon(Weapon &weapon);
 };
-
-HumanB::HumanB(std::string name) : name_(name)
-{
-}
-
-HumanB::~HumanB()
-{
-}

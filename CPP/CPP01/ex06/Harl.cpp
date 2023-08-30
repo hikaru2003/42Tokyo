@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 20:17:29 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/12 14:24:08 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/30 20:30:14 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+
+Harl::Harl(/* args */)
+{
+}
+
+Harl::~Harl()
+{
+}
 
 void Harl::debug(void)
 {
