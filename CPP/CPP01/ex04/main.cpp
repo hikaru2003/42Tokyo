@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 17:27:49 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/09 20:16:07 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:50:51 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 #include <string>
 #include <fstream>
 
-// TODO: テスト用のファイルを作成して提出する必要がある
-
 int	main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
 		std::cout << "please input three parameters" << std::endl;
-		return (0);
+		return (1);
+	}
+
+	if (strlen(argv[2]) == 0)
+	{
+		std::cout << "please input at least one character" << std::endl;
+		return (1);
 	}
 
 	std::string data;
@@ -30,20 +34,26 @@ int	main(int argc, char **argv)
 		if (!ifs)
 		{
 			std::cout << "cannot open file" << std::endl;
-			return (0);
+			return (1);
 		}
 		std::ofstream ofs(std::string(argv[1]) + ".replace");
 		if (!ofs)
 		{
 			std::cout << "cannot create file" << std::endl;
-			return (0);
+			return (1);
 		}
 		
 		std::string	buf;
-		int	pos, convert_string_length = strlen(argv[2]);
+		std::string::size_type pos;
+		int	convert_string_length = strlen(argv[2]);
 		while (1)
 		{
 			std::getline(ifs, buf);
+			if (!ifs)
+			{
+				std::cout << "failed to read" << std::endl;
+				return (1);
+			}
 			pos = 0;
 			while (1)
 			{
