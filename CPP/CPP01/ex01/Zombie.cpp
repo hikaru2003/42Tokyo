@@ -6,20 +6,20 @@
 /*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 14:13:19 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/30 20:27:00 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/09/02 11:45:30 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-inline Zombie::Zombie()
+Zombie::Zombie()
 {
-	std::cout << name_ << ": this is constructor\n";
+	std::cout << "this is constructor\n";
 }
 
-inline Zombie::~Zombie()
+Zombie::~Zombie()
 {
-	std::cout << name_ << ": this is destructor\n";
+	std::cout << "this is destructor\n";
 }
 
 void	Zombie::announce(void)
