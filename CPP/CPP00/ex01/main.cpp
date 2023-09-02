@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 15:34:42 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/04 19:00:23 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/02 17:25:43 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(void)
 	PhoneBook	phone_book;
 	int			register_id = 0;
 	int			required_id = 0;
-	int			max_contacts = 8;
 	std::string	command;
 
 	while (1)

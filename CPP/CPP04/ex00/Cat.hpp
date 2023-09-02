@@ -3,28 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:09:43 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/29 16:59:57 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:09:03 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "Animal.hpp"
 
-class Cat : 
+class Cat : public Animal
 {
-private:
-	/* data */
+
 public:
 	Cat(/* args */);
 	~Cat();
+	Cat(const Cat &cat);
+	Cat &operator=(const Cat &cat);
+
+	void	makeSound() const;
 };
 
-Cat::Cat(/* args */)
-{
-}
-
-Cat::~Cat()
-{
-}

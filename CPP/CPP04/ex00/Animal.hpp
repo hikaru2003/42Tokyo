@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:37:07 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 13:14:20 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/02 12:56:24 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ public:
 	Animal(const Animal &animal);
 	Animal &operator=(const Animal &animal);
 
-	void	get_type() const;
-	void	makeSound() const;
+	std::string		getType() const;
+	virtual void	makeSound() const;
 };

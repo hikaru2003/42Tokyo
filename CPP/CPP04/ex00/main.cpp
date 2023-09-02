@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:37:03 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 12:44:23 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/02 13:07:44 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ int	main()
 
 	std::cout << j->getType() << " " << std::endl;
 	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
 	j->makeSound();
+	i->makeSound(); //will output the cat sound!
 	meta->makeSound();
 
+
+	delete(meta);
+	delete(j);
+	delete(i);
+	
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 14:12:14 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 14:12:15 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/08/29 19:15:36 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,25 @@ void Contact::set_contact()
 	do{
 		std::cout << "enter first name\n";
 		std::getline(std::cin, first_name_);
-	} while (first_name_.empty());
+		// if (std::cin.eof())
+		// 	return ;
+	} while (!std::cin.eof() && first_name_.empty());
 	do{
 		std::cout << "enter last name\n";
 		std::getline(std::cin, last_name_);
-	} while (last_name_.empty());
+	} while (!std::cin.eof() && last_name_.empty());
 	do{
 		std::cout << "enter nickname\n";
 		std::getline(std::cin, nickname_);
-	} while (nickname_.empty());
+	} while (!std::cin.eof() && nickname_.empty());
 	do{
 		std::cout << "enter phone number\n";
 		std::getline(std::cin, phone_number_);
-	} while (phone_number_.empty());
+	} while (!std::cin.eof() && phone_number_.empty());
 	do{
 		std::cout << "enter darkest secret\n";
 		std::getline(std::cin, darkest_secret_);
-	} while (darkest_secret_.empty());
+	} while (!std::cin.eof() && darkest_secret_.empty());
 }
 
 void Contact::get_contact(int id)

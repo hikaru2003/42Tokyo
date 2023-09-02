@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:37:09 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 13:14:11 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/02 13:13:48 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,33 @@
 Animal::Animal(/* args */)
 {
 	type_ = "Animal";
+	std::cout << "Animal: this is constructor" << std::endl;
 }
 
 Animal::~Animal()
 {
+	std::cout << "Animal: this is destructor" << std::endl;
 }
 
-Animal::Animal(const Animal &animal)
+WrongAnimal::WrongAnimal(const WrongAnimal &animal)
 {
 	*this = animal;
 }
 
-Animal &Animal::operator=(const Animal &animal)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &animal)
 {
 	if (this != &animal)
-		this->type_ = animal.get_type();
+		this->type_ = animal.getType();
 	return (*this);
 }
 
 
-std::string	Animal::get_type() const
+std::string	WrongAnimal::getType() const
 {
 	return (type_);	
 }
 
-void	Animal::makeSound() const
+void	WrongAnimal::makeSound() const
 {
-	std::cout << "Animaaaaaaaaaal" << std::endl;
+	std::cout << "Wrong Animal Sound" << std::endl;
 }
