@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/26 13:09:55 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 11:48:53 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/26 13:09:43 by hikaru            #+#    #+#             */
+/*   Updated: 2023/09/03 15:51:20 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once 
+#pragma once
 
-#include <iostream>
-#include <string>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class WrongAnimal
+class Cat : public Animal
 {
-protected:
-	std::string	type_;
-
+private:
+	Brain	*cat_brain_;
 public:
-	WrongAnimal(/* args */);
-	virtual ~WrongAnimal();
-	WrongAnimal(const WrongAnimal &animal);
-	WrongAnimal &operator=(const WrongAnimal &animal);
+	Cat(/* args */);
+	~Cat();
+	Cat(const Cat &cat);
+	Cat &operator=(const Cat &cat);
 
-	std::string		getType() const;
-	virtual void	makeSound() const;
+	void	makeSound() const;
+	std::string get_brain(size_t i) const;
+	void	set_brain(size_t i, std::string str);
 };
