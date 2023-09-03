@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 15:54:38 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 15:30:56 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/26 12:37:07 by hikaru            #+#    #+#             */
+/*   Updated: 2023/09/03 13:26:59 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
 
-Zombie*	zombieHorde( int N, std::string name )
+#include <iostream>
+#include <string>
+
+class Animal
 {
-	try
-	{
-		Zombie *horde = new Zombie[N];
-		for (int i = 0; i < N; i++)
-		{
-			horde[i].set_name(name);
-		}
-		return (horde);
-	}
-	catch(const std::bad_alloc &e)
-	{
-		std::cerr << "bad_alloc" << e.what() << std::endl;
-		return (NULL);
-	}
-}
+protected:
+	std::string	type_;
+
+public:
+	Animal(/* args */);
+	virtual ~Animal();
+	Animal(const Animal &animal);
+	Animal &operator=(const Animal &animal);
+
+	std::string		getType() const;
+	virtual void	makeSound() const = 0;
+};

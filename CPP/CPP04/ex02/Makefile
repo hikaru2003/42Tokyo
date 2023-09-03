@@ -1,4 +1,4 @@
-NAME = ex00
+NAME = ex02
 
 SRCS =	main.cpp		\
 		Animal.cpp		\
@@ -6,6 +6,7 @@ SRCS =	main.cpp		\
 		Dog.cpp			\
 		WrongAnimal.cpp	\
 		WrongCat.cpp	\
+		Brain.cpp		\
 
 OBJS = $(SRCS:.cpp=.o)
 

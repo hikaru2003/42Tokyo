@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 15:54:38 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 15:30:56 by hikaru           ###   ########.fr       */
+/*   Created: 2023/09/03 12:05:49 by hikaru            #+#    #+#             */
+/*   Updated: 2023/09/03 13:04:33 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
 
-Zombie*	zombieHorde( int N, std::string name )
+#include <string>
+#include <iostream>
+
+class Brain
 {
-	try
-	{
-		Zombie *horde = new Zombie[N];
-		for (int i = 0; i < N; i++)
-		{
-			horde[i].set_name(name);
-		}
-		return (horde);
-	}
-	catch(const std::bad_alloc &e)
-	{
-		std::cerr << "bad_alloc" << e.what() << std::endl;
-		return (NULL);
-	}
-}
+private:
+	std::string ideas[100];
+public:
+	Brain(/* args */);
+	~Brain();
+	Brain(const Brain &brain);
+	Brain &operator=(const Brain &brain);
+
+	std::string	get_ideas(size_t i) const;
+	void		set_ideas(size_t i, std::string str);
+};

@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/05 15:54:38 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 15:30:56 by hikaru           ###   ########.fr       */
+/*   Created: 2023/08/26 13:09:43 by hikaru            #+#    #+#             */
+/*   Updated: 2023/09/03 15:51:20 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
 
-Zombie*	zombieHorde( int N, std::string name )
+#include "Animal.hpp"
+#include "Brain.hpp"
+
+class Cat : public Animal
 {
-	try
-	{
-		Zombie *horde = new Zombie[N];
-		for (int i = 0; i < N; i++)
-		{
-			horde[i].set_name(name);
-		}
-		return (horde);
-	}
-	catch(const std::bad_alloc &e)
-	{
-		std::cerr << "bad_alloc" << e.what() << std::endl;
-		return (NULL);
-	}
-}
+private:
+	Brain	*cat_brain_;
+public:
+	Cat(/* args */);
+	~Cat();
+	Cat(const Cat &cat);
+	Cat &operator=(const Cat &cat);
+
+	void	makeSound() const;
+	std::string get_brain(size_t i) const;
+	void	set_brain(size_t i, std::string str);
+};
