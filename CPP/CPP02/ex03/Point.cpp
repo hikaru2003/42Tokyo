@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 19:30:46 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/26 12:22:11 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/03 17:39:17 by hmorisak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,22 @@ Point &Point::operator=(const Point &point)
 {
 	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &point)
-		*this = point;
+	{
+		const_cast<Fixed &>(x_) = point.get_x();
+		const_cast<Fixed &>(y_) = point.get_y();
+	}
 	return (*this);
 }
 
 // method
-void	Point::get_x() const
+const Fixed	&Point::get_x() const
 {
-	std::cout << "x is " << x_ << std::endl;
+	return this->x_;
 }
 
-void	Point::get_y() const
+const Fixed	&Point::get_y() const
 {
-	std::cout << "y is " << y_ << std::endl;
+	return this->y_;
 }
 
 float	Point::get_difference_x(const Point &p1, const Point &p2)
