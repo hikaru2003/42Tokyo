@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 14:13:14 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/05 17:32:39 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/03 15:30:40 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ Zombie*	newZombie( std::string name_ )
 		zombie->announce();
 		return (zombie);
 	}
-	catch(std::bad_alloc)
+	catch(const std::bad_alloc &e)
 	{
-		std::cout << "malloc error\n";
+		std::cerr << "bad_alloc" << e.what() << std::endl;
 		return (NULL);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 15:54:38 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/02 17:32:10 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/03 15:30:56 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ Zombie*	zombieHorde( int N, std::string name )
 		}
 		return (horde);
 	}
-	catch(std::bad_alloc)
+	catch(const std::bad_alloc &e)
 	{
-		std::cout << "malloc error\n";
+		std::cerr << "bad_alloc" << e.what() << std::endl;
 		return (NULL);
 	}
 }
