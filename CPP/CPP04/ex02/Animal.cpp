@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 12:37:09 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 16:05:17 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 17:53:26 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ Animal::~Animal()
 
 Animal::Animal(const Animal &animal)
 {
+	std::cout << "Animal: this is copy constructor" << std::endl;
 	*this = animal;
 }
 
 Animal &Animal::operator=(const Animal &animal)
 {
+	std::cout << "Animal: this is copy assignment operator" << std::endl;
 	if (this != &animal)
 		this->type_ = animal.getType();
 	return (*this);

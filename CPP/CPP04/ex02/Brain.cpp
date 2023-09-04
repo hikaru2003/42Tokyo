@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 12:06:18 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 13:11:58 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 18:06:04 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ Brain::~Brain()
 
 Brain::Brain(const Brain &brain)
 {
+	std::cout << "Brain: this is copy constructor" << std::endl;
 	*this = brain;
 }
 
 Brain &Brain::operator=(const Brain &brain)
 {
+	std::cout << "Brain: this is copy assignment operator" << std::endl;
 	if (this != &brain)
 		for (size_t i = 0; i < 100; i++)
 			this->ideas[i] = brain.get_ideas(i);

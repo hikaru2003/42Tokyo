@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:09:41 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 15:51:34 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 18:00:23 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ Cat::~Cat()
 
 Cat::Cat(const Cat &cat)
 {
+	std::cout << "Cat: this is copy constructor" << std::endl;
 	*this = cat;
 }
 
@@ -42,6 +43,7 @@ Cat &Cat::operator=(const Cat &cat)
 {
 	if (this != &cat)
 	{
+		std::cout << "Cat: this is copy assignment operator" << std::endl;
 		this->type_ = cat.getType();
 		this->cat_brain_ = cat.cat_brain_;
 	}

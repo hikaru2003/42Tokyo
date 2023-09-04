@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:09:59 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 11:55:32 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 17:55:15 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ WrongCat::~WrongCat()
 
 WrongCat::WrongCat(const WrongCat &cat)
 {
+	std::cout << "WrongCat: this is copy constructor" << std::endl;
 	*this = cat;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &cat)
 {
+	std::cout << "WrongCat: this is copy assignment operator" << std::endl;
 	if (this != &cat)
 		this->type_ = cat.getType();
 	return (*this);

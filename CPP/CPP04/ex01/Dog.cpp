@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:09:46 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/03 15:52:45 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 18:00:58 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ Dog::~Dog()
 
 Dog::Dog(const Dog &dog)
 {
+	std::cout << "Dog: this is copy constructor" << std::endl;
 	*this = dog;
 }
 
@@ -43,6 +44,7 @@ Dog &Dog::operator=(const Dog &dog)
 {
 	if (this != &dog)
 	{
+		std::cout << "Dog: this is copy assignment operator" << std::endl;
 		this->type_ = dog.getType();
 		this->dog_brain_ = dog.dog_brain_;
 	}
