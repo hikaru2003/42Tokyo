@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:07:17 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/19 17:21:17 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:50:25 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 FlagTrap::FlagTrap()
 {
 	std::cout << "FlagTrap Default constructor called" << std::endl;
+	name_   = "FragTrap";
+	hit_    = 100;
+	energy_ = 100;
+	attack_ = 30;
 }
 
 FlagTrap::FlagTrap(std::string name)
@@ -36,18 +40,20 @@ FlagTrap::~FlagTrap()
 // copy constructor
 FlagTrap::FlagTrap(const FlagTrap &flag)
 {
+	std::cout << "FlagTrap Copy constructor called" << std::endl;
 	*this = flag;
 }
 
 // copy assignment operator
 FlagTrap &FlagTrap::operator=(const FlagTrap &flag)
 {
+	std::cout << "FlagTrap Copy assignment operator called" << std::endl;
 	if (this != &flag)
 	{
-		name_   = flag.name_;
-		hit_    = flag.hit_;
-		energy_ = flag.energy_;
-		attack_ = flag.attack_;
+		name_   = flag.get_name();
+		hit_    = flag.get_hit();
+		energy_ = flag.get_energy();
+		attack_ = flag.get_attack();
 	}
 	return (*this);
 }

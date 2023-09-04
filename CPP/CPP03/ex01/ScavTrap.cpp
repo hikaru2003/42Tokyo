@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:15:52 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/19 17:19:40 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 14:44:48 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 ScavTrap::ScavTrap()
 {
 	std::cout << "ScavTrap Default constructor called" << std::endl;
+	name_   = "ScavTrap";
+	hit_    = 100;
+	energy_ = 50;
+	attack_ = 20;
 }
 
 ScavTrap::ScavTrap(std::string name)
@@ -36,18 +40,20 @@ ScavTrap::~ScavTrap()
 // copy constructor
 ScavTrap::ScavTrap(const ScavTrap &scav)
 {
+	std::cout << "ScavTrap Copy constructor called" << std::endl;
 	*this = scav;
 }
 
 // copy assignment operator
 ScavTrap &ScavTrap::operator=(const ScavTrap &scav)
 {
+	std::cout << "ScavTrap Copy assignment operator called" << std::endl;
 	if (this != &scav)
 	{
-		name_   = scav.name_;
-		hit_    = scav.hit_;
-		energy_ = scav.energy_;
-		attack_ = scav.attack_;
+		name_   = scav.get_name();
+		hit_    = scav.get_hit();
+		energy_ = scav.get_energy();
+		attack_ = scav.get_attack();
 	}
 	return (*this);
 }

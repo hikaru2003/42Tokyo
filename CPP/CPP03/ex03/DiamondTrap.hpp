@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:23:13 by hikaru            #+#    #+#             */
-/*   Updated: 2023/08/19 22:30:28 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:18:04 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ public:
 	DiamondTrap &operator=(const DiamondTrap &diamond);
 
 	// method
-	using	ScavTrap::attack;
+	void	attack(const std::string &target);
 	void	whoAmI(void);
 };

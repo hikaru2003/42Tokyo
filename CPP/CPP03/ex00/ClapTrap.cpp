@@ -3,45 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmorisak <hmorisak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:01:02 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/08/17 17:59:03 by hmorisak         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:36:33 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 // constructor
-ClapTrap::ClapTrap()
+ClapTrap::ClapTrap() : name_("ClapTrap"), hit_(10), energy_(10), attack_(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "ClapTrap Default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name)
+ClapTrap::ClapTrap(std::string name) : name_(name), hit_(10), energy_(10), attack_(0)
 {
-	std::cout << "Constructor called" << std::endl;
-	name_   = name;
-	hit_    = 10;
-	energy_ = 10;
-	attack_ = 0;
+	std::cout << "ClapTrap Constructor called" << std::endl;
 }
 
 // copy constructor
 ClapTrap::ClapTrap(const ClapTrap &clap)
 {
+	std::cout << "ClapTrap Copy constructor called" << std::endl;
 	*this = clap;
 }
 
 // copy assignment operator
 ClapTrap &ClapTrap::operator=(const ClapTrap &clap)
 {
+	std::cout << "ClapTrap Copy assignment operator called" << std::endl;
 	if (this != &clap)
 	{
-		name_   = clap.name_;
-		hit_    = clap.hit_;
-		energy_ = clap.energy_;
-		attack_ = clap.attack_;
+		name_   = clap.get_name();
+		hit_    = clap.get_hit();
+		energy_ = clap.get_energy();
+		attack_ = clap.get_attack();
 	}
 	return (*this);
 }
@@ -49,7 +47,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &clap)
 // destructor
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap Destructor called" << std::endl;
 }
 
 // method
@@ -86,7 +84,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 }
 
 
-void	ClapTrap::get_status(void)
+void	ClapTrap::get_status(void) const
 {
 	std::cout << "\033[31mShow Status" << std::endl;
 	std::cout << "name   : " << name_ << std::endl;
@@ -96,17 +94,22 @@ void	ClapTrap::get_status(void)
 	std::cout << "\33[m" << std::endl;
 }
 
-unsigned int	ClapTrap::get_attack(void)
+std::string	ClapTrap::get_name(void) const
+{
+	return (name_);
+}
+
+unsigned int	ClapTrap::get_attack(void) const
 {
 	return (attack_);
 }
 
-unsigned int	ClapTrap::get_hit(void)
+unsigned int	ClapTrap::get_hit(void) const
 {
 	return (hit_);
 }
 
-unsigned int	ClapTrap::get_energy(void)
+unsigned int	ClapTrap::get_energy(void) const
 {
 	return (energy_);
 }
