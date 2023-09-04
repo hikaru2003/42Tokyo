@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:15:48 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/04 16:18:44 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 18:59:00 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 
 class ScavTrap : virtual public ClapTrap
 {
+protected:
+	static const unsigned int	hit_ = 100;
+	static const unsigned int	energy_ = 50;
+	static const unsigned int	attack_ = 20;
 public:
 	// constructor
 	ScavTrap();

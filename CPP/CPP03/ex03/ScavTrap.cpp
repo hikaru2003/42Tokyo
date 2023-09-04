@@ -6,29 +6,28 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 18:15:52 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/04 16:18:49 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/04 19:06:31 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 // constructor
-ScavTrap::ScavTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
 	std::cout << "ScavTrap Default constructor called" << std::endl;
-	name_   = "ScavTrap";
-	hit_    = 100;
-	energy_ = 50;
-	attack_ = 20;
+	this->set_name("ScavTrap");
+	this->set_attack(attack_);
+	this->set_energy(energy_);
+	this->set_hit(hit_);
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap constructor called" << std::endl;
-	name_   = name;
-	hit_    = 100;
-	energy_ = 50;
-	attack_ = 20;
+	this->set_attack(attack_);
+	this->set_energy(energy_);
+	this->set_hit(hit_);
 }
 
 // destructor
@@ -49,28 +48,23 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &scav)
 {
 	std::cout << "ScavTrap Copy assignment operator called" << std::endl;
 	if (this != &scav)
-	{
-		name_   = scav.get_name();
-		hit_    = scav.get_hit();
-		energy_ = scav.get_energy();
-		attack_ = scav.get_attack();
-	}
+		ClapTrap::operator=(scav);
 	return (*this);
 }
 
 // method
 void	ScavTrap::attack(const std::string &target)
 {
-	if (energy_ <= 0)
+	if (this->get_energy() <= 0)
 		std::cout << "ScavTrap: no energy points left" << std::endl;
 	else
 	{
-		energy_--;
-		std::cout << "ScavTrap " << name_ << " attacks " << target << ", causing " << get_attack() << "points of damage!" << std::endl;
+		this->set_energy(this->get_energy() - 1);
+		std::cout << "ScavTrap " << this->get_name() << " attacks " << target << ", causing " << get_attack() << "points of damage!" << std::endl;
 	}
 }
 
 void	ScavTrap::guardGate(void)
 {
-	std::cout << "\033[33m" << name_ << " is now in Gate keeper mode.\33[m" << std::endl;
+	std::cout << "\033[33m" << this->get_name() << " is now in Gate keeper mode.\33[m" << std::endl;
 }
