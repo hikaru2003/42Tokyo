@@ -3,8 +3,8 @@ SO ./texture/red_white.xpm
 WE ./texture/SnowbrickL.xpm
 EA ./texture/Stone1L.xpm
 
-F 0,0,0
-C 255,255,255
+F 220,100,0
+C 144,215,236
 
 1111
 1001

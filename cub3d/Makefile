@@ -1,7 +1,7 @@
 NAME = cub3d
 
 SRCS	=	src/check_file.c	\
-			src/check_goal.c	\
+			src/check_map.c	\
 			src/create_map.c	\
 			src/destroy.c		\
 			src/draw.c			\

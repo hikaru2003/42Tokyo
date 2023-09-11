@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 17:10:25 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:25 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:06:33 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,52 +24,44 @@ void	check_path(char *line, int index, t_data *data)
 	data->path[index] = ft_strdup(&line[i]);
 }
 
-void	check_rgb(char *line, int *rgb, int i)
+void	check_rgb(char *line, int *color, int i)
 {
-	rgb[i] = ft_atoi(line);
-	if (rgb[i] < 0 || rgb[i] > 255)
+	int	rgb;
+
+	rgb = 0;
+	if (line[0] < '0' || line[0] > '9')
+		print_error("rgb is missing");
+	rgb = ft_atoi(line);
+	if (rgb < 0 || rgb > 255)
 		print_error("rgb out of range");
-}
-
-int	to_hexa(int *rgb)
-{
-	int	hexa;
-
-	printf("%d, %d, %d\n", rgb[0], rgb[1], rgb[2]);
-
-	hexa = 0;
-	hexa += rgb[0] * 256 * 256;
-	hexa += rgb[1] * 256;
-	hexa += rgb[2];
-	return (hexa);
+	if (i == 0)
+		*color += rgb * 256 * 256;
+	else if (i == 1)
+		*color += rgb * 256;
+	else
+		*color += rgb;
 }
 
 void	check_color(char *line, int identifier, t_data *data)
 {
 	int	i;
-	int	*rgb;
+	int	color;
 
 	i = 0;
+	color = 0;
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == '\0')
 		print_error("color is missing");
-	rgb = (int *)malloc(sizeof(int) * 3);
-	if (!rgb)
-		print_error("bad_alloc");
-	printf("%s\n", &line[i]);
-	check_rgb(&line[i], rgb, 0);
+	check_rgb(&line[i], &color, 0);
 	i += ft_strchr(&line[i], ',') - &line[i] + 1;
-	printf("%s\n", &line[i]);
-	check_rgb(&line[i], rgb, 1);
+	check_rgb(&line[i], &color, 1);
 	i += ft_strchr(&line[i], ',') - &line[i] + 1;
-	printf("%s\n", &line[i]);
-	check_rgb(&line[i], rgb, 2);
+	check_rgb(&line[i], &color, 2);
 	if (identifier == 'F')
-		data->floor_rgb = to_hexa(rgb);
+		data->floor_rgb = color;
 	if (identifier == 'C')
-		data->ceiling_rgb = to_hexa(rgb);
-	free (rgb);
+		data->ceiling_rgb = color;
 }
 
 void	check_elements(int fd, t_data *data)
@@ -85,18 +77,20 @@ void	check_elements(int fd, t_data *data)
 			print_error("element is missing");
 		if (i == 0 && line[0] == 'N' && line[1] == 'O')
 			check_path(&line[2], i, data);
-		if (i == 1 && line[0] == 'S' && line[1] == 'O')
+		else if (i == 1 && line[0] == 'S' && line[1] == 'O')
 			check_path(&line[2], i, data);
-		if (i == 2 && line[0] == 'W' && line[1] == 'E')
+		else if (i == 2 && line[0] == 'W' && line[1] == 'E')
 			check_path(&line[2], i, data);
-		if (i == 3 && line[0] == 'E' && line[1] == 'A')
+		else if (i == 3 && line[0] == 'E' && line[1] == 'A')
 			check_path(&line[2], i, data);
-		if ((i == 4 || i == 7) && line[0] != '\n')
-			print_error("not separated by a line");
-		if (i == 5 && line[0] == 'F')
+		else if ((i == 4 || i == 7) && line[0] == '\n')
+			;
+		else if (i == 5 && line[0] == 'F')
 			check_color(&line[1], 'F', data);
-		if (i == 6 && line[0] == 'C')
+		else if (i == 6 && line[0] == 'C')
 			check_color(&line[1], 'C', data);
+		else
+			print_error("element is incorrect");
 		free(line);
 		i++;
 	}
@@ -135,7 +129,7 @@ void	get_map_info(int fd, t_data *data)
 		if (ft_strchr(line, '\n'))
 			line[ft_strchr(line, '\n') - line] = '\0';
 		line_len = ft_strlen(line);
-		if (line_len == 0)
+		if (ft_strlen(line) == 0)
 			print_error("map is missing");
 		if (line_len > data->max_x)
 			data->max_x = line_len;

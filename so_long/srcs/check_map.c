@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:34:45 by hmorisak          #+#    #+#             */
-/*   Updated: 2023/05/04 20:49:49 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:05:18 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int	check_map(t_data *data)
 	printf("check map element\n");
 	printf("%d\n", data->width);
 	check_goal(data);
-	printf("check goal")
+	printf("check goal");
 	return (0);
 }

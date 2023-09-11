@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 18:17:00 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 15:53:59 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:23:12 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	draw_one_pixel(t_data *data, int x, int y)
 {
-	if (y < DISPLAY_Y / 2)
-		my_mlx_pixel_put(data, x, y, data->ceiling_rgb);
-	else
-		my_mlx_pixel_put(data, x, y, data->floor_rgb);
+	// if (y < DISPLAY_Y / 2)
+	// 	my_mlx_pixel_put(data, x, y, data->ceiling_rgb);
+	// else
+	// 	my_mlx_pixel_put(data, x, y, data->floor_rgb);
+	my_mlx_pixel_put(data, x, y, data->display[y][x]);
 }
 
 int	draw_map(t_data *data)

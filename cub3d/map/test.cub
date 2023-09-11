@@ -1,10 +1,10 @@
 NO ./texture/blue_tile.xpm
 SO ./texture/red_white.xpm
-WE ./texture/SnowbrickL.xpm
-EA ./texture/Stone1L.xpm
+WE ./texture/Stone1L.xpm
+EA ./texture/blue_tile.xpm
 
 F 220,100,0
-C 225,30,0
+C 144,215,236
 
         1111111111111111111111111
         1000000000110000000000001

@@ -6,37 +6,43 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:58 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 15:38:20 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:52:33 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	create_map(t_data *data, char *filename)
+void	init_map(t_data *data)
 {
-	int		fd;
-	int		i;
-	char	*line;
+	int	i;
+	int j;
 
-	fd = open(filename, O_RDONLY);
 	i = 0;
+	j = 0;
 	data->map = (char **)malloc(sizeof(char *) * data->max_y);
 	if (!data->map)
 		print_error("bad_alloc");
-	while (i < data->max_y)
+	while (j < data->max_y)
 	{
-		data->map[i] = (char *)malloc(sizeof(char) * (data->max_x + 1));
-		if (!data->map[i])
+		data->map[j] = (char *)malloc(sizeof(char) * (data->max_x + 1));
+		if (!data->map[j])
 			print_error("bad_alloc");
-		int j = 0;
-		while (j < data->max_x)
+		i = 0;
+		while (i < data->max_x)
 		{
-			data->map[i][j] = ' ';
-			j++;
+			data->map[j][i] = ' ';
+			i++;
 		}
-		data->map[i][j] = '\0';
-		i++;
+		data->map[j][i] = '\0';
+		j++;
 	}
+}
+
+void	skip_elements(t_data *data, int fd)
+{
+	int		i;
+	char	*line;
+
 	i = 0;
 	while (i < 8)
 	{
@@ -44,18 +50,46 @@ void	create_map(t_data *data, char *filename)
 		free(line);
 		i++;
 	}
+}
+
+void	create_map(t_data *data, char *filename)
+{
+	int		fd;
+	int		i;
+	int		j;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
 	i = 0;
-	while (i < data->max_y)
+	j = 0;
+	init_map(data);
+	skip_elements(data, fd);
+	while (j < data->max_y)
 	{
 		line = get_next_line(fd);
-		int j = 0;
-		while (line[j] != '\n' && line[j] != '\0')
+		i = 0;
+		while (line[i] != '\n' && line[i] != '\0')
 		{
-			data->map[i][j] = line[j];
-			j++;
+			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+			{
+				if (data->direction != -1)
+					print_error("duplicate player position");
+				data->pos_x = i;
+				data->pos_y = j;
+				if (line[i] == 'N')
+					data->direction = NORTH;
+				else if (line[i] == 'S')
+					data->direction = SOUTH;
+				else if (line[i] == 'E')
+					data->direction = EAST;
+				else if (line[i] == 'W')
+					data->direction = WEST;
+			}
+			data->map[j][i] = line[i];
+			i++;
 		}
 		free(line);
-		i++;
+		j++;
 	}
 	close (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:45:21 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 15:51:56 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/11 20:52:18 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@
 # define DISPLAY_Y		750
 
 # define NORTH			0
-# define SOUTH			1
-# define WEST			2
-# define EAST			3
+# define SOUTH			180
+# define WEST			90
+# define EAST			270
+
+# define ANGLE			30
 
 # define ESC			53
 # define UP_ARROW		126
@@ -51,8 +53,9 @@
 typedef struct s_data
 {
 	char	**map;
-	int		start_x;
-	int		start_y;
+	int		display[DISPLAY_Y][DISPLAY_X];
+	int		pos_x;
+	int		pos_y;
 	int		max_x;
 	int		max_y;
 	int		direction;
@@ -62,10 +65,6 @@ typedef struct s_data
 	void	*south_img;
 	void	*west_img;
 	void	*east_img;
-	void	*floor_img;
-	void	*ceiling_img;
-	// int		*floor_rgb;
-	// int		*ceiling_rgb;
 	int		floor_rgb;
 	int		ceiling_rgb;
 	void	*mlx;
@@ -81,7 +80,7 @@ typedef struct s_data
 // check_file.c
 void	check_file(char *filename, t_data *data);
 
-// check_goal.c
+// check_map.c
 
 
 // create_map.c
