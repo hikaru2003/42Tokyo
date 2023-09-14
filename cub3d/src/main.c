@@ -6,11 +6,25 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:44:54 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 19:13:32 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/14 15:11:54 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	print_data(t_data *data)
+{
+	printf("max_x: %d\n", data->max_x);
+	printf("max_y: %d\n", data->max_y);
+	printf("map:\n");
+	for (int i = 0; i < data->max_y; i++)
+	{
+		printf("%s\n", data->map[i]);
+	}
+	printf("player_x: %d\n", data->pos_x);
+	printf("player_y: %d\n", data->pos_y);
+	printf("player_dir: %d\n", data->direction);
+}
 
 int	main(int argc, char **argv)
 {
@@ -20,6 +34,7 @@ int	main(int argc, char **argv)
 	data = init_data();
 	check_file(argv[1], data);
 	create_map(data, argv[1]);
+	// print_data(data);
 	// check_map(data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, DISPLAY_X, DISPLAY_Y, "cub3d");

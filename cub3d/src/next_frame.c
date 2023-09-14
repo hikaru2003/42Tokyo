@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 18:01:19 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 21:33:25 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/14 15:12:31 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	go_right(t_data *data)
 {
 	if (data->map[data->pos_y][data->pos_x + 1] == '0')
 		data->pos_x++;
+}
+
+void	update_display(t_data *data)
+{
+	
 }
 
 int	next_frame(int keycode, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: hikaru <hikaru@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:38:58 by hikaru            #+#    #+#             */
-/*   Updated: 2023/09/11 20:52:33 by hikaru           ###   ########.fr       */
+/*   Updated: 2023/09/14 15:08:00 by hikaru           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_map(t_data *data)
 
 	i = 0;
 	j = 0;
-	data->map = (char **)malloc(sizeof(char *) * data->max_y);
+	data->map = (char **)malloc(sizeof(char *) * (data->max_y + 1));
 	if (!data->map)
 		print_error("bad_alloc");
 	while (j < data->max_y)
@@ -36,6 +36,7 @@ void	init_map(t_data *data)
 		data->map[j][i] = '\0';
 		j++;
 	}
+	data->map[j] = NULL;
 }
 
 void	skip_elements(t_data *data, int fd)
